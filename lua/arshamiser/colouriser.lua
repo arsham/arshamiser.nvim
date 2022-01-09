@@ -334,8 +334,8 @@ local internals = function(palette) -- Internals {{{
     },
     FoldColumn = {
       -- 'foldcolumn'
-      guifg = palette.white,
-      guibg = palette.black,
+      guifg = palette.border,
+      guibg = palette.base2,
     },
     Constant = {
       guifg = palette.aqua,
