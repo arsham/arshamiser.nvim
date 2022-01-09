@@ -39,7 +39,13 @@ Use your favourite package manager to install this library. Packer example:
 ```lua
 use({
   "arsham/arshamiser.nvim",
-  requires = { "arshlib.nvim", "nvim.lua", "feline.nvim", "nvim-web-devicons", "lsp-status.nvim" },
+  requires = {
+    "arsham/arshlib.nvim",
+    "norcalli/nvim.lua",
+    "famiu/feline.nvim",
+    "kyazdani42/nvim-web-devicons",
+    "nvim-lua/lsp-status.nvim",
+  },
   config = function()
     -- ignore any parts you don't want to use
     require("nvim").ex.colorscheme("arshamiser_light")
@@ -68,7 +74,13 @@ You can defer setting the colorscheme until the UI loads. Packer example:
 ```lua
 use({
   "arsham/arshamiser.nvim",
-  requires = { "arshlib.nvim", "nvim.lua", "feline.nvim", "nvim-web-devicons", "lsp-status.nvim" },
+  requires = {
+    "arsham/arshlib.nvim",
+    "norcalli/nvim.lua",
+    "famiu/feline.nvim",
+    "kyazdani42/nvim-web-devicons",
+    "nvim-lua/lsp-status.nvim",
+  },
   config = function()
     require("arshlib.quick").autocmd({"UIEnter", "*", function()
         require("nvim").ex.colorscheme("arshamiser_light")
