@@ -390,28 +390,6 @@ function M.fold_method() --{{{
   return string.format("%s[%d]", name, vim.wo.foldlevel)
 end --}}}
 
--- Adopted from the feline codebase.
-
----Returns true if a LSP server is attached to the current buffer.
----@return boolean
-function M.is_lsp_attached() --{{{
-  return next(vim.lsp.buf_get_clients(0)) ~= nil
-end --}}}
-
----Returns true if at least one of the LSP servers has the given capability.
----@param capability string
----@return boolean
-function M.has_lsp_capability(capability) --{{{
-  local clients = vim.lsp.buf_get_clients(0)
-  for _, client in pairs(clients) do
-    local capabilities = client.resolved_capabilities
-    if capabilities and capabilities[capability] then
-      return true
-    end
-  end
-  return false
-end --}}}
-
 ---Turns the severity to a form vim.diagnostic.get accepts.
 ---@param severity string
 ---@return string

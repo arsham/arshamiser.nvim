@@ -1,4 +1,5 @@
 local util = require("arshamiser.feliniser.util")
+local lsp = require("arshlib.lsp")
 local vi_mode_utils = require("feline.providers.vi_mode")
 
 local components = { -- {{{
@@ -253,7 +254,7 @@ table.insert(components.active[3], {
 table.insert(components.active[3], {
   provider = "lsp_clients",
   enabled = function()
-    return util.is_lsp_attached()
+    return lsp.is_lsp_attached()
   end,
   hl = right_ribbon_hl,
   priority = 3,
@@ -265,7 +266,7 @@ table.insert(components.active[3], {
 table.insert(components.active[3], {
   provider = "lsp_progress",
   enabled = function()
-    return util.is_lsp_attached()
+    return lsp.is_lsp_attached()
   end,
   truncate_hide = true,
   hl = right_ribbon_hl,
