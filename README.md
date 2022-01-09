@@ -41,8 +41,11 @@ use({
   "arsham/arshamiser.nvim",
   requires = { "arshlib.nvim", "nvim.lua", "feline.nvim", "nvim-web-devicons", "lsp-status.nvim" },
   config = function()
+    -- ignore any parts you don't want to use
     require("nvim").ex.colorscheme("arshamiser_light")
     require("arshamiser.feliniser")
+    _G.custom_foldtext = require("arshamiser.folding").foldtext
+    vim.opt.foldtext = "v:lua.custom_foldtext()"
   end,
 })
 ```
@@ -70,6 +73,8 @@ use({
     require("arshlib.quick").autocmd({"UIEnter", "*", function()
         require("nvim").ex.colorscheme("arshamiser_light")
         require("arshamiser.feliniser")
+        _G.custom_foldtext = require("arshamiser.folding").foldtext
+        vim.opt.foldtext = "v:lua.custom_foldtext()"
       end,
     })
   end,
