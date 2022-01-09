@@ -5,6 +5,19 @@
 
 Neovim status bar, colour scheme, and foldtext function.
 
+1. [Demo](#demo)
+2. [Requirements](#requirements)
+3. [Installation](#installation)
+   - [Config](#config)
+   - [Lazy Loading](#lazy-loading)
+4. [License](#license)
+
+## Demo
+
+![folds](https://user-images.githubusercontent.com/428611/148667078-25211d3c-116a-4c6f-938a-bb52b8bb1163.png)
+
+![go](https://user-images.githubusercontent.com/428611/148667079-f441fc97-4157-4ed3-b2bb-81a64d358107.png)
+
 ## Requirements
 
 At the moment it works on the development release of Neovim, and will be
@@ -14,7 +27,10 @@ This plugin depends are the following libraries. Please make sure to add them
 as dependencies in your package manager:
 
 - [arshlib.nvim](https://github.com/arsham/arshlib.nvim)
+- [feline.nvim](https://github.com/famiu/feline.nvim)
 - [nvim.lua](https://github.com/norcalli/nvim.lua)
+- [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
+- [lsp-status.nvim](https://github.com/nvim-lua/lsp-status.nvim)
 
 ## Installation
 
@@ -23,8 +39,10 @@ Use your favourite package manager to install this library. Packer example:
 ```lua
 use({
   "arsham/arshamiser.nvim",
+  requires = { "arshlib.nvim", "nvim.lua", "feline.nvim", "nvim-web-devicons", "lsp-status.nvim" },
   config = function()
     require("nvim").ex.colorscheme("arshamiser_light")
+    require("arshamiser.feliniser")
   end,
 })
 ```
@@ -47,9 +65,11 @@ You can defer setting the colorscheme until the UI loads. Packer example:
 ```lua
 use({
   "arsham/arshamiser.nvim",
+  requires = { "arshlib.nvim", "nvim.lua", "feline.nvim", "nvim-web-devicons", "lsp-status.nvim" },
   config = function()
     require("arshlib.quick").autocmd({"UIEnter", "*", function()
         require("nvim").ex.colorscheme("arshamiser_light")
+        require("arshamiser.feliniser")
       end,
     })
   end,
