@@ -28,6 +28,7 @@ as dependencies in your package manager:
 
 - [arshlib.nvim](https://github.com/arsham/arshlib.nvim)
 - [feline.nvim](https://github.com/famiu/feline.nvim)
+- [heirline.nvim](https://github.com/rebelot/heirline.nvim)
 - [nvim.lua](https://github.com/norcalli/nvim.lua)
 - [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
 - [lsp-status.nvim](https://github.com/nvim-lua/lsp-status.nvim)
@@ -43,6 +44,7 @@ use({
     "arsham/arshlib.nvim",
     "norcalli/nvim.lua",
     "famiu/feline.nvim",
+    "rebelot/heirline.nvim",
     "kyazdani42/nvim-web-devicons",
     "nvim-lua/lsp-status.nvim",
   },
@@ -50,6 +52,8 @@ use({
     -- ignore any parts you don't want to use
     require("nvim").ex.colorscheme("arshamiser_light")
     require("arshamiser.feliniser")
+    -- or:
+    -- require("arshamiser.heirliniser")
     _G.custom_foldtext = require("arshamiser.folding").foldtext
     vim.opt.foldtext = "v:lua.custom_foldtext()"
   end,
@@ -78,6 +82,7 @@ use({
     "arsham/arshlib.nvim",
     "norcalli/nvim.lua",
     "famiu/feline.nvim",
+    "rebelot/heirline.nvim",
     "kyazdani42/nvim-web-devicons",
     "nvim-lua/lsp-status.nvim",
   },
@@ -85,6 +90,8 @@ use({
     require("arshlib.quick").autocmd({"UIEnter", "*", function()
         require("nvim").ex.colorscheme("arshamiser_light")
         require("arshamiser.feliniser")
+        -- or:
+        -- require("arshamiser.heirliniser")
         _G.custom_foldtext = require("arshamiser.folding").foldtext
         vim.opt.foldtext = "v:lua.custom_foldtext()"
       end,

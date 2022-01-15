@@ -7,6 +7,7 @@ local libs = {
   plenary = "nvim-lua/plenary.nvim",
   nvim = "norcalli/nvim.lua",
   feline = "famiu/feline.lua",
+  heirline = "rebelot/heirline.nvim",
   ["lsp-status"] = "nvim-lua/lsp-status.nvim",
   ["nvim-web-devicons"] = "kyazdani42/nvim-web-devicons",
 }

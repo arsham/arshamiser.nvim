@@ -89,7 +89,7 @@ table.insert(components.active[1], {
 })
 -- }}}
 
--- Git bransh {{{
+-- Git branch {{{
 table.insert(components.active[1], {
   provider = "git_branch",
   enabled = function()
