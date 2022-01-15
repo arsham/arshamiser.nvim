@@ -2,22 +2,6 @@ local utils = require("heirline.utils")
 
 local M = {}
 
-M.force_inactive = { --{{{
-  filetypes = {
-    "NvimTree",
-    "dbui",
-    "packer",
-    "startify",
-    "fugitive",
-    "fugitiveblame",
-  },
-  buftypes = {
-    "terminal",
-  },
-  bufnames = {},
-}
---}}}
-
 -- stylua: ignore start
 M.colours = {--{{{
   white         = "#b5bcc9",
@@ -125,6 +109,7 @@ M.separators = {--{{{
   right_rounded_thin = '',
   circle             = '●',
   github_icon        = " ﯙ ",
+  folder_icon        = " ",
 }
 --}}}
 

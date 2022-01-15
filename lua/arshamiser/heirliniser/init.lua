@@ -1,26 +1,10 @@
 local conditions = require("heirline.conditions")
-local utils = require("heirline.utils")
+local heirline = require("heirline.utils")
 local feliniser = require("arshamiser.feliniser.util")
 local util = require("arshamiser.heirliniser.util")
 
 local space = { provider = " " }
 local spring = { provider = "%=" }
-
-local active_right_triangle = { --{{{
-  provider = util.separators.right_filled,
-  hl = {
-    fg = util.colours.statusline_bg,
-    bg = util.colours.mid_bg,
-  },
-} --}}}
-
-local active_left_triangle = { --{{{
-  provider = util.separators.left_filled,
-  hl = {
-    fg = util.colours.statusline_bg,
-    bg = util.colours.mid_bg,
-  },
-} --}}}
 
 local inactive_left_slant = { --{{{
   provider = util.separators.slant_right_2,
@@ -58,7 +42,6 @@ local vim_mode = { --{{{
   hl = function(self)
     local mode = self.mode:sub(1, 1) -- get only the first mode character
     return {
-      bg = util.colours.statusline_bg,
       fg = util.mode_colour(mode),
       style = "bold",
     }
@@ -70,10 +53,8 @@ local fold_method = { --{{{
     return vim.wo.foldenable
   end,
   {
-
     hl = {
       fg = util.colours.green_pale,
-      bg = util.colours.statusline_bg,
       style = "bold",
     },
     { provider = "  " },
@@ -90,6 +71,7 @@ local git = { --{{{
       or self.status_dict.removed ~= 0
       or self.status_dict.changed ~= 0
   end,
+  { provider = util.separators.folder_icon },
   { provider = feliniser.git_root },
   {
     provider = function(self)
@@ -122,16 +104,6 @@ local git = { --{{{
 } --}}}
 
 local fileinfo = { --{{{
-  init = function(self)
-    self.filename = vim.api.nvim_buf_get_name(0)
-    local filename = self.filename
-    local extension = vim.fn.fnamemodify(filename, ":e")
-    self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(
-      filename,
-      extension,
-      { default = true }
-    )
-  end,
   { -- File icon {{{
     provider = function(self)
       return self.icon and (self.icon .. " ")
@@ -140,6 +112,7 @@ local fileinfo = { --{{{
       return { fg = self.icon_color }
     end,
   }, --}}}
+
   { -- Filename {{{
     provider = function(self)
       local filename = vim.fn.fnamemodify(self.filename, ":.")
@@ -152,6 +125,7 @@ local fileinfo = { --{{{
       return filename
     end,
   }, --}}}
+
   { -- Modified / Readonly {{{
     provider = function()
       if vim.bo.modified then
@@ -159,7 +133,8 @@ local fileinfo = { --{{{
       end
     end,
     hl = { fg = util.colours.green },
-  }, --}}}
+  },
+
   {
     provider = function()
       if not vim.bo.modifiable or vim.bo.readonly then
@@ -167,13 +142,14 @@ local fileinfo = { --{{{
       end
     end,
     hl = { fg = util.colours.orange },
-  },
+  }, --}}}
+
   space,
   { -- Filesize {{{
-    provider = function()
+    provider = function(self)
       local suffix = { "b", "k", "M", "G", "T", "P", "E" }
       local index = 1
-      local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
+      local fsize = vim.fn.getfsize(self.filename)
 
       if fsize < 0 then
         fsize = 0
@@ -194,28 +170,17 @@ local fileinfo = { --{{{
 local active_left_segment = { --{{{
   hl = {
     fg = util.colours.grey_fg,
-    bg = util.colours.statusline_bg,
   },
   vim_mode,
   fold_method,
-  space,
-  git,
-  space,
-  active_right_triangle,
+  heirline.surround({ " ", " " }, util.colours.statusline_bg, git),
 } --}}}
 
 local active_middle_segment = { --{{{
   condition = function()
     return vim.fn.expand("%:t") ~= ""
   end,
-  hl = {
-    fg = util.colours.white,
-    bg = util.colours.statusline_bg,
-  },
-  active_left_triangle,
-  space,
-  fileinfo,
-  active_right_triangle,
+  heirline.surround({ " ", " " }, util.colours.statusline_bg, fileinfo),
 } --}}}
 
 local locallist = { --{{{
@@ -245,9 +210,7 @@ local active_right_segment = { --{{{
   end,
   hl = {
     fg = util.colours.grey_fg,
-    bg = util.colours.statusline_bg,
   },
-  active_left_triangle,
   {
     condition = conditions.lsp_attached,
     {
@@ -313,27 +276,16 @@ local active_right_segment = { --{{{
   }, --}}}
 
   { -- Filetype {{{
-    hl = function()
-      local val = {}
-      local filename = vim.fn.expand("%:t")
-      local extension = vim.fn.expand("%:e")
-      local icon, name = require("nvim-web-devicons").get_icon(filename, extension)
-      if icon ~= nil then
-        val.fg = vim.fn.synIDattr(vim.fn.hlID(name), "fg")
-      else
-        val.fg = util.colours.grey_fg
-      end
-      val.bg = util.colours.statusline_bg
-      val.style = "bold"
-      return val
+    hl = function(self)
+      return {
+        fg = self.icon_color,
+        style = "bold",
+      }
     end,
     space,
     {
-      provider = function()
-        local filename = vim.fn.expand("%:t")
-        local extension = vim.fn.expand("%:e")
-        local icon = require("nvim-web-devicons").get_icon(filename, extension)
-        return icon or ""
+      provider = function(self)
+        return self.icon or ""
       end,
     },
     space,
@@ -345,12 +297,8 @@ local active_right_segment = { --{{{
   }, --}}}
 
   space,
-  { -- Search results {{{
-    provider = feliniser.search_results,
-    hl = {
-      fg = util.colours.grey_fg,
-    },
-  }, --}}}
+  { provider = feliniser.search_results },
+
   space,
   { -- Cursor Location {{{
     hl = function(self)
@@ -369,6 +317,7 @@ local active_right_segment = { --{{{
       end,
     },
     { provider = "" },
+
     space,
     {
       provider = feliniser.quickfix_count,
@@ -385,15 +334,29 @@ local active_right_segment = { --{{{
 local active_status_line = { --{{{
   condition = conditions.is_active,
   hl = {
-    fg = utils.get_highlight("StatusLine").fg,
-    bg = utils.get_highlight("StatusLine").bg,
+    fg = heirline.get_highlight("StatusLine").fg,
+    bg = heirline.get_highlight("StatusLine").bg,
   },
 
-  active_left_segment,
+  heirline.surround(
+    { "", util.separators.right_filled },
+    util.colours.statusline_bg,
+    active_left_segment
+  ),
+
   spring,
-  active_middle_segment,
+  heirline.surround(
+    { util.separators.left_filled, util.separators.right_filled },
+    util.colours.statusline_bg,
+    active_middle_segment
+  ),
+
   spring,
-  active_right_segment,
+  heirline.surround(
+    { util.separators.left_filled, "" },
+    util.colours.statusline_bg,
+    active_right_segment
+  ),
 } --}}}
 
 local inactive_right_segment = { --{{{
@@ -446,12 +409,42 @@ local inactive_status_line = { --{{{
   inactive_right_segment,
 } --}}}
 
+local disabled_buffers = { --{{{
+  condition = function()
+    return conditions.buffer_matches({
+      filetype = { "NvimTree", "dbui", "packer", "startify", "fugitive", "fugitiveblame" },
+      buftype = { "nofile", "help", "quickfix", "terminal" },
+    })
+  end,
+  provider = " ",
+} --}}}
+
+local help_file_name = {
+  condition = function()
+    return vim.bo.filetype == "help"
+  end,
+  provider = function()
+    local filename = vim.api.nvim_buf_get_name(0)
+    return vim.fn.fnamemodify(filename, ":t")
+  end,
+  hl = { fg = util.colours.blue },
+}
+
 local status_line = { --{{{
   init = function(self)
+    self.filename = vim.api.nvim_buf_get_name(0)
+    local extension = vim.fn.fnamemodify(self.filename, ":e")
+    self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(
+      self.filename,
+      extension,
+      { default = true }
+    )
     self.mode = vim.fn.mode(1)
   end,
 
   stop_at_first = true,
+  help_file_name,
+  disabled_buffers,
   active_status_line,
   inactive_status_line,
 } --}}}
