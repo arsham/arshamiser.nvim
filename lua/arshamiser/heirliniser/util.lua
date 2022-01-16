@@ -28,7 +28,7 @@ M.colours = {--{{{
     info  = utils.get_highlight("DiagnosticInfo").fg,
   },
   git = {
-    del    = utils.get_highlight("DiffDelete").fg,
+    del    = utils.get_highlight("DiffDelete").bg,
     add    = utils.get_highlight("DiffAdd").fg,
     change = utils.get_highlight("DiffChange").fg,
   },

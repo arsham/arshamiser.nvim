@@ -87,18 +87,21 @@ local git = { --{{{
         local count = self.status_dict.added or 0
         return count > 0 and ("  " .. count)
       end,
+      hl = { fg = util.colours.git.add },
     },
     {
       provider = function(self)
         local count = self.status_dict.removed or 0
         return count > 0 and ("  " .. count)
       end,
+      hl = { fg = util.colours.git.del },
     },
     {
       provider = function(self)
         local count = self.status_dict.changed or 0
         return count > 0 and (" 柳" .. count)
       end,
+      hl = { fg = util.colours.git.change },
     },
   }, --}}}
 } --}}}
