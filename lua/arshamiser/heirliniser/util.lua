@@ -205,6 +205,11 @@ function M.mode_colour(mode)
   return M.colours[mode_colors[mode_alias[mode]]]
 end
 
+function M.lsp_client_names()
+  local names, _ = require("arshamiser.feliniser.util").lsp_client_names()
+  return names
+end
+
 return M
 
 -- vim: fdm=marker fdl=0

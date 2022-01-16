@@ -217,10 +217,7 @@ local active_right_segment = { --{{{
   {
     condition = conditions.lsp_attached,
     {
-      provider = function()
-        local names, _ = feliniser.lsp_client_names()
-        return "  " .. names
-      end,
+      provider = "  " .. feliniser.lsp_client_names(),
     },
     {
       provider = feliniser.get_lsp_progress,
