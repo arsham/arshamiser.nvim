@@ -1,4 +1,5 @@
 local nvim = require("nvim")
+local utils = require("heirline.utils")
 
 local M = {}
 
@@ -34,6 +35,11 @@ M.colors = {--{{{
   light_bg      = "#222930",
   light_bg2     = "#1d242b",
   mid_bg        = "#2B3033",
+  orange        = utils.get_highlight("DiagnosticWarn").fg,
+  cyan          = utils.get_highlight("Special").fg,
+  git_add       = utils.get_highlight("DiffAdd").fg,
+  git_del       = utils.get_highlight("DiffDelete").bg,
+  git_change    = utils.get_highlight("DiffChange").fg,
 }
 --}}}
 -- stylua: ignore

@@ -115,8 +115,10 @@ table.insert(components.active[1], {
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
-  hl = left_ribbon_hl,
-  --icon  = "  ",
+  hl = {
+    fg = "git_add",
+    bg = "statusline_bg",
+  },
 })
 
 table.insert(components.active[1], {
@@ -124,8 +126,10 @@ table.insert(components.active[1], {
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
-  hl = left_ribbon_hl,
-  --icon  = "  ",
+  hl = {
+    fg = "git_change",
+    bg = "statusline_bg",
+  },
 })
 
 table.insert(components.active[1], {
@@ -133,8 +137,10 @@ table.insert(components.active[1], {
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
-  hl = left_ribbon_hl,
-  --icon  = "  ",
+  hl = {
+    fg = "git_del",
+    bg = "statusline_bg",
+  },
 })
 -- }}}
 
