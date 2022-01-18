@@ -631,6 +631,11 @@ local internals = function(palette) -- Internals {{{
       guifg = palette.base1,
       guibg = palette.diff_add_fg,
     }, --}}}
+    -- Help {{{
+    helpHyperTextJump = {
+      link = "Statement",
+    },
+    --}}}
   }
 end
 -- }}}
