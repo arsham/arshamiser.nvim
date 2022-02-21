@@ -1172,7 +1172,15 @@ local plugin_syntax = function(palette) -- Plugins {{{
       guifg = palette.diff_add_bg,
       guibg = palette.base2,
     },
-    GitSignsAddLn = {
+    GitSignsAddInline = {
+      guifg = palette.diff_add_bg,
+      guibg = palette.base2,
+    },
+    GitSignsAddLnInline = {
+      guifg = palette.diff_add_bg,
+      guibg = palette.base2,
+    },
+    GitSignsAddVirtLnInline = {
       guifg = palette.diff_add_bg,
       guibg = palette.base2,
     },
@@ -1184,7 +1192,15 @@ local plugin_syntax = function(palette) -- Plugins {{{
       guifg = palette.diff_change_bg,
       guibg = palette.base2,
     },
-    GitSignsChangeLn = {
+    GitSignsChangeInLine = {
+      guifg = palette.diff_change_bg,
+      guibg = palette.base2,
+    },
+    GitSignsChangeVirtLnInline = {
+      guifg = palette.diff_change_bg,
+      guibg = palette.base2,
+    },
+    GitSignsChangeLnInline = {
       guifg = palette.diff_change_bg,
       guibg = palette.base2,
     },
@@ -1196,7 +1212,15 @@ local plugin_syntax = function(palette) -- Plugins {{{
       guifg = palette.diff_remove_bg,
       guibg = palette.base2,
     },
-    GitSignsDeleteLn = {
+    GitSignsDeleteInLine = {
+      guifg = palette.diff_remove_bg,
+      guibg = palette.base2,
+    },
+    GitSignsDeleteLnInline = {
+      guifg = palette.diff_remove_bg,
+      guibg = palette.base2,
+    },
+    GitSignsDeleteVirtLnInline = {
       guifg = palette.diff_remove_bg,
       guibg = palette.base2,
     },
