@@ -10,6 +10,7 @@ local libs = {
   heirline = "rebelot/heirline.nvim",
   ["fidget.nvim"] = "j-hui/fidget.nvim",
   ["nvim-web-devicons"] = "kyazdani42/nvim-web-devicons",
+  ["sqls.nvim"] = "nanotee/sqls.nvim",
 }
 
 M.check = function()

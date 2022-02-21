@@ -1,4 +1,3 @@
-local nvim = require("nvim")
 local utils = require("heirline.utils")
 
 local M = {}
@@ -439,10 +438,35 @@ function M.diagnostic_info() --{{{
   return diagnostics(vim.diagnostic.severity.INFO), "  "
 end --}}}
 
+local sqls_status = {
+  subscribed = false,
+  connection = nil,
+  database = "default",
+}
 
-
+function M.sqls_status() --{{{
+  local ok, events = pcall(require, "sqls.events")
+  if not ok then
+    return ""
+  end
+  if not sqls_status.subscribed then
+    events.add_subscriber("connection_choice", function(event)
+      local items = vim.split(event.choice, " ")
+      sqls_status.connection = items[3]
+      local _, _, name = event.choice:find("dbname=([^ ]+)")
+      sqls_status.database = name or "Unknown"
+    end)
+    events.add_subscriber("database_choice", function(event)
+      sqls_status.database = event.choice
+    end)
+    sqls_status.sqls_subscribed = true
   end
 
+  if not sqls_status.connection or not sqls_status.database then
+    return ""
+  end
+
+  return sqls_status.connection .. M.separators.database .. sqls_status.database
 end --}}}
 
 return M

@@ -347,6 +347,25 @@ table.insert(components.active[3], {
 })
 -- }}}
 
+-- SQLs Info {{{
+table.insert(components.active[3], {
+  provider = "sqls_status",
+  enabled = function()
+    return vim.bo.filetype == "sql" and pcall(require, "sqls.commands")
+  end,
+  truncate_hide = true,
+  hl = right_ribbon_hl,
+  left_sep = {
+    str = " ",
+    hl = {
+      bg = "statusline_bg",
+      fg = "mid_bg",
+      style = "bold",
+    },
+  },
+})
+-- }}}
+
 -- File Icon {{{
 table.insert(components.active[3], {
   priority = 7,
@@ -725,6 +744,7 @@ require("feline").setup({ -- {{{
     diag_hints = util.diagnostic_hints,
     lsp_clients = util.lsp_client_names,
     fold_method = util.fold_method,
+    sqls_status = util.sqls_status,
   },
 })
 -- }}}

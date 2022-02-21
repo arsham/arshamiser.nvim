@@ -32,6 +32,7 @@ as dependencies in your package manager:
 - [nvim.lua](https://github.com/norcalli/nvim.lua)
 - [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
 - [fidget.nvim](https://github.com/j-hui/fidget.nvim)
+- [sqls.nvim](https://github.com/nanotee/sqls.nvim)
 
 ## Installation
 
@@ -85,6 +86,7 @@ use({
     "rebelot/heirline.nvim",
     "kyazdani42/nvim-web-devicons",
     "j-hui/fidget.nvim",
+    "nanotee/sqls.nvim",
   },
   config = function()
     require("arshlib.quick").autocmd({"UIEnter", "*", function()
