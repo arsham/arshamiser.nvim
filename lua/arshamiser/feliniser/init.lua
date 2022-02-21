@@ -279,25 +279,6 @@ table.insert(components.active[3], {
 })
 -- }}}
 
--- Lsp feedback {{{
-table.insert(components.active[3], {
-  provider = "lsp_progress",
-  enabled = function()
-    return lsp.is_lsp_attached()
-  end,
-  truncate_hide = true,
-  hl = right_ribbon_hl,
-  left_sep = {
-    str = " ",
-    hl = {
-      bg = "statusline_bg",
-      fg = "mid_bg",
-      style = "bold",
-    },
-  },
-})
--- }}}
-
 -- Diagnostics {{{
 table.insert(components.active[3], {
   provider = "diag_errors",
@@ -368,6 +349,8 @@ table.insert(components.active[3], {
 
 -- File Icon {{{
 table.insert(components.active[3], {
+  priority = 7,
+  truncate_hide = true,
   provider = function()
     local filename = vim.fn.expand("%:t")
     local extension = vim.fn.expand("%:e")
@@ -741,7 +724,6 @@ require("feline").setup({ -- {{{
     diag_warnings = util.diagnostic_warnings,
     diag_hints = util.diagnostic_hints,
     lsp_clients = util.lsp_client_names,
-    lsp_progress = util.get_lsp_progress,
     fold_method = util.fold_method,
   },
 })

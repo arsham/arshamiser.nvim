@@ -1272,6 +1272,12 @@ local plugin_syntax = function(palette) -- Plugins {{{
       guifg = palette.pink,
     },
     -- }}}
+    FidgetTitle = {
+      guifg = palette.blue_pale,
+    },
+    FidgetTask = {
+      guifg = palette.green,
+    },
   }
 end
 -- }}}

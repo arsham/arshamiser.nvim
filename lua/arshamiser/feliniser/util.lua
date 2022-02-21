@@ -119,6 +119,7 @@ M.separators = {--{{{
   circle             = '●',
   github_icon        = " ﯙ ",
   folder_icon        = " ",
+  database           = '  ',
 }
 --}}}
 ---Returns the VIM mode.
@@ -328,21 +329,25 @@ local lsp_config = { --{{{
   ok = "",
   spinner_frames = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
   component_separator = "   ",
+  lsp_icon = " ",
 }
 --}}}
 local lsp_names = { --{{{
-  sumneko_lua = "Lua",
   ["null-ls"] = "Null",
-  gopls = "GoPLS",
+  ["diagnostics_on_open"] = "Diagnostics",
+  ["diagnostics_on_save"] = "Diagnostics",
   bashls = "Bash",
-  vimls = "Vim",
-  dockerls = "Docker",
-  jedi_language_server = "Python",
-  html = "HTML",
   clangd = "C++",
-  tsserver = "TS",
-  sqls = "SQL",
+  dockerls = "Docker",
+  gopls = "GoPLS",
+  golangci_lint_ls = "GolangCI",
+  html = "HTML",
+  jedi_language_server = "Python",
   jsonls = "JSON",
+  sqls = "SQL",
+  sumneko_lua = "Lua",
+  tsserver = "TS",
+  vimls = "Vim",
   yamlls = "YAML",
 }
 --}}}
@@ -355,36 +360,7 @@ function M.lsp_client_names() --{{{
     clients[#clients + 1] = name
   end
 
-  return table.concat(clients, "   "), " "
-end --}}}
-
-function M.get_lsp_progress() --{{{
-  local messaging = require("lsp-status/messaging")
-  local buf_messages = messaging.messages()
-  local msgs = {}
-  for _, msg in ipairs(buf_messages) do
-    local contents
-    if msg.progress then
-      contents = msg.title
-      -- this percentage format string escapes a percent sign once to
-      -- show a percentage and one more time to prevent errors in vim
-      -- statusline's because of it's treatment of % chars
-      if msg.percentage then
-        contents = contents .. string.format(" (%.0f%%%%)", msg.percentage)
-      end
-
-      if msg.spinner then
-        contents = lsp_config.spinner_frames[(msg.spinner % #lsp_config.spinner_frames) + 1]
-          .. " "
-          .. contents
-      end
-    else
-      contents = msg.content
-    end
-    contents = contents:gsub("%s*workspace", "")
-    table.insert(msgs, contents)
-  end
-  return table.concat(msgs, lsp_config.component_separator)
+  return table.concat(clients, lsp_config.component_separator), lsp_config.lsp_icon
 end --}}}
 
 function M.fold_method() --{{{
@@ -463,48 +439,10 @@ function M.diagnostic_info() --{{{
   return diagnostics(vim.diagnostic.severity.INFO), "  "
 end --}}}
 
----Checks for dependency updates. It adds the found upgrades to the quickfix
--- list.
----@param filename string should be the full path of the go.mod file.
-function M.go_mod_check_upgrades(filename) --{{{
-  local f = io.open(filename, "r")
-  local contents = f:read("*a")
-  f:close()
-  local modules = {}
-  for line in contents:gmatch("[^\r\n]+") do
-    local module = line:match("^%s+([%a\\/\\.-]+)%s+[^%s\\/]+")
-    if module then
-      table.insert(modules, module)
-    end
+
+
   end
 
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
-    for _, diag in pairs(result.diagnostics) do
-      local cur_list = vim.fn.getqflist()
-      local item = {
-        filename = filename,
-        lnum = diag.range.start.line + 1,
-        col = diag.range.start.character + 1,
-        text = diag.message,
-      }
-      table.insert(cur_list, item)
-      vim.fn.setqflist(cur_list)
-      nvim.ex.copen()
-    end
-
-    vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.diagnostic.on_publish_diagnostics
-  end
-
-  local command = {
-    command = "gopls.check_upgrades",
-    arguments = { {
-      URI = "file:/" .. filename,
-      Modules = modules,
-    } },
-  }
-  -- FIXME: check if at least one of the clients supports this.
-  vim.lsp.buf.execute_command(command)
 end --}}}
 
 return M

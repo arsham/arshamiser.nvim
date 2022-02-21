@@ -8,7 +8,7 @@ local libs = {
   nvim = "norcalli/nvim.lua",
   feline = "famiu/feline.lua",
   heirline = "rebelot/heirline.nvim",
-  ["lsp-status"] = "nvim-lua/lsp-status.nvim",
+  ["fidget.nvim"] = "j-hui/fidget.nvim",
   ["nvim-web-devicons"] = "kyazdani42/nvim-web-devicons",
 }
 

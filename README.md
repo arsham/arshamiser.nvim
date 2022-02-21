@@ -31,7 +31,7 @@ as dependencies in your package manager:
 - [heirline.nvim](https://github.com/rebelot/heirline.nvim)
 - [nvim.lua](https://github.com/norcalli/nvim.lua)
 - [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
-- [lsp-status.nvim](https://github.com/nvim-lua/lsp-status.nvim)
+- [fidget.nvim](https://github.com/j-hui/fidget.nvim)
 
 ## Installation
 
@@ -46,7 +46,7 @@ use({
     "famiu/feline.nvim",
     "rebelot/heirline.nvim",
     "kyazdani42/nvim-web-devicons",
-    "nvim-lua/lsp-status.nvim",
+    "j-hui/fidget.nvim",
   },
   config = function()
     -- ignore any parts you don't want to use
@@ -84,7 +84,7 @@ use({
     "famiu/feline.nvim",
     "rebelot/heirline.nvim",
     "kyazdani42/nvim-web-devicons",
-    "nvim-lua/lsp-status.nvim",
+    "j-hui/fidget.nvim",
   },
   config = function()
     require("arshlib.quick").autocmd({"UIEnter", "*", function()
