@@ -37,6 +37,7 @@ M.colors = {--{{{
   mid_bg        = "#2B3033",
   orange        = utils.get_highlight("DiagnosticWarn").fg,
   cyan          = utils.get_highlight("Special").fg,
+  folder        = utils.get_highlight("NvimTreeFolderIcon").fg,
   git_add       = utils.get_highlight("DiffAdd").fg,
   git_del       = utils.get_highlight("DiffDelete").bg,
   git_change    = utils.get_highlight("DiffChange").fg,
@@ -117,6 +118,7 @@ M.separators = {--{{{
   right_rounded_thin = '',
   circle             = '●',
   github_icon        = " ﯙ ",
+  folder_icon        = " ",
 }
 --}}}
 ---Returns the VIM mode.

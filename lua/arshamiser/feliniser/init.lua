@@ -73,22 +73,6 @@ table.insert(components.active[1], {
 })
 -- }}}
 
--- Git root {{{
-table.insert(components.active[1], {
-  provider = "git_root",
-  enabled = function()
-    return require("feline.providers.git").git_info_exists()
-  end,
-  priority = 10,
-  truncate_hide = true,
-  hl = left_ribbon_hl,
-  left_sep = {
-    str = "github_icon",
-    hl = left_ribbon_hl,
-  },
-})
--- }}}
-
 -- Git branch {{{
 table.insert(components.active[1], {
   provider = "git_branch",
@@ -115,6 +99,8 @@ table.insert(components.active[1], {
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
+  priority = 9,
+  truncate_hide = true,
   hl = {
     fg = "git_add",
     bg = "statusline_bg",
@@ -126,6 +112,8 @@ table.insert(components.active[1], {
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
+  priority = 9,
+  truncate_hide = true,
   hl = {
     fg = "git_change",
     bg = "statusline_bg",
@@ -137,6 +125,8 @@ table.insert(components.active[1], {
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
+  priority = 9,
+  truncate_hide = true,
   hl = {
     fg = "git_del",
     bg = "statusline_bg",
@@ -176,12 +166,33 @@ table.insert(components.active[2], {
 })
 -- }}}
 
+-- Git root {{{
+table.insert(components.active[2], {
+  provider = "git_root",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
+  priority = 10,
+  truncate_hide = true,
+  hl = left_ribbon_hl,
+  left_sep = {
+    str = "folder_icon",
+    hl = {
+      fg = util.colors.folder,
+    },
+  },
+  right_sep = {
+    str = " ",
+  },
+})
+-- }}}
+
 -- File info {{{
 table.insert(components.active[2], {
   provider = {
     name = "file_info",
     opts = {
-      type = "full-path",
+      type = "relative",
       file_modified_icon = "",
       file_readonly_icon = "🔒",
     },
@@ -189,7 +200,7 @@ table.insert(components.active[2], {
   short_provider = {
     name = "file_info",
     opts = {
-      type = "relative",
+      type = "relative-short",
       file_modified_icon = "",
       file_readonly_icon = "🔒",
     },
@@ -533,35 +544,6 @@ table.insert(components.active[3], {
 })
 -- }}}
 
--- Git root {{{
-table.insert(components.inactive[1], {
-  provider = "git_root",
-  enabled = function()
-    return require("feline.providers.git").git_info_exists()
-  end,
-  truncate_hide = true,
-  hl = {
-    fg = "white",
-    bg = "mid_bg",
-    style = "bold",
-  },
-  left_sep = {
-    str = "github_icon",
-    hl = {
-      fg = "white",
-      bg = "short_bg",
-    },
-  },
-  right_sep = {
-    str = " ",
-    hl = {
-      fg = "white",
-      bg = "mid_bg",
-    },
-  },
-})
--- }}}
-
 -- Git branch {{{
 table.insert(components.inactive[1], {
   provider = "git_branch",
@@ -765,4 +747,4 @@ require("feline").setup({ -- {{{
 })
 -- }}}
 
--- vim: foldmethod=marker foldlevel=2
+-- vim: foldmethod=marker foldlevel=0
