@@ -20,6 +20,7 @@ M.colours = {--{{{
   light_bg2     = "#1d242b",
   mid_bg        = "#2B3033",
   orange        = utils.get_highlight("DiagnosticWarn").fg,
+  folder        = utils.get_highlight("NvimTreeFolderIcon").fg,
   cyan          = utils.get_highlight("Special").fg,
   diag = {
     warn  = utils.get_highlight("DiagnosticWarn").fg,

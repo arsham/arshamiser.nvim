@@ -5,6 +5,7 @@ local util = require("arshamiser.heirliniser.util")
 
 local space = { provider = " " }
 local spring = { provider = "%=" }
+local null = { provider = "" }
 
 local inactive_left_slant = { --{{{
   provider = util.separators.slant_right_2,
@@ -23,113 +24,117 @@ local inactive_right_slant = { --{{{
 } --}}}
 
 local vim_mode = { --{{{
+  init = function(self)
+    self.mode_ch = self.mode:sub(1, 1) -- get only the first mode character
+  end,
+  hl = function(self)
+    return {
+      fg = util.mode_colour(self.mode_ch),
+      style = "bold",
+    }
+  end,
   {
-    provider = "  ",
     hl = function(self)
-      local mode = self.mode:sub(1, 1) -- get only the first mode character
       return {
         fg = util.colours.statusline_bg,
-        bg = util.mode_colour(mode),
+        bg = util.mode_colour(self.mode_ch),
         style = "bold",
       }
     end,
+    provider = "  ",
   },
   {
     provider = function(self)
       return "  %2(" .. util.mode_names[self.mode][1] .. "%) "
     end,
   },
-  hl = function(self)
-    local mode = self.mode:sub(1, 1) -- get only the first mode character
-    return {
-      fg = util.mode_colour(mode),
-      style = "bold",
-    }
-  end,
 } --}}}
 
 local fold_method = { --{{{
-  enabled = function()
+  condition = function()
     return vim.wo.foldenable
   end,
   {
-    hl = {
-      fg = util.colours.green_pale,
-      style = "bold",
-    },
+    hl = { fg = util.colours.green_pale, style = "bold" },
     { provider = "  " },
     { provider = feliniser.fold_method },
   },
 } --}}}
+
+local function git_count(prop, colour, icon) --{{{
+  return {
+    condition = function(self)
+      return self.status_dict[prop] and self.status_dict[prop] > 0
+    end,
+    {
+      provider = icon,
+      hl = { fg = util.colours.git[colour] },
+    },
+    {
+      provider = function(self)
+        return self.status_dict[prop]
+      end,
+    },
+  }
+end --}}}
 
 local git = { --{{{
   condition = conditions.is_git_repo,
 
   init = function(self)
     self.status_dict = vim.b.gitsigns_status_dict
-    self.has_changes = self.status_dict.added ~= 0
-      or self.status_dict.removed ~= 0
-      or self.status_dict.changed ~= 0
   end,
-  { provider = util.separators.folder_icon },
-  { provider = feliniser.git_root },
+  heirline.make_flexible_component(2, {
+    { provider = "  ", hl = { fg = util.colours.git.add } },
+    {
+      provider = function(self)
+        return self.status_dict.head
+      end,
+    },
+  }, null),
   {
-    provider = function(self)
-      return "  " .. self.status_dict.head
-    end,
-  },
-  { --{{{
     condition = function(self)
-      return self.has_changes
+      return self.has_changes == self.status_dict.added ~= 0
+        or self.status_dict.removed ~= 0
+        or self.status_dict.changed ~= 0
     end,
-    {
-      provider = function(self)
-        local count = self.status_dict.added or 0
-        return count > 0 and ("  " .. count)
-      end,
-      hl = { fg = util.colours.git.add },
-    },
-    {
-      provider = function(self)
-        local count = self.status_dict.removed or 0
-        return count > 0 and ("  " .. count)
-      end,
-      hl = { fg = util.colours.git.del },
-    },
-    {
-      provider = function(self)
-        local count = self.status_dict.changed or 0
-        return count > 0 and (" 柳" .. count)
-      end,
-      hl = { fg = util.colours.git.change },
-    },
-  }, --}}}
+    heirline.make_flexible_component(4, {
+      git_count("added", "add", "  "),
+      git_count("removed", "del", "  "),
+      git_count("changed", "change", " 柳"),
+    }, {
+      git_count("removed", "del", "  "),
+      git_count("changed", "change", " 柳"),
+    }, {
+      git_count("removed", "del", "  "),
+    }, null),
+  },
 } --}}}
 
-local fileinfo = { --{{{
-  { -- File icon {{{
-    provider = function(self)
-      return self.icon and (self.icon .. " ")
-    end,
-    hl = function(self)
-      return { fg = self.icon_color }
-    end,
-  }, --}}}
+local file_size = { -- Filesize {{{
+  provider = function(self)
+    local suffix = { "b", "k", "M", "G", "T", "P", "E" }
+    local index = 1
+    local fsize = vim.fn.getfsize(self.filename)
 
-  { -- Filename {{{
-    provider = function(self)
-      local filename = vim.fn.fnamemodify(self.filename, ":.")
-      if filename == "" then
-        return "[No Name]"
-      end
-      if not conditions.width_percent_below(#filename, 0.25) then
-        filename = vim.fn.pathshorten(filename)
-      end
-      return filename
-    end,
-  }, --}}}
+    if fsize < 0 then
+      fsize = 0
+    end
 
-  { -- Modified / Readonly {{{
+    while fsize > 1024 and index < 7 do
+      fsize = fsize / 1024
+      index = index + 1
+    end
+    return string.format(index == 1 and "%g%s" or "%.2f%s", fsize, suffix[index])
+  end,
+  hl = {
+    fg = util.colours.grey_fg,
+  },
+} --}}}
+
+local file_lock_info = { -- Modified / Readonly {{{
+
+  {
     provider = function()
       if vim.bo.modified then
         return " "
@@ -141,33 +146,67 @@ local fileinfo = { --{{{
   {
     provider = function()
       if not vim.bo.modifiable or vim.bo.readonly then
-        return ""
+        return " "
       end
     end,
     hl = { fg = util.colours.orange },
-  }, --}}}
-
-  space,
-  { -- Filesize {{{
+  },
+}
+local file_name = { -- Filename {{{
+  init = function(self)
+    self.filename = vim.fn.fnamemodify(self.filename, ":.")
+    if self.filename == "" then
+      return "[No Name]"
+    end
+  end,
+  heirline.make_flexible_component(1, {
     provider = function(self)
-      local suffix = { "b", "k", "M", "G", "T", "P", "E" }
-      local index = 1
-      local fsize = vim.fn.getfsize(self.filename)
-
-      if fsize < 0 then
-        fsize = 0
-      end
-
-      while fsize > 1024 and index < 7 do
-        fsize = fsize / 1024
-        index = index + 1
-      end
-      return string.format(index == 1 and "%g%s" or "%.2f%s", fsize, suffix[index])
+      return self.filename
     end,
-    hl = {
-      fg = util.colours.grey_fg,
-    },
-  }, --}}}
+  }, {
+    provider = function(self)
+      return vim.fn.pathshorten(self.filename)
+    end,
+  }),
+} --}}}
+
+local file_icon = { -- File icon {{{
+  provider = function(self)
+    return self.icon and (self.icon .. " ")
+  end,
+  hl = function(self)
+    return { fg = self.icon_color }
+  end,
+} --}}}
+
+local folder_name = {
+  condition = function()
+    return conditions.is_git_repo()
+  end,
+  { provider = util.separators.folder_icon, hl = { fg = util.colours.folder } },
+  { provider = feliniser.git_root },
+  space,
+}
+
+local fileinfo = { --{{{
+  heirline.make_flexible_component(3, {
+    folder_name,
+    file_icon,
+    file_name,
+    file_lock_info,
+    space,
+    file_size,
+  }, {
+    folder_name,
+    file_icon,
+    file_name,
+    file_lock_info,
+  }, {
+    folder_name,
+    file_name,
+  }, {
+    file_name,
+  }),
 } --}}}
 
 local active_left_segment = { --{{{
@@ -175,7 +214,7 @@ local active_left_segment = { --{{{
     fg = util.colours.grey_fg,
   },
   vim_mode,
-  fold_method,
+  heirline.make_flexible_component(3, fold_method, null),
   heirline.surround({ " ", " " }, util.colours.statusline_bg, git),
 } --}}}
 
@@ -211,17 +250,26 @@ local active_right_segment = { --{{{
   condition = function()
     return vim.fn.expand("%:t") ~= ""
   end,
-  hl = {
-    fg = util.colours.grey_fg,
-  },
+  hl = { fg = util.colours.grey_fg },
   {
+    static = {
+      icon = "  ",
+    },
     condition = conditions.lsp_attached,
-    {
-      provider = "  " .. feliniser.lsp_client_names(),
-    },
-    {
-      provider = feliniser.get_lsp_progress,
-    },
+    heirline.make_flexible_component(2, {
+      {
+        provider = function(self)
+          return self.icon .. feliniser.lsp_client_names()
+        end,
+      },
+      -- { provider = feliniser.get_lsp_progress },
+    }, {
+      {
+        provider = function(self)
+          return self.icon .. feliniser.lsp_client_names()
+        end,
+      },
+    }, null),
   },
 
   { -- Diagnostics {{{
@@ -278,26 +326,30 @@ local active_right_segment = { --{{{
     },
   }, --}}}
 
-  { -- Filetype {{{
-    hl = function(self)
-      return {
-        fg = self.icon_color,
-        style = "bold",
-      }
-    end,
-    space,
+  heirline.make_flexible_component( -- Filetype {{{
+    2,
     {
-      provider = function(self)
-        return self.icon or ""
+      hl = function(self)
+        return {
+          fg = self.icon_color,
+          style = "bold",
+        }
       end,
+      space,
+      {
+        provider = function(self)
+          return self.icon or ""
+        end,
+      },
+      space,
+      {
+        provider = function()
+          return string.upper(vim.bo.filetype)
+        end,
+      },
     },
-    space,
-    {
-      provider = function()
-        return string.upper(vim.bo.filetype)
-      end,
-    },
-  }, --}}}
+    null
+  ), --}}}
 
   space,
   { provider = feliniser.search_results },
@@ -368,8 +420,8 @@ local inactive_right_segment = { --{{{
   end,
 
   hl = {
-    bg = util.colours.green_pale,
     fg = util.colours.mid_bg,
+    bg = util.colours.green_pale,
   },
   {
     {
@@ -399,6 +451,7 @@ local inactive_status_line = { --{{{
     space,
     inactive_right_slant,
   },
+
   spring,
   {
     inactive_left_slant,
@@ -408,6 +461,7 @@ local inactive_status_line = { --{{{
     space,
     inactive_right_slant,
   },
+
   spring,
   inactive_right_segment,
 } --}}}
@@ -422,7 +476,7 @@ local disabled_buffers = { --{{{
   provider = " ",
 } --}}}
 
-local help_file_name = {
+local help_file_name = { --{{{
   condition = function()
     return vim.bo.filetype == "help"
   end,
@@ -431,7 +485,7 @@ local help_file_name = {
     return vim.fn.fnamemodify(filename, ":t")
   end,
   hl = { fg = util.colours.blue },
-}
+} --}}}
 
 local status_line = { --{{{
   init = function(self)
@@ -445,7 +499,9 @@ local status_line = { --{{{
     self.mode = vim.fn.mode(1)
   end,
 
-  stop_at_first = true,
+  stop_when = function(_, out)
+    return out ~= ""
+  end,
   help_file_name,
   disabled_buffers,
   active_status_line,
