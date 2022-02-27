@@ -1,6 +1,25 @@
-local utils = require("heirline.utils")
-
 local M = {}
+
+---If highlight is a string, use it as highlight name and extract the
+-- properties from the highlight.
+-- Borrowed from the feline codebase.
+local function get_hl_properties(hlname)
+  local hl = vim.api.nvim_get_hl_by_name(hlname, true)
+  local styles = {}
+
+  for k, v in ipairs(hl) do
+    if v == true then
+      styles[#styles + 1] = k
+    end
+  end
+
+  return {
+    name = hlname,
+    fg = hl.foreground and string.format("#%06x", hl.foreground),
+    bg = hl.background and string.format("#%06x", hl.background),
+    style = next(styles) and table.concat(styles, ",") or "NONE",
+  }
+end
 
 M.force_inactive = { --{{{
   filetypes = {
@@ -34,12 +53,12 @@ M.colors = {--{{{
   light_bg      = "#222930",
   light_bg2     = "#1d242b",
   mid_bg        = "#2B3033",
-  orange        = utils.get_highlight("DiagnosticWarn").fg,
-  cyan          = utils.get_highlight("Special").fg,
-  folder        = utils.get_highlight("NvimTreeFolderIcon").fg,
-  git_add       = utils.get_highlight("DiffAdd").fg,
-  git_del       = utils.get_highlight("DiffDelete").bg,
-  git_change    = utils.get_highlight("DiffChange").fg,
+  orange        = get_hl_properties("DiagnosticWarn").fg,
+  cyan          = get_hl_properties("Special").fg,
+  folder        = get_hl_properties("NvimTreeFolderIcon").fg,
+  git_add       = get_hl_properties("DiffAdd").fg,
+  git_del       = get_hl_properties("DiffDelete").bg,
+  git_change    = get_hl_properties("DiffChange").fg,
 }
 --}}}
 -- stylua: ignore
