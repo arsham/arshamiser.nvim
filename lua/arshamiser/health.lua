@@ -8,9 +8,9 @@ local libs = {
   nvim = "norcalli/nvim.lua",
   feline = "famiu/feline.lua",
   heirline = "rebelot/heirline.nvim",
-  ["fidget.nvim"] = "j-hui/fidget.nvim",
+  fidget = "j-hui/fidget.nvim",
   ["nvim-web-devicons"] = "kyazdani42/nvim-web-devicons",
-  ["sqls.nvim"] = "nanotee/sqls.nvim",
+  sqls = "nanotee/sqls.nvim",
 }
 
 M.check = function()

@@ -192,7 +192,7 @@ table.insert(components.active[2], {
   provider = {
     name = "file_info",
     opts = {
-      type = "relative",
+      type = "full-path",
       file_modified_icon = "",
       file_readonly_icon = "🔒",
     },

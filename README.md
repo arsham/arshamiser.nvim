@@ -20,8 +20,7 @@ Neovim status bar, colour scheme, and foldtext function.
 
 ## Requirements
 
-At the moment it works on the development release of Neovim, and will be
-officially supporting [Neovim 0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0).
+This library supports [Neovim 0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0).
 
 This plugin depends are the following libraries. Please make sure to add them
 as dependencies in your package manager:
@@ -89,7 +88,8 @@ use({
     "nanotee/sqls.nvim",
   },
   config = function()
-    require("arshlib.quick").autocmd({"UIEnter", "*", function()
+    require("arshlib.quick").autocmd({ events = "UIEnter", pattern = "*",
+      callback = function()
         require("nvim").ex.colorscheme("arshamiser_light")
         require("arshamiser.feliniser")
         -- or:
