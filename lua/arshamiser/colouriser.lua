@@ -284,22 +284,18 @@ local internals = function(palette) -- Internals {{{
     }, --}}}
     DiffAdd = { -- {{{
       -- diff mode: Added line
-      fg = palette.diff_add_fg,
       bg = palette.diff_add_bg,
     },
     DiffDelete = {
       -- diff mode: Deleted line
-      fg = palette.diff_remove_fg,
       bg = palette.diff_remove_bg,
     },
     DiffChange = {
       --  diff mode: Changed line
-      fg = palette.diff_change_fg,
       bg = palette.diff_change_bg,
     },
     DiffText = {
       -- diff mode: Changed text within a changed line
-      fg = palette.diff_text_fg,
       bg = palette.diff_text_bg,
     },
     diffAdded = {
@@ -1165,63 +1161,63 @@ local plugin_syntax = function(palette) -- Plugins {{{
     -- }}}
     -- Git Signs {{{
     GitSignsAdd = {
-      fg = palette.diff_add_bg,
+      fg = palette.sign_add_bg,
       bg = palette.base2,
     },
     GitSignsAddNr = {
-      fg = palette.diff_add_bg,
+      fg = palette.sign_add_bg,
       bg = palette.base2,
     },
     GitSignsAddInline = {
-      fg = palette.diff_add_bg,
+      fg = palette.sign_add_bg,
       bg = palette.base2,
     },
     GitSignsAddLnInline = {
-      fg = palette.diff_add_bg,
+      fg = palette.sign_add_bg,
       bg = palette.base2,
     },
     GitSignsAddVirtLnInline = {
-      fg = palette.diff_add_bg,
+      fg = palette.sign_add_bg,
       bg = palette.base2,
     },
     GitSignsChange = {
-      fg = palette.diff_change_bg,
+      fg = palette.sign_change_bg,
       bg = palette.base2,
     },
     GitSignsChangeNr = {
-      fg = palette.diff_change_bg,
+      fg = palette.sign_change_bg,
       bg = palette.base2,
     },
     GitSignsChangeInLine = {
-      fg = palette.diff_change_bg,
+      fg = palette.sign_change_bg,
       bg = palette.base2,
     },
     GitSignsChangeVirtLnInline = {
-      fg = palette.diff_change_bg,
+      fg = palette.sign_change_bg,
       bg = palette.base2,
     },
     GitSignsChangeLnInline = {
-      fg = palette.diff_change_bg,
+      fg = palette.sign_change_bg,
       bg = palette.base2,
     },
     GitSignsDelete = {
-      fg = palette.diff_remove_bg,
+      fg = palette.sign_remove_bg,
       bg = palette.base2,
     },
     GitSignsDeleteNr = {
-      fg = palette.diff_remove_bg,
+      fg = palette.sign_remove_bg,
       bg = palette.base2,
     },
     GitSignsDeleteInLine = {
-      fg = palette.diff_remove_bg,
+      fg = palette.sign_remove_bg,
       bg = palette.base2,
     },
     GitSignsDeleteLnInline = {
-      fg = palette.diff_remove_bg,
+      fg = palette.sign_remove_bg,
       bg = palette.base2,
     },
     GitSignsDeleteVirtLnInline = {
-      fg = palette.diff_remove_bg,
+      fg = palette.sign_remove_bg,
       bg = palette.base2,
     },
     -- }}}
