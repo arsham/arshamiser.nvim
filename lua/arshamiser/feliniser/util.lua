@@ -56,9 +56,9 @@ M.colors = {--{{{
   orange        = get_hl_properties("DiagnosticWarn").fg,
   cyan          = get_hl_properties("Special").fg,
   folder        = get_hl_properties("NvimTreeFolderIcon").fg,
-  git_add       = get_hl_properties("DiffAdd").fg,
-  git_del       = get_hl_properties("DiffDelete").bg,
-  git_change    = get_hl_properties("DiffChange").fg,
+  git_add       = get_hl_properties("GitSignsAdd").fg,
+  git_del       = get_hl_properties("GitSignsDelete").fg,
+  git_change    = get_hl_properties("GitSignsChange").fg,
 }
 --}}}
 -- stylua: ignore
