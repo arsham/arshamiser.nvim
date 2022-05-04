@@ -36,9 +36,9 @@ local light = {
   purple         = "#BBB3E8",
   red            = "#DE7185",
   sidebar_bg     = "#202324",
-  warning        = "#FC9867",
+  warning        = "#F7A379",
   white          = "#FFF1F3",
-  yellow         = "#EBD492",
+  yellow         = "#D6C596",
 
   none           = "NONE",
 }

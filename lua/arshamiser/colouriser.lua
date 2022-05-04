@@ -864,176 +864,6 @@ local plugin_syntax = function(palette) -- Plugins {{{
       bg = palette.base5,
     },
     -- }}}
-    -- LSP {{{
-    LspDiagnosticsDefaultError = {
-      -- used for "Error" diagnostic virtual text
-      fg = palette.error,
-    },
-    LspDiagnosticsError = {
-      fg = palette.error,
-    },
-    LspDiagnosticsWarning = {
-      fg = palette.yellow,
-    },
-    LspDiagnosticsInformation = {
-      fg = palette.blue_pale,
-    },
-    LspDiagnosticsHint = {
-      fg = palette.purple,
-    },
-    LspDiagnosticsSignError = {
-      -- used for "Error" diagnostic signs in sign column
-      fg = palette.red,
-      bg = palette.base2,
-    },
-    LspDiagnosticsFloatingError = {
-      -- used for "Error" diagnostic messages in the diagnostics float
-      fg = palette.error,
-    },
-    LspDiagnosticsSignWarning = {
-      -- used for "Warning" diagnostic signs in sign column
-      fg = palette.yellow,
-      bg = palette.base2,
-    },
-    LspDiagnosticsFloatingWarning = {
-      -- used for "Warning" diagnostic messages in the diagnostics float
-      fg = palette.yellow,
-    },
-    LspDiagnosticsSignInformation = {
-      -- used for "Information" diagnostic signs in sign column
-      bg = palette.base2,
-      fg = palette.white,
-    },
-    LspDiagnosticsFloatingInformation = {
-      -- used for "Information" diagnostic messages in the diagnostics float
-      fg = palette.blue_pale,
-    },
-    LspDiagnosticsSignHint = {
-      -- used for "Hint" diagnostic signs in sign column
-      fg = palette.aqua,
-      bg = palette.base2,
-    },
-    LspDiagnosticsFloatingHint = {
-      -- used for "Hint" diagnostic messages in the diagnostics float
-      fg = palette.purple,
-    },
-    LspDiagnosticsVirtualTextError = {
-      -- Virtual text "Error"
-      fg = palette.red,
-    },
-    LspDiagnosticsVirtualTextWarning = {
-      -- Virtual text "Warning"
-      fg = palette.yellow,
-    },
-    LspDiagnosticsVirtualTextInformation = {
-      -- Virtual text "Information"
-      fg = palette.white,
-    },
-    LspDiagnosticsVirtualTextHint = {
-      -- Virtual text "Hint"
-      fg = palette.aqua,
-    },
-    LspDiagnosticsUnderlineError = {
-      -- used to underline "Error" diagnostics.
-      undercurl = true,
-      sp = palette.red,
-    },
-    LspDiagnosticsDefaultWarning = {
-      -- used for "Warning" diagnostic signs in sign column
-      fg = palette.yellow,
-    },
-    LspDiagnosticsUnderlineWarning = {
-      -- used to underline "Warning" diagnostics.
-      undercurl = true,
-      sp = palette.yellow,
-    },
-    LspDiagnosticsDefaultInformation = {
-      -- used for "Information" diagnostic virtual text
-      fg = palette.blue_pale,
-    },
-    LspDiagnosticsUnderlineInformation = {
-      -- used to underline "Information" diagnostics.
-      undercurl = true,
-      sp = palette.white,
-    },
-    LspDiagnosticsDefaultHint = {
-      -- used for "Hint" diagnostic virtual text
-      fg = palette.purple,
-    },
-    LspDiagnosticsUnderlineHint = {
-      -- used to underline "Hint" diagnostics.
-      undercurl = true,
-      sp = palette.aqua,
-    },
-    LspSignatureActiveParameter = {
-      fg = palette.orange,
-    },
-    LspCodeLens = {
-      fg = palette.orange,
-    },
-    LspFloatWinNormal = {
-      bg = palette.blue_pale,
-    },
-    LspFloatWinBorder = {
-      fg = palette.border_highlight,
-    },
-    LspSagaBorderTitle = {
-      fg = palette.cyan,
-    },
-    LspSagaHoverBorder = {
-      fg = palette.blue,
-    },
-    LspSagaRenameBorder = {
-      fg = palette.green,
-    },
-    LspSagaDefPreviewBorder = {
-      fg = palette.green,
-    },
-    LspSagaCodeActionBorder = {
-      fg = palette.blue,
-    },
-    LspSagaFinderSelection = {
-      fg = palette.bg_visual,
-    },
-    LspSagaCodeActionTitle = {
-      fg = palette.blue1,
-    },
-    LspSagaCodeActionContent = {
-      fg = palette.purple,
-    },
-    LspSagaSignatureHelpBorder = {
-      fg = palette.red,
-    },
-    LspLinesDiagBorder = {
-      fg = palette.contrast,
-    },
-    LspReferenceText = {
-      -- used for highlighting "text" references
-      fg = palette.accent,
-      bg = palette.highlight,
-    },
-    LspReferenceRead = {
-      -- used for highlighting "read" references
-      fg = palette.accent,
-      bg = palette.highlight,
-    },
-    LspReferenceWrite = {
-      -- used for highlighting "write" references
-      fg = palette.accent,
-      bg = palette.highlight,
-    },
-    LspTroubleText = {
-      fg = palette.text,
-    },
-    LspTroubleCount = {
-      fg = palette.purple,
-      bg = palette.active,
-    },
-    LspTroubleNormal = {
-      fg = palette.white,
-      bg = palette.sidebar,
-    },
-    -- }}}
     -- Diagnostics {{{
     DiagnosticError = {
       fg = palette.error,
@@ -1042,14 +872,14 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.base4,
       bg = palette.error,
     },
-    DiagnosticWarning = {
+    DiagnosticWarn = {
       fg = palette.warning,
     },
     DiagnosticLineNrWarn = {
       fg = palette.base4,
       bg = palette.warning,
     },
-    DiagnosticInformation = {
+    DiagnosticInfo = {
       fg = palette.green,
     },
     DiagnosticLineNrInfo = {
