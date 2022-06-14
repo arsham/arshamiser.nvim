@@ -3,7 +3,7 @@ local M = {}
 ---If highlight is a string, use it as highlight name and extract the
 -- properties from the highlight.
 -- Borrowed from the feline codebase.
-local function get_hl_properties(hlname)
+local function get_hl_properties(hlname) --{{{
   local hl = vim.api.nvim_get_hl_by_name(hlname, true)
   local styles = {}
 
@@ -19,7 +19,7 @@ local function get_hl_properties(hlname)
     bg = hl.background and string.format("#%06x", hl.background),
     style = next(styles) and table.concat(styles, ",") or "NONE",
   }
-end
+end --}}}
 
 M.force_inactive = { --{{{
   filetypes = {
@@ -36,7 +36,8 @@ M.force_inactive = { --{{{
   bufnames = {},
 }
 --}}}
--- stylua: ignore
+
+-- stylua: ignore start
 M.colors = {--{{{
   white         = "#b5bcc9",
   grey_fg       = "#737D87",
@@ -61,7 +62,7 @@ M.colors = {--{{{
   git_change    = get_hl_properties("GitSignsChange").fg,
 }
 --}}}
--- stylua: ignore
+
 M.mode_mappings = {--{{{
   ['n']   = {'Normal',       '-'},
   ['no']  = {'Op·Pending',   'P'},
@@ -94,7 +95,7 @@ M.mode_mappings = {--{{{
   ['']    = {'Empty',        '-'},
 }
 --}}}
--- stylua: ignore
+
 M.vi_mode_colors = {--{{{
   NORMAL        = 'green',
   OP            = 'green',
@@ -113,7 +114,7 @@ M.vi_mode_colors = {--{{{
   NONE          = 'yellow'
 }
 --}}}
--- stylua: ignore
+
 M.separators = {--{{{
   vertical_bar       = '┃',
   vertical_bar_thin  = '│',
@@ -140,6 +141,8 @@ M.separators = {--{{{
   database           = '  ',
 }
 --}}}
+-- stylua: ignore end
+
 ---Returns the VIM mode.
 ---@return string
 function M.vim_mode() --{{{
@@ -173,16 +176,16 @@ end --}}}
 
 ---Returns the git directory for the current file. Adapted from from
 -- galaxyline.
----@param path string
+---@param path string?
 ---@return string
 local function get_git_dir(path) --{{{
   -- Checks if provided directory contains git directory
-  local function has_git_dir(dir)
+  local function has_git_dir(dir) --{{{
     local git_dir = dir .. "/.git"
     if vim.fn.isdirectory(git_dir) == 1 then
       return git_dir
     end
-  end
+  end --}}}
 
   -- Get git directory from git file if present
   local function has_git_file(dir) --{{{

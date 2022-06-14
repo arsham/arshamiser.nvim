@@ -1,4 +1,4 @@
--- stylua: ignore
+-- stylua: ignore start
 local light = {
   base0          = "#232627",
   base1          = "#211F22",
@@ -44,7 +44,6 @@ local light = {
   none           = "NONE",
 }
 
--- stylua: ignore
 local dark = {
   base0          = '#232627',
   base1          = '#211F22',
@@ -89,6 +88,7 @@ local dark = {
 
   none           = 'NONE',
 }
+-- stylua: ignore end
 
 return {
   light = light,

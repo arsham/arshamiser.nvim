@@ -47,6 +47,34 @@ local internals = function(palette) -- Internals {{{
       bg = palette.none,
       reverse = true,
     },
+    lCursor = {
+      -- the character under the cursor when language-mapping is used.
+      fg = palette.none,
+      bg = palette.none,
+      reverse = true,
+    },
+    vCursor = {
+      -- the character under the cursor
+      fg = palette.none,
+      bg = palette.none,
+      reverse = true,
+    },
+    iCursor = {
+      fg = palette.none,
+      bg = palette.none,
+      reverse = true,
+    },
+    CursorIM = {
+      -- like Cursor, but used when in IME mode.
+      fg = palette.none,
+      bg = palette.none,
+      reverse = true,
+    },
+    CursorColumn = {
+      -- Screen-column at the cursor, when 'cursorcolumn' is set.
+      fg = palette.none,
+      bg = palette.base3,
+    },
     ColorColumn = {
       --  used for the columns set with 'colorcolumn'
       fg = palette.none,
@@ -129,11 +157,6 @@ local internals = function(palette) -- Internals {{{
       bg = palette.red,
       fg = palette.black,
     },
-    StatusLine = {
-      -- status line of current window
-      fg = palette.base7,
-      bg = palette.base2,
-    },
     Search = {
       -- Last search pattern highlighting (see 'hlsearch').  Also used for
       -- similar items that need to stand out.
@@ -208,7 +231,12 @@ local internals = function(palette) -- Internals {{{
       bg = palette.sidebar_bg,
       fg = palette.white,
     }, --}}}
-    StatusLineNC = { --{{{
+    StatusLine = { --{{{
+      -- status line of current window
+      fg = palette.base7,
+      bg = palette.base2,
+    },
+    StatusLineNC = {
       -- status lines of not-current windows Note: if this is equal to
       -- "StatusLine" Vim will use "^^^" in the status line of the current
       -- window.
@@ -227,7 +255,12 @@ local internals = function(palette) -- Internals {{{
       fg = palette.text,
       bg = palette.base0,
     },
-    TabLine = {
+    Title = {
+      -- titles for output from ":set all", ":autocmd" etc.
+      fg = palette.yellow,
+      bold = true,
+    }, --}}}
+    TabLine = { --{{{
       -- tab pages line, not active tab page label
       bg = palette.blue_dark,
       fg = palette.blue_pale,
@@ -243,10 +276,6 @@ local internals = function(palette) -- Internals {{{
       fg = palette.white,
       bold = true,
     },
-    Title = {
-      -- titles for output from ":set all", ":autocmd" etc.
-      fg = palette.yellow,
-      bold = true,
     }, --}}}
     SpellBad = { --{{{
       -- Word that is not recognized by the spellchecker. |spell| Combined
@@ -475,45 +504,18 @@ local internals = function(palette) -- Internals {{{
       fg = palette.grey,
       bg = palette.none,
     }, --}}}
-    vCursor = { --{{{
-      -- the character under the cursor
-      fg = palette.none,
-      bg = palette.none,
-      reverse = true,
-    },
-    iCursor = {
-      fg = palette.none,
-      bg = palette.none,
-      reverse = true,
-    },
-    lCursor = {
-      fg = palette.none,
-      bg = palette.none,
-      reverse = true,
-    },
-    CursorIM = {
-      -- like Cursor, but used when in IME mode
-      fg = palette.none,
-      bg = palette.none,
-      reverse = true,
-    },
-    CursorColumn = {
-      -- Screen-column at the cursor, when 'cursorcolumn' is set.
-      fg = palette.none,
-      bg = palette.base3,
-    },
-    WildMenu = {
+    WildMenu = { --{{{
       -- current match in 'wildmenu' completion
       fg = palette.white,
       bg = palette.orange,
-    },
-    QuickFixLine = {
+    }, --}}}
+    QuickFixLine = { --{{{
       -- Current |quickfix| item in the quickfix window. Combined with
       -- |hl-CursorLine| when the cursor is there.
       fg = palette.purple,
       bold = true,
-    }, --}}}
-    qfLineNr = { --{{{
+    },
+    qfLineNr = {
       -- Line numbers for quickfix lists
       fg = palette.highlight,
       bg = palette.title,
@@ -521,8 +523,8 @@ local internals = function(palette) -- Internals {{{
     },
     qfFileName = {
       fg = palette.blue,
-    },
-    Debug = {
+    }, --}}}
+    Debug = { --{{{
       -- debugging statements
       fg = palette.orange,
     },
