@@ -28,7 +28,6 @@ as dependencies in your package manager:
 - [arshlib.nvim](https://github.com/arsham/arshlib.nvim)
 - [feline.nvim](https://github.com/famiu/feline.nvim)
 - [heirline.nvim](https://github.com/rebelot/heirline.nvim)
-- [nvim.lua](https://github.com/norcalli/nvim.lua)
 - [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
 - [fidget.nvim](https://github.com/j-hui/fidget.nvim)
 - [sqls.nvim](https://github.com/nanotee/sqls.nvim)
@@ -42,7 +41,6 @@ use({
   "arsham/arshamiser.nvim",
   requires = {
     "arsham/arshlib.nvim",
-    "norcalli/nvim.lua",
     "famiu/feline.nvim",
     "rebelot/heirline.nvim",
     "kyazdani42/nvim-web-devicons",
@@ -50,7 +48,7 @@ use({
   },
   config = function()
     -- ignore any parts you don't want to use
-    require("nvim").ex.colorscheme("arshamiser_light")
+    vim.api.nvim_command("colorscheme arshamiser_light")
     require("arshamiser.feliniser")
     -- or:
     -- require("arshamiser.heirliniser")
@@ -80,7 +78,6 @@ use({
   "arsham/arshamiser.nvim",
   requires = {
     "arsham/arshlib.nvim",
-    "norcalli/nvim.lua",
     "famiu/feline.nvim",
     "rebelot/heirline.nvim",
     "kyazdani42/nvim-web-devicons",
@@ -90,7 +87,7 @@ use({
   config = function()
     require("arshlib.quick").autocmd({ events = "UIEnter", pattern = "*",
       callback = function()
-        require("nvim").ex.colorscheme("arshamiser_light")
+        vim.api.nvim_command("colorscheme arshamiser_light")
         require("arshamiser.feliniser")
         -- or:
         -- require("arshamiser.heirliniser")

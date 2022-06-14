@@ -1119,15 +1119,13 @@ end
 -- }}}
 
 -- Setup function {{{
-local nvim = require("nvim")
-
 ---Creates all highlighting from the given palette.
 ---@param palette string could be 'light_palette' or 'dark_palette'
 ---@param name string the colour scheme name
 local setup = function(palette, name) --{{{
-  nvim.ex.clear()
+  vim.api.nvim_command("clear")
   if vim.fn.exists("syntax_on") then
-    nvim.ex.syntax("reset")
+    vim.api.nvim_command("syntax reset")
   end
 
   vim.g.colors_name = name
