@@ -286,7 +286,7 @@ table.insert(components.active[3], {
     return util.diagnostics_exist(vim.diagnostic.ERROR)
   end,
   hl = {
-    fg = "red",
+    fg = "error",
     bg = "statusline_bg",
   },
 })
@@ -308,7 +308,7 @@ table.insert(components.active[3], {
     return util.diagnostics_exist(vim.diagnostic.HINT)
   end,
   hl = {
-    fg = "green",
+    fg = "info",
     bg = "statusline_bg",
   },
 })

@@ -83,7 +83,6 @@ local internals = function(palette) -- Internals {{{
     CursorLine = {
       -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority
       -- if foreground (ctermfg OR fg) is not set.
-      fg = palette.none,
       bg = palette.base3,
     },
     ToolbarLine = {
@@ -276,6 +275,107 @@ local internals = function(palette) -- Internals {{{
       fg = palette.white,
       bold = true,
     },
+    TabLineSepSel = {
+      bg = palette.blue_pale,
+      fg = palette.white,
+    },
+    TabLineSep = {
+      bg = palette.blue_dark,
+      fg = palette.white,
+    },
+    TabLineModifiedSel = {
+      bg = palette.blue_pale,
+      fg = palette.white,
+    },
+    TabLineModified = {
+      bg = palette.blue_pale,
+      fg = palette.white,
+    }, --}}}
+    -- GPS {{{
+    NavicIcons = {
+      fg = palette.blue_pale,
+      bg = palette.base3,
+    },
+    NavicText = {
+      fg = palette.white,
+    },
+    NavicIconsFile = {
+      link = "CmpItemKindFile",
+    },
+    NavicIconsModule = {
+      link = "CmpItemKindModule",
+    },
+    NavicIconsNamespace = {
+      link = "CmpItemKindNamespace",
+    },
+    NavicIconsPackage = {
+      link = "CmpItemKindPackage",
+    },
+    NavicIconsClass = {
+      link = "CmpItemKindClass",
+    },
+    NavicIconsMethod = {
+      link = "CmpItemKindMethod",
+    },
+    NavicIconsProperty = {
+      link = "CmpItemKindProperty",
+    },
+    NavicIconsField = {
+      link = "CmpItemKindField",
+    },
+    NavicIconsConstructor = {
+      link = "CmpItemKindConstructor",
+    },
+    NavicIconsEnum = {
+      link = "CmpItemKindEnum",
+    },
+    NavicIconsInterface = {
+      link = "CmpItemKindInterface",
+    },
+    NavicIconsFunction = {
+      link = "CmpItemKindFunction",
+    },
+    NavicIconsVariable = {
+      link = "CmpItemKindVariable",
+    },
+    NavicIconsConstant = {
+      link = "CmpItemKindConstant",
+    },
+    NavicIconsString = {
+      link = "CmpItemKindString",
+    },
+    NavicIconsNumber = {
+      link = "CmpItemKindNumber",
+    },
+    NavicIconsBoolean = {
+      link = "CmpItemKindBoolean",
+    },
+    NavicIconsArray = {
+      link = "CmpItemKindArray",
+    },
+    NavicIconsObject = {
+      link = "CmpItemKindObject",
+    },
+    NavicIconsKey = {
+      link = "CmpItemKindKey",
+    },
+    NavicIconsNull = {
+      link = "CmpItemKindNull",
+    },
+    NavicIconsEnumMember = {
+      link = "CmpItemKindEnumMember",
+    },
+    NavicIconsStruct = {
+      link = "CmpItemKindStruct",
+    },
+    NavicIconsEvent = {
+      link = "CmpItemKindEvent",
+    },
+    NavicIconsOperator = {
+      link = "CmpItemKindOperator",
+    },
+    NavicIconsTypeParameter = {
+      link = "CmpItemKindTypeParameter",
     }, --}}}
     SpellBad = { --{{{
       -- Word that is not recognized by the spellchecker. |spell| Combined
@@ -455,6 +555,7 @@ local internals = function(palette) -- Internals {{{
     SpecialComment = {
       -- special things inside a comment
       fg = palette.grey,
+      bold = true,
     },
     Tag = {
       -- you can use CTRL-] on this
@@ -495,6 +596,7 @@ local internals = function(palette) -- Internals {{{
       bg = palette.base2,
     },
     EndOfBuffer = {
+      -- filler lines (~) after the end of the buffer.
       fg = palette.base2,
       bg = palette.none,
     },
@@ -502,7 +604,6 @@ local internals = function(palette) -- Internals {{{
       -- placeholder characters substituted for concealed text (see
       -- 'conceallevel')
       fg = palette.grey,
-      bg = palette.none,
     }, --}}}
     WildMenu = { --{{{
       -- current match in 'wildmenu' completion
@@ -613,7 +714,6 @@ local internals = function(palette) -- Internals {{{
     Directory = {
       -- directory names (and other special names in listings)
       fg = palette.aqua,
-      bg = palette.none,
     },
     Repeat = {
       fg = palette.pink,
@@ -640,6 +740,103 @@ end
 
 local plugin_syntax = function(palette) -- Plugins {{{
   return {
+    -- CMP {{{
+    CmpDocumentation = {
+      fg = palette.green,
+      bg = palette.blue,
+    },
+    CmpDocumentationBorder = {
+      fg = palette.border_highlight,
+      bg = palette.blue,
+    },
+    CmpItemAbbr = {
+      fg = palette.white,
+    },
+    CmpItemAbbrDeprecated = {
+      fg = palette.grey,
+      strikethrough = true,
+    },
+    CmpItemAbbrMatch = {
+      fg = palette.blue,
+    },
+    CmpItemAbbrMatchFuzzy = {
+      fg = palette.blue,
+    },
+    CmpItemKind = {
+      fg = palette.orange,
+    },
+    CmpItemKindClass = {
+      fg = palette.orange,
+    },
+    CmpItemKindConstant = {
+      fg = palette.magenta,
+    },
+    CmpItemKindConstructor = {
+      fg = palette.blue,
+    },
+    CmpItemKindDefault = {
+      fg = palette.green_dark,
+    },
+    CmpItemKindEnum = {
+      fg = palette.orange,
+    },
+    CmpItemKindEnumMember = {
+      fg = palette.green,
+    },
+    CmpItemKindEvent = {
+      fg = palette.orange,
+    },
+    CmpItemKindField = {
+      fg = palette.green,
+    },
+    CmpItemKindFunction = {
+      fg = palette.blue,
+    },
+    CmpItemKindInterface = {
+      fg = palette.aqua,
+    },
+    CmpItemKindKeyword = {
+      fg = palette.cyan,
+    },
+    CmpItemKindMethod = {
+      fg = palette.blue,
+    },
+    CmpItemKindModule = {
+      fg = palette.yellow,
+    },
+    CmpItemKindOperator = {
+      fg = palette.green,
+    },
+    CmpItemKindProperty = {
+      fg = palette.green,
+    },
+    CmpItemKindReference = {
+      fg = palette.magenta,
+    },
+    CmpItemKindSnippet = {
+      fg = palette.blue,
+    },
+    CmpItemKindStruct = {
+      fg = palette.orange,
+    },
+    CmpItemKindText = {
+      fg = palette.aqua,
+    },
+    CmpItemKindTypeParameter = {
+      fg = palette.green,
+    },
+    CmpItemKindUnit = {
+      fg = palette.orange,
+    },
+    CmpItemKindValue = {
+      fg = palette.magenta,
+    },
+    CmpItemKindVariable = {
+      fg = palette.aqua,
+    },
+    CmpItemMenu = {
+      fg = palette.base7,
+    }, --}}}
     -- Treesitter {{{
     TSString = {
       fg = palette.yellow,
@@ -692,6 +889,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
     TSError = {
       -- For syntax/parser errors.
       fg = palette.error,
+      italic = true,
     },
     TSConditional = {
       fg = palette.pink,
@@ -863,6 +1061,26 @@ local plugin_syntax = function(palette) -- Plugins {{{
     },
     TSDefinition = {
       bg = palette.base5,
+    },
+    -- }}}
+    -- LSP {{{
+    LspCodeLens = {
+      fg = palette.orange,
+    },
+    LspReferenceText = {
+      -- used for highlighting "text" references
+      fg = palette.accent,
+      bg = palette.highlight,
+    },
+    LspReferenceRead = {
+      -- used for highlighting "read" references
+      fg = palette.accent,
+      bg = palette.highlight,
+    },
+    LspReferenceWrite = {
+      -- used for highlighting "write" references
+      fg = palette.accent,
+      bg = palette.highlight,
     },
     -- }}}
     -- Diagnostics {{{

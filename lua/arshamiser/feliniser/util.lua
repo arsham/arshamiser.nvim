@@ -60,6 +60,9 @@ M.colors = {--{{{
   git_add       = get_hl_properties("GitSignsAdd").fg,
   git_del       = get_hl_properties("GitSignsDelete").fg,
   git_change    = get_hl_properties("GitSignsChange").fg,
+  warn          = get_hl_properties("DiagnosticWarn").fg,
+  error         = get_hl_properties("DiagnosticError").fg,
+  info          = get_hl_properties("DiagnosticInfo").fg,
 }
 --}}}
 
