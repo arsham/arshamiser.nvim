@@ -450,6 +450,16 @@ table.insert(components.active[3], {
 -- Search results key {{{
 table.insert(components.active[3], {
   provider = "search_results",
+  enabled = function()
+    if not vim.v.hlsearch or vim.v.hlsearch ~= 1 then
+      return false
+    end
+    local lines = vim.api.nvim_buf_line_count(0)
+    if lines > 50000 then
+      return false
+    end
+    return true
+  end,
   truncate_hide = true,
   hl = right_ribbon_hl,
   right_sep = {

@@ -306,10 +306,6 @@ function M.filename(_, opts) --{{{
 end --}}}
 
 function M.search_results() --{{{
-  local lines = vim.api.nvim_buf_line_count(0)
-  if lines > 50000 then
-    return ""
-  end
   local search_term = vim.fn.getreg("/")
   if search_term == "" then
     return ""
@@ -319,11 +315,7 @@ function M.search_results() --{{{
   end
 
   local search_count = vim.fn.searchcount({ recompute = 1, maxcount = -1 })
-  local active = false
-  if vim.v.hlsearch and vim.v.hlsearch == 1 and search_count.total > 0 then
-    active = true
-  end
-  if not active then
+  if search_count.total == 0 then
     return ""
   end
 
