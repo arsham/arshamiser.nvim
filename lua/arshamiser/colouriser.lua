@@ -16,18 +16,17 @@ local internals = function(palette) -- Internals {{{
     },
     NormalFloat = {
       -- normal text and background color for floating windows
-      fg = palette.grey_light,
-      bg = palette.base4,
+      bg = palette.pmenu,
     }, -- }}}
     Pmenu = { --{{{
       -- Popup menu: normal item.
-      fg = palette.grey_light,
-      bg = palette.base4,
+      bg = palette.pmenu,
     },
     PmenuSel = {
       -- Popup menu: selected item.
-      fg = palette.base4,
+      fg = palette.pmenu,
       bg = palette.blue_pale,
+      bold = true,
     },
     PmenuSelBold = {
       fg = palette.base4,
@@ -36,7 +35,7 @@ local internals = function(palette) -- Internals {{{
     PmenuThumb = {
       -- Popup menu: Thumb of the scrollbar.
       fg = palette.purple,
-      bg = palette.green,
+      bg = palette.blue_light,
     },
     PmenuSbar = {
       -- Popup menu: scrollbar.
