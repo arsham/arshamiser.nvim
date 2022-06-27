@@ -1333,6 +1333,12 @@ local plugin_syntax = function(palette) -- Plugins {{{
       link = "Search",
     },
     --}}}
+    -- Misc {{{
+    SubstituteExchange = {
+      bg = palette.blue_light,
+      bold = true,
+    },
+    -- }}}
   }
 end
 -- }}}
