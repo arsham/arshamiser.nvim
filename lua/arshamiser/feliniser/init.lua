@@ -29,7 +29,7 @@ table.insert(components.active[1], {
     return {
       fg = "statusline_bg",
       bg = vi_mode_utils.get_mode_color(),
-      style = "bold",
+      bold = true,
     }
   end,
   right_sep = "right_rounded",
@@ -41,7 +41,7 @@ table.insert(components.active[1], {
     return {
       fg = vi_mode_utils.get_mode_color(),
       bg = "statusline_bg",
-      style = "bold",
+      bold = true,
     }
   end,
   right_sep = {
@@ -49,7 +49,7 @@ table.insert(components.active[1], {
     hl = {
       fg = "light_bg2",
       bg = "statusline_bg",
-      style = "bold",
+      bold = true,
     },
   },
   icon = "  ",
@@ -67,7 +67,7 @@ table.insert(components.active[1], {
   hl = {
     fg = "green_pale",
     bg = "statusline_bg",
-    style = "bold",
+    bold = true,
   },
   icon = "  ",
 })
@@ -160,7 +160,7 @@ table.insert(components.active[2], {
     hl = {
       fg = "statusline_bg",
       bg = "mid_bg",
-      style = "bold",
+      bold = true,
     },
   },
 })
@@ -334,14 +334,14 @@ table.insert(components.active[3], {
   hl = {
     fg = "yellow",
     bg = "statusline_bg",
-    style = "bold",
+    bold = true,
   },
   left_sep = {
     str = " ",
     hl = {
       bg = "statusline_bg",
       fg = "mid_bg",
-      style = "bold",
+      bold = true,
     },
   },
 })
@@ -360,7 +360,7 @@ table.insert(components.active[3], {
     hl = {
       bg = "statusline_bg",
       fg = "mid_bg",
-      style = "bold",
+      bold = true,
     },
   },
 })
@@ -393,7 +393,7 @@ table.insert(components.active[3], {
       val.fg = "grey_fg"
     end
     val.bg = "statusline_bg"
-    val.style = "bold"
+    val.bold = true
     return val
   end,
   left_sep = {
@@ -408,7 +408,7 @@ table.insert(components.active[3], {
     hl = {
       bg = "statusline_bg",
       fg = "mid_bg",
-      style = "bold",
+      bold = true,
     },
   },
 })
@@ -431,7 +431,7 @@ table.insert(components.active[3], {
       val.fg = "grey_fg"
     end
     val.bg = "statusline_bg"
-    val.style = "bold"
+    val.bold = true
     return val
   end,
   priority = 7,
@@ -441,7 +441,7 @@ table.insert(components.active[3], {
     hl = {
       fg = "mid_bg",
       bg = "statusline_bg",
-      style = "bold",
+      bold = true,
     },
   },
 })
@@ -467,7 +467,7 @@ table.insert(components.active[3], {
     hl = {
       fg = "mid_bg",
       bg = "statusline_bg",
-      style = "bold",
+      bold = true,
     },
   },
 })
@@ -479,7 +479,7 @@ table.insert(components.active[3], { -- {{{
     return {
       fg = "light_bg",
       bg = vi_mode_utils.get_mode_color(),
-      style = "bold",
+      bold = true,
     }
   end,
   left_sep = "left_rounded",
@@ -498,7 +498,7 @@ table.insert(components.active[3], {
     return {
       fg = "red_dark",
       bg = vi_mode_utils.get_mode_color(),
-      style = "bold",
+      bold = true,
     }
   end,
 })
@@ -516,7 +516,7 @@ table.insert(components.active[3], {
     return {
       fg = "purple",
       bg = vi_mode_utils.get_mode_color(),
-      style = "bold",
+      bold = true,
     }
   end,
 })
@@ -529,7 +529,7 @@ table.insert(components.active[3], {
     return {
       fg = "statusline_bg",
       bg = vi_mode_utils.get_mode_color(),
-      style = "bold",
+      bold = true,
     }
   end,
   right_sep = {
@@ -538,7 +538,7 @@ table.insert(components.active[3], {
       return {
         fg = vi_mode_utils.get_mode_color(),
         bg = "statusline_bg",
-        style = "bold",
+        bold = true,
       }
     end,
   },
@@ -550,7 +550,7 @@ table.insert(components.active[3], {
     return {
       fg = vi_mode_utils.get_mode_color(),
       bg = "statusline_bg",
-      style = "bold",
+      bold = true,
     }
   end,
 })
@@ -660,7 +660,7 @@ table.insert(components.inactive[2], {
     hl = {
       bg = "mid_bg",
       fg = "short_bg",
-      style = "bold",
+      bold = true,
     },
   },
   right_sep = {
@@ -668,7 +668,7 @@ table.insert(components.inactive[2], {
     hl = {
       bg = "short_bg",
       fg = "mid_bg",
-      style = "bold",
+      bold = true,
     },
   },
 })
@@ -679,7 +679,7 @@ table.insert(components.inactive[3], { -- {{{
   hl = {
     fg = "mid_bg",
     bg = "green_pale",
-    style = "bold",
+    bold = true,
   },
   left_sep = {
     str = "slant_left",
@@ -714,7 +714,7 @@ table.insert(components.inactive[3], {
   hl = {
     fg = "light_bg",
     bg = "green_pale",
-    style = "bold",
+    bold = true,
   },
 })
 

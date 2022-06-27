@@ -30,7 +30,7 @@ local vim_mode = { --{{{
   hl = function(self)
     return {
       fg = util.mode_colour(self.mode_ch),
-      style = "bold",
+      bold = true,
     }
   end,
   {
@@ -38,7 +38,7 @@ local vim_mode = { --{{{
       return {
         fg = util.colours.statusline_bg,
         bg = util.mode_colour(self.mode_ch),
-        style = "bold",
+        bold = true,
       }
     end,
     provider = "  ",
@@ -55,7 +55,7 @@ local fold_method = { --{{{
     return vim.wo.foldenable
   end,
   {
-    hl = { fg = util.colours.green_pale, style = "bold" },
+    hl = { fg = util.colours.green_pale, bold = true },
     { provider = "  " },
     { provider = feliniser.fold_method },
   },
@@ -234,7 +234,7 @@ local locallist = { --{{{
 } --}}}
 
 local cursor_location = { --{{{
-  { provider = "%l/%L|%c ", hl = { style = "bold" } },
+  { provider = "%l/%L|%c ", hl = { bold = true } },
   {
     provider = " %P",
     hl = function(self)
@@ -322,7 +322,7 @@ local active_right_segment = { --{{{
     end,
     hl = {
       fg = util.colours.yellow,
-      style = "bold",
+      bold = true,
     },
   }, --}}}
 
@@ -332,7 +332,7 @@ local active_right_segment = { --{{{
       hl = function(self)
         return {
           fg = self.icon_color,
-          style = "bold",
+          bold = true,
         }
       end,
       space,
