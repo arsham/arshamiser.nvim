@@ -3,7 +3,7 @@
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/arsham/arshamiser.nvim)
 ![License](https://img.shields.io/github/license/arsham/arshamiser.nvim)
 
-Neovim status bar, colour scheme, and foldtext function.
+Neovim status bar, colour scheme, foldtext and tabline functions.
 
 1. [Demo](#demo)
 2. [Requirements](#requirements)
@@ -54,6 +54,8 @@ use({
     -- require("arshamiser.heirliniser")
     _G.custom_foldtext = require("arshamiser.folding").foldtext
     vim.opt.foldtext = "v:lua.custom_foldtext()"
+    -- if you want to draw a tabline:
+    vim.api.nvim_set_option("tabline", [[%{%v:lua.require("arshamiser.tabline").draw()%}]])
   end,
 })
 ```
@@ -93,6 +95,8 @@ use({
         -- require("arshamiser.heirliniser")
         _G.custom_foldtext = require("arshamiser.folding").foldtext
         vim.opt.foldtext = "v:lua.custom_foldtext()"
+        -- if you want to draw a tabline:
+        vim.api.nvim_set_option("tabline", [[%{%v:lua.require("arshamiser.tabline").draw()%}]])
       end,
     })
   end,
