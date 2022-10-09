@@ -282,7 +282,7 @@ local function file_readonly() --{{{
   if vim.bo.filetype == "help" then
     return ""
   end
-  local icon = ""
+  local icon = ""
   if vim.bo.readonly == true then
     return " " .. icon .. " "
   end
@@ -483,6 +483,36 @@ function M.sqls_status() --{{{
 
   return sqls_status.connection .. M.separators.database .. sqls_status.database
 end --}}}
+
+function M.recording_macro()
+  return "Recording @" .. vim.fn.reg_recording()
+end
+
+local function selection_count()
+  local mode = vim.api.nvim_get_mode().mode
+  local _, from_row, from_col, end_row, end_col
+  _, from_row, from_col, _ = unpack(vim.fn.getpos("."))
+  _, end_row, end_col, _ = unpack(vim.fn.getpos("v"))
+  if end_row < from_row then
+    from_row, end_row = end_row, from_row
+  end
+  if end_col < from_col then
+    from_col, end_col = end_col, from_col
+  end
+  if mode == "v" then
+    if from_row == end_row then
+      return end_col - from_col + 1
+    end
+  end
+  if mode == "" then
+    return string.format("%dx%d", end_row - from_row + 1, end_col - from_col + 1)
+  end
+  return end_row - from_row + 1
+end
+
+function M.visually_selected()
+  return "𝒱 " .. selection_count()
+end
 
 return M
 

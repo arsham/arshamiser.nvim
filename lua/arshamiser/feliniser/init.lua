@@ -73,6 +73,27 @@ table.insert(components.active[1], {
 })
 -- }}}
 
+-- Recording macro {{{
+table.insert(components.active[1], {
+  provider = "recording_macro",
+  enabled = function()
+    return vim.fn.reg_recording() ~= ""
+  end,
+  priority = 8,
+  truncate_hide = false,
+  left_sep = {
+    str = " ",
+    hl = left_ribbon_hl,
+  },
+  hl = {
+    fg = "red_dark",
+    bg = "statusline_bg",
+    bold = true,
+  },
+  icon = " ",
+})
+-- }}}
+
 -- Git branch {{{
 table.insert(components.active[1], {
   provider = "git_branch",
@@ -536,14 +557,48 @@ table.insert(components.active[3], {
     str = " ",
     hl = function()
       return {
-        fg = vi_mode_utils.get_mode_color(),
-        bg = "statusline_bg",
+        fg = "green_pale",
+        bg = vi_mode_utils.get_mode_color(),
         bold = true,
       }
     end,
   },
+  left_sep = {
+    str = " ",
+    hl = function()
+      return {
+        fg = "green_pale",
+        bg = vi_mode_utils.get_mode_color(),
+      }
+    end,
+  },
 })
+-- }}}
 
+-- Visually selected count {{{
+table.insert(components.active[3], {
+  provider = "visually_selected",
+  enabled = function()
+    local mode = vim.fn.mode()
+    return string.find(mode, "V") or string.find(mode, "") or string.find(mode, "v")
+  end,
+  priority = 10,
+  truncate_hide = false,
+  hl = {
+    fg = "orange",
+    bg = "statusline_bg",
+    bold = true,
+  },
+  left_sep = {
+    str = " ",
+    hl = {
+      bg = "statusline_bg",
+    },
+  },
+})
+-- }}}
+
+-- Line percentage {{{
 table.insert(components.active[3], {
   provider = "line_percentage",
   hl = function()
@@ -553,6 +608,12 @@ table.insert(components.active[3], {
       bold = true,
     }
   end,
+  left_sep = {
+    str = " ",
+    hl = {
+      bg = "statusline_bg",
+    },
+  },
 })
 -- }}}
 
@@ -755,6 +816,8 @@ require("feline").setup({ -- {{{
     lsp_clients = util.lsp_client_names,
     fold_method = util.fold_method,
     sqls_status = util.sqls_status,
+    recording_macro = util.recording_macro,
+    visually_selected = util.visually_selected,
   },
 })
 -- }}}
