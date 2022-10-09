@@ -3,7 +3,9 @@
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/arsham/arshamiser.nvim)
 ![License](https://img.shields.io/github/license/arsham/arshamiser.nvim)
 
-Neovim status bar, colour scheme, foldtext and tabline functions.
+Neovim status bar, colour scheme, foldtext and tabline functions. It has
+support for `cmdheight=0` for macro recording message and visually selected
+count.
 
 1. [Demo](#demo)
 2. [Requirements](#requirements)
@@ -20,7 +22,8 @@ Neovim status bar, colour scheme, foldtext and tabline functions.
 
 ## Requirements
 
-This library supports [Neovim 0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0).
+This library supports [Neovim
+v0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0) and newer.
 
 This plugin depends are the following libraries. Please make sure to add them
 as dependencies in your package manager:
@@ -38,25 +41,26 @@ Use your favourite package manager to install this library. Packer example:
 
 ```lua
 use({
-  "arsham/arshamiser.nvim",
-  requires = {
-    "arsham/arshlib.nvim",
-    "famiu/feline.nvim",
-    "rebelot/heirline.nvim",
-    "kyazdani42/nvim-web-devicons",
-    "j-hui/fidget.nvim",
-  },
-  config = function()
-    -- ignore any parts you don't want to use
-    vim.api.nvim_command("colorscheme arshamiser_light")
-    require("arshamiser.feliniser")
-    -- or:
-    -- require("arshamiser.heirliniser")
-    _G.custom_foldtext = require("arshamiser.folding").foldtext
-    vim.opt.foldtext = "v:lua.custom_foldtext()"
-    -- if you want to draw a tabline:
-    vim.api.nvim_set_option("tabline", [[%{%v:lua.require("arshamiser.tabline").draw()%}]])
-  end,
+	"arsham/arshamiser.nvim",
+	requires = {
+		"arsham/arshlib.nvim",
+		"famiu/feline.nvim",
+		"rebelot/heirline.nvim",
+		"kyazdani42/nvim-web-devicons",
+		"j-hui/fidget.nvim",
+	},
+	config = function()
+		-- ignore any parts you don't want to use
+		vim.api.nvim_command("colorscheme arshamiser_light")
+		require("arshamiser.feliniser")
+		-- or:
+		-- require("arshamiser.heirliniser")
+
+		_G.custom_foldtext = require("arshamiser.folding").foldtext
+		vim.opt.foldtext = "v:lua.custom_foldtext()"
+		-- if you want to draw a tabline:
+		vim.api.nvim_set_option("tabline", [[%{%v:lua.require("arshamiser.tabline").draw()%}]])
+	end,
 })
 ```
 
@@ -77,29 +81,33 @@ You can defer setting the colorscheme until the UI loads. Packer example:
 
 ```lua
 use({
-  "arsham/arshamiser.nvim",
-  requires = {
-    "arsham/arshlib.nvim",
-    "famiu/feline.nvim",
-    "rebelot/heirline.nvim",
-    "kyazdani42/nvim-web-devicons",
-    "j-hui/fidget.nvim",
-    "nanotee/sqls.nvim",
-  },
-  config = function()
-    require("arshlib.quick").autocmd({ events = "UIEnter", pattern = "*",
-      callback = function()
-        vim.api.nvim_command("colorscheme arshamiser_light")
-        require("arshamiser.feliniser")
-        -- or:
-        -- require("arshamiser.heirliniser")
-        _G.custom_foldtext = require("arshamiser.folding").foldtext
-        vim.opt.foldtext = "v:lua.custom_foldtext()"
-        -- if you want to draw a tabline:
-        vim.api.nvim_set_option("tabline", [[%{%v:lua.require("arshamiser.tabline").draw()%}]])
-      end,
-    })
-  end,
+	"arsham/arshamiser.nvim",
+	requires = {
+		"arsham/arshlib.nvim",
+		"famiu/feline.nvim",
+		"rebelot/heirline.nvim",
+		"kyazdani42/nvim-web-devicons",
+		"j-hui/fidget.nvim",
+		"nanotee/sqls.nvim",
+	},
+	config = function()
+		vim.api.nvim_create_autocmd("UIEnter", {
+			events = "UIEnter",
+			pattern = "*",
+			callback = function()
+				vim.api.nvim_command("colorscheme arshamiser_light")
+				require("arshamiser.feliniser")
+				-- or:
+				-- require("arshamiser.heirliniser")
+
+				_G.custom_foldtext = require("arshamiser.folding").foldtext
+				vim.opt.foldtext = "v:lua.custom_foldtext()"
+				-- if you want to draw a tabline:
+				vim.api.nvim_set_option("tabline", [[%{%v:lua.require("arshamiser.tabline").draw()%}]])
+			end,
+		})
+	end,
+	event = { "UIEnter" },
 })
 ```
 
