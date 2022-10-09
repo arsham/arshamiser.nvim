@@ -461,24 +461,22 @@ local sqls_status = {
   database = "default",
 }
 
-function M.sqls_status() --{{{
-  local ok, events = pcall(require, "sqls.events")
-  if not ok then
-    return ""
-  end
-  if not sqls_status.subscribed then
-    events.add_subscriber("connection_choice", function(event)
-      local items = vim.split(event.choice, " ")
-      sqls_status.connection = items[3]
-      local _, _, name = event.choice:find("dbname=([^ ]+)")
-      sqls_status.database = name or "Unknown"
-    end)
-    events.add_subscriber("database_choice", function(event)
-      sqls_status.database = event.choice
-    end)
-    sqls_status.sqls_subscribed = true
-  end
+vim.api.nvim_create_autocmd("User", {
+  pattern = "SqlsConnectionChoice",
+  callback = function(event)
+    local items = vim.split(event.data.choice, " ")
+    sqls_status.connection = items[3]
+  end,
+})
 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "SqlsDatabaseChoice",
+  callback = function(event)
+    sqls_status.database = event.data.choice
+  end,
+})
+
+function M.sqls_status() --{{{
   if not sqls_status.connection or not sqls_status.database then
     return ""
   end
