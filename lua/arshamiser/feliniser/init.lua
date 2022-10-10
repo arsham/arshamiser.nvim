@@ -56,6 +56,20 @@ table.insert(components.active[1], {
 })
 -- }}}
 
+-- Scroll binding {{{
+table.insert(components.active[1], {
+  provider = " ",
+  enabled = function()
+    return vim.opt_local.scrollbind:get()
+  end,
+  hl = {
+    fg = "yellow",
+    bg = "statusline_bg",
+    bold = true,
+  },
+})
+-- }}}
+
 -- Fold method {{{
 table.insert(components.active[1], {
   provider = "fold_method",

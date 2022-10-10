@@ -1348,9 +1348,9 @@ end
 ---@param palette string could be 'light_palette' or 'dark_palette'
 ---@param name string the colour scheme name
 local setup = function(palette, name) --{{{
-  vim.api.nvim_command("clear")
+  vim.cmd.clear()
   if vim.fn.exists("syntax_on") then
-    vim.api.nvim_command("syntax reset")
+    vim.cmd.syntax("reset")
   end
 
   vim.g.colors_name = name
