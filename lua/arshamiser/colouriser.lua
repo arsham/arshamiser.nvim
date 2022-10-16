@@ -838,229 +838,232 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.base7,
     }, --}}}
     -- Treesitter {{{
-    TSString = {
+    ["@string"] = {
       fg = palette.yellow,
     },
-    TSStringRegex = {
+    ["@string.regex"] = {
       -- For regexes.
       fg = palette.purple,
     },
-    TSStringEscape = {
+    ["@string.escape"] = {
       -- For escape characters within a string.
       fg = palette.purple,
     },
-    TSInclude = {
+    ["@include"] = {
       -- For includes: `#include` in C, `use` or `extern crate` in Rust, or
       -- `require` in Lua.
       fg = palette.pink,
     },
-    TSVariable = {
+    ["@variable"] = {
       fg = palette.white,
     },
-    TSVariableBuiltin = {
+    ["@variable.builtin"] = {
       fg = palette.orange,
     },
-    TSAnnotation = {
+    ["@annotation"] = {
       -- For C++/Dart attributes, annotations that can be attached to the
       -- code to denote some kind of meta information.
       fg = palette.green,
     },
-    TSAttribute = {
+    ["@attribute"] = {
       fg = palette.yellow,
     },
-    TSBoolean = {
+    ["@boolean"] = {
       -- For booleans.
       fg = palette.orange,
     },
-    TSComment = {
+    ["@comment"] = {
       fg = palette.base6,
     },
-    TSConstant = {
+    ["@constant"] = {
       fg = palette.aqua,
     },
-    TSConstBuiltin = {
+    ["@constant.builtin"] = {
       -- For constant that are built in the language: `nil` in Lua.
       fg = palette.orange,
     },
-    TSConstMacro = {
+    ["@constant.macro"] = {
       -- For constants that are defined by macros: `NULL` in C.
       fg = palette.purple,
     },
-    TSError = {
+    ["@error"] = {
       -- For syntax/parser errors.
       fg = palette.error,
       italic = true,
     },
-    TSConditional = {
+    ["@conditional"] = {
       fg = palette.pink,
     },
-    TSCharacter = {
+    ["@character"] = {
       -- For characters.
       -- any character constant: 'c', '\n'
       fg = palette.yellow,
     },
-    TSConstructor = {
+    ["@constructor"] = {
       -- For constructor calls and definitions: `= { }` in Lua, and Java
       -- constructors.
       fg = palette.purple,
     },
-    TSFunction = {
+    ["@function"] = {
       fg = palette.green,
     },
-    TSFuncBuiltin = {
+    ["@function.builtin"] = {
       fg = palette.aqua,
     },
-    TSFuncMacro = {
+    ["@function.macro"] = {
       -- For macro defined fuctions (calls and definitions): each
       -- `macro_rules` in Rust.
       fg = palette.green,
     },
-    TSKeyword = {
+    ["@keyword"] = {
       fg = palette.pink,
     },
-    TSKeywordFunction = {
+    ["@keyword.function"] = {
       fg = palette.pink,
     },
-    TSKeywordOperator = {
+    ["@keyword.operator"] = {
       -- sizeof", "+", "*", etc.
       fg = palette.pink,
     },
-    TSKeywordReturn = {
+    ["@keyword.return"] = {
       fg = palette.pink,
     },
-    TSMethod = {
+    ["@method"] = {
       fg = palette.green,
     },
-    TSNamespace = {
+    ["@namespace"] = {
       -- For identifiers referring to modules and namespaces.
       fg = palette.purple,
     },
-    TSNumber = {
+    ["@number"] = {
       fg = palette.purple,
     },
-    TSOperator = {
+    ["@operator"] = {
       -- For any operator: `+`, but also `->` and `*` in C.
       fg = palette.pink,
     },
-    TSParameter = {
+    ["@parameter"] = {
       -- For parameters of a function.
       fg = palette.blue_light,
     },
-    TSParameterReference = {
+    ["@parameter.reference"] = {
       -- For references to parameters of a function.
       fg = palette.white,
     },
-    TSProperty = {
+    ["@property"] = {
       -- Same as `TSField`,accesing for struct members in C.
       fg = palette.green,
     },
-    TSPunctDelimiter = {
+    ["@punctuation.delimiter"] = {
       -- For delimiters ie: `.`
       fg = palette.white,
     },
-    TSPunctBracket = {
+    ["@punctuation.bracket"] = {
       -- For brackets and parens.
       fg = palette.white,
     },
-    TSPunctSpecial = {
+    ["@punctuation.special"] = {
       -- For special punctutation that does not fall in the catagories
       -- before.
       fg = palette.pink,
     },
-    TSRepeat = {
+    ["@repeat"] = {
       fg = palette.pink,
     },
-    TSSymbol = {
+    ["@symbol"] = {
       -- For identifiers referring to symbols or atoms.
       fg = palette.yellow,
     },
-    TSTag = {
+    ["@tag"] = {
       -- Tags like html tag names.
       fg = palette.pink,
     },
-    TSTagDelimiter = {
+    ["@tag.delimiter"] = {
       -- Tag delimiter like `<` `>` `/`
       fg = palette.white,
     },
-    TSText = {
+    ["@text"] = {
       -- For strings considered text in a markup language.
       fg = palette.text,
     },
-    TSTextReference = {
+    ["@text.reference"] = {
       fg = palette.yellow,
     },
-    TSEmphasis = {
+    ["@text.emphasis"] = {
       -- For text to be represented with emphasis.
       fg = palette.blue_pale,
     },
-    TSUnderline = {
+    ["@text.underline"] = {
       -- For text to be represented with an underline.
       fg = palette.white,
       bg = palette.none,
       underline = true,
     },
-    TSTitle = {
+    ["@text.title"] = {
       -- Text that is part of a title.
       fg = palette.title,
       bg = palette.none,
       bold = true,
     },
-    TSLiteral = {
+    ["@text.literal"] = {
       -- Literal text.
       fg = palette.white,
     },
-    TSURI = {
+    ["@text.uri"] = {
       -- Any URI like a link or email.
       fg = palette.link,
     },
-    TSTagAttribute = {
+    ["@tag.attribute"] = {
       fg = palette.green,
     },
-    TSLabel = {
+    ["@label"] = {
       -- For labels: `label:` in C and `:label:` in Lua.
       fg = palette.pink,
     },
-    TSType = {
+    ["@type"] = {
       -- For types.
       fg = palette.aqua,
     },
-    TSTypeBuiltin = {
+    ["@type.builtin"] = {
       -- For builtin types.
       fg = palette.purple,
     },
-    TSException = {
+    ["@exception"] = {
       -- For exception related keywords.  try, catch, throw
       fg = palette.pink,
     },
-    TSField = {
+    ["@field"] = {
       -- For fields.
       fg = palette.white,
     },
-    TSFloat = {
+    ["@float"] = {
       fg = palette.purple,
     },
-    TSNote = {
+    ["@text.note"] = {
       fg = palette.orange,
       bg = palette.info,
       bold = true,
     },
-    TSWarning = {
+    ["@text.warning"] = {
       -- TODO, HACK, WARNING
       fg = palette.black,
       bg = palette.warning,
       bold = true,
     },
-    TSDanger = {
+    ["@text.danger"] = {
       -- FIXME, XXX, BUG
       fg = palette.black,
       bg = palette.error,
       bold = true,
     },
-    TSDefinitionUsage = {
-      bg = palette.base5,
+    ["@todo"] = {
+      link = "Todo",
     },
-    TSDefinition = {
-      bg = palette.base5,
+    ["@debug"] = {
+      link = "Debug",
+    },
+    ["@define"] = {
+      link = "Define",
     },
     -- }}}
     -- LSP {{{
