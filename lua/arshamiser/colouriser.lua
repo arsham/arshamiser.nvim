@@ -262,7 +262,7 @@ local internals = function(palette) -- Internals {{{
     TabLine = { --{{{
       -- tab pages line, not active tab page label
       bg = palette.blue_dark,
-      fg = palette.blue_pale,
+      fg = palette.grey_light,
     },
     TabLineFill = {
       -- tab pages line, where there are no labels
@@ -277,18 +277,18 @@ local internals = function(palette) -- Internals {{{
     },
     TabLineSepSel = {
       bg = palette.blue_pale,
-      fg = palette.white,
+      fg = palette.base0,
     },
     TabLineSep = {
       bg = palette.blue_dark,
-      fg = palette.white,
+      fg = palette.base0,
     },
     TabLineModifiedSel = {
       bg = palette.blue_pale,
       fg = palette.white,
     },
     TabLineModified = {
-      bg = palette.blue_pale,
+      bg = palette.blue_dark,
       fg = palette.white,
     }, --}}}
     -- GPS {{{
@@ -944,7 +944,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
     },
     TSParameter = {
       -- For parameters of a function.
-      fg = palette.white,
+      fg = palette.blue_light,
     },
     TSParameterReference = {
       -- For references to parameters of a function.

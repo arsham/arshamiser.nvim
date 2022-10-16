@@ -18,14 +18,13 @@ local function modified(bufnr, sel)
   end
 
   return table.concat({
-    sel and "" or " ",
     sel and "%#TabLineModifiedSel#" or "%#TabLineModified#",
     "●",
   })
 end
 
-local function separator(sel)
-  return table.concat({ sel and "%#TabLineSepSel#" or "%#TabLineSep#", "▏" })
+local function separator(sel, ch)
+  return table.concat({ sel and "%#TabLineSepSel#" or "%#TabLineSep#", ch })
 end
 
 local function draw()
@@ -35,10 +34,12 @@ local function draw()
     local sel = tab == vim.api.nvim_get_current_tabpage()
     local bufnr = vim.api.nvim_win_get_buf(vim.api.nvim_tabpage_get_win(tab))
     local label = { ("%%%dT"):format(vim.api.nvim_tabpage_get_number(tab)) }
-    table.insert(label, separator(sel))
+    table.insert(label, separator(sel, ""))
     table.insert(label, title(bufnr, sel))
     table.insert(label, modified(bufnr, sel))
-    table.insert(label, " %#TabLineFill#")
+    table.insert(label, "%#TabLineFill#")
+    table.insert(label, separator(sel, ""))
+    table.insert(label, "%#TabLineFill#")
 
     table.insert(tabline, table.concat(label))
   end
