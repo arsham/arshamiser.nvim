@@ -34,7 +34,9 @@ local light = {
   grey_light     = "#DDDDDD",
   magenta        = "#CF4CC9",
   orange         = "#FCB08B",
+  orange_light   = "#f7cbb6",
   pink           = "#FFA1B8",
+  pink_light     = "#f7bbca",
   pmenu          = "#1D2021",
   purple         = "#BBB3E8",
   red            = "#DE7185",
@@ -42,6 +44,7 @@ local light = {
   warning        = "#C78F73",
   white          = "#FFF1F3",
   yellow         = "#D6C596",
+  yellow_light   = "#f7efce",
 
   none           = "NONE",
 }

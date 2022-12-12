@@ -907,6 +907,9 @@ local plugin_syntax = function(palette) -- Plugins {{{
     ["@function"] = {
       fg = palette.green,
     },
+    ["@function.call"] = {
+      fg = palette.green,
+    },
     ["@function.builtin"] = {
       fg = palette.aqua,
     },
@@ -916,20 +919,22 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.green,
     },
     ["@keyword"] = {
-      fg = palette.pink,
+      fg = palette.pink_light,
     },
     ["@keyword.function"] = {
       fg = palette.pink,
     },
     ["@keyword.operator"] = {
-      -- sizeof", "+", "*", etc.
       fg = palette.pink,
     },
     ["@keyword.return"] = {
       fg = palette.pink,
     },
     ["@method"] = {
-      fg = palette.green,
+      fg = palette.aqua,
+    },
+    ["@method.call"] = {
+      fg = palette.aqua,
     },
     ["@namespace"] = {
       -- For identifiers referring to modules and namespaces.
@@ -939,27 +944,21 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.purple,
     },
     ["@operator"] = {
-      -- For any operator: `+`, but also `->` and `*` in C.
       fg = palette.pink,
     },
     ["@parameter"] = {
-      -- For parameters of a function.
-      fg = palette.blue_light,
+      fg = palette.yellow_light,
     },
     ["@parameter.reference"] = {
-      -- For references to parameters of a function.
       fg = palette.white,
     },
     ["@property"] = {
-      -- Same as `TSField`,accesing for struct members in C.
       fg = palette.green,
     },
     ["@punctuation.delimiter"] = {
-      -- For delimiters ie: `.`
       fg = palette.white,
     },
     ["@punctuation.bracket"] = {
-      -- For brackets and parens.
       fg = palette.white,
     },
     ["@punctuation.special"] = {
@@ -1033,8 +1032,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.pink,
     },
     ["@field"] = {
-      -- For fields.
-      fg = palette.white,
+      fg = palette.green,
     },
     ["@float"] = {
       fg = palette.purple,
