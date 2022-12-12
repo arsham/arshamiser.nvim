@@ -32,7 +32,6 @@ as dependencies in your package manager:
 - [feline.nvim](https://github.com/famiu/feline.nvim)
 - [heirline.nvim](https://github.com/rebelot/heirline.nvim)
 - [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
-- [fidget.nvim](https://github.com/j-hui/fidget.nvim)
 - [sqls.nvim](https://github.com/nanotee/sqls.nvim)
 
 ## Installation
@@ -47,7 +46,6 @@ use({
 		"famiu/feline.nvim",
 		"rebelot/heirline.nvim",
 		"kyazdani42/nvim-web-devicons",
-		"j-hui/fidget.nvim",
 	},
 	config = function()
 		-- ignore any parts you don't want to use
@@ -87,7 +85,6 @@ use({
 		"famiu/feline.nvim",
 		"rebelot/heirline.nvim",
 		"kyazdani42/nvim-web-devicons",
-		"j-hui/fidget.nvim",
 		"nanotee/sqls.nvim",
 	},
 	config = function()

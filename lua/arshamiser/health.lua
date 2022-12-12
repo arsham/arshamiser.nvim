@@ -6,7 +6,6 @@ local libs = {
   plenary = "nvim-lua/plenary.nvim",
   feline = "famiu/feline.lua",
   heirline = "rebelot/heirline.nvim",
-  fidget = "j-hui/fidget.nvim",
   ["nvim-web-devicons"] = "kyazdani42/nvim-web-devicons",
   sqls = "nanotee/sqls.nvim",
 }
