@@ -1209,6 +1209,42 @@ local plugin_syntax = function(palette) -- Plugins {{{
       bg = palette.sidebar_bg,
     },
     -- }}}
+    -- NeoTree {{{
+    NeoTreeBufferNumber = {
+      fg = palette.white,
+    },
+    NeoTreeDirectoryIcon = {
+      fg = palette.accent,
+    },
+    NeoTreeDirectoryName = {
+      fg = palette.white,
+    },
+    NeoTreeFileNameOpened = {
+      fg = palette.accent,
+    },
+    NeoTreeGitAdded = {
+      fg = palette.green,
+    },
+    NeoTreeGitDeleted = {
+      fg = palette.red,
+    },
+    NeoTreeGitStaged = {
+      fg = palette.comments,
+    },
+    NeoTreeIndentMarker = {
+      fg = palette.disabled,
+    },
+    NeoTreeNormal = {
+      fg = palette.white,
+      bg = palette.sidebar_bg,
+    },
+    NeoTreeRootName = {
+      fg = palette.pink,
+    },
+    NeoTreeGitModified = {
+      fg = palette.blue,
+    },
+    -- }}}
     -- Git Signs {{{
     GitSignsAdd = {
       fg = palette.sign_add_bg,
