@@ -1380,6 +1380,14 @@ local plugin_syntax = function(palette) -- Plugins {{{
       bold = true,
     },
     -- }}}
+    -- Noice {{{
+    NoiceFormatProgressDone = {
+      bg = palette.base1,
+    },
+    NoiceFormatProgressTodo = {
+      bg = palette.base1,
+    },
+    -- }}}
   }
 end
 -- }}}
