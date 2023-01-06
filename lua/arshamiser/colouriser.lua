@@ -1388,6 +1388,36 @@ local plugin_syntax = function(palette) -- Plugins {{{
       bg = palette.base1,
     },
     -- }}}
+    -- Neotest {{{
+    NeotestFailed = {
+      fg = palette.error,
+      bg = palette.base2,
+    },
+    NeotestPassed = {
+      fg = palette.green,
+      bg = palette.base2,
+    },
+    NeotestRunning = {
+      fg = palette.aqua,
+      bg = palette.base2,
+    },
+    NeotestSkipped = {
+      fg = palette.orange,
+      bg = palette.base2,
+    },
+    -- }}}
+    -- Marks Nvim {{{
+    MarkSignHL = { -- displayed mark signs.
+      fg = palette.pink_light,
+      bg = palette.base2,
+    },
+    MarkSignNumHL = {}, -- the number line in a signcolumn.
+    MarkVirtTextHL = { -- bookmark virtual text annotations.
+      fg = palette.pink_light,
+      bg = palette.none,
+      italic = true,
+    },
+    -- }}}
   }
 end
 -- }}}
