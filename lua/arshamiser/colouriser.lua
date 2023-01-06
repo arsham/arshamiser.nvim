@@ -1251,7 +1251,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
       bg = palette.base2,
     },
     GitSignsAddNr = {
-      fg = palette.sign_add_bg,
+      fg = palette.sign_add_bg_lt,
       bg = palette.base2,
     },
     GitSignsAddInline = {
@@ -1271,7 +1271,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
       bg = palette.base2,
     },
     GitSignsChangeNr = {
-      fg = palette.sign_change_bg,
+      fg = palette.sign_change_bg_lt,
       bg = palette.base2,
     },
     GitSignsChangeInLine = {
@@ -1291,7 +1291,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
       bg = palette.base2,
     },
     GitSignsDeleteNr = {
-      fg = palette.sign_remove_bg,
+      fg = palette.sign_remove_bg_lt,
       bg = palette.base2,
     },
     GitSignsDeleteInLine = {
@@ -1315,7 +1315,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.warning,
     },
     NotifyINFOBorder = {
-      fg = palette.green,
+      fg = palette.info,
     },
     NotifyDEBUGBorder = {
       fg = palette.grey,
@@ -1330,7 +1330,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.warning,
     },
     NotifyINFOIcon = {
-      fg = palette.green,
+      fg = palette.info,
     },
     NotifyDEBUGIcon = {
       fg = palette.grey,
@@ -1345,13 +1345,17 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.warning,
     },
     NotifyINFOTitle = {
-      fg = palette.green,
+      fg = palette.info,
     },
     NotifyDEBUGTitle = {
       fg = palette.grey,
     },
     NotifyTRACETitle = {
       fg = palette.pink,
+    },
+    NotifyBackground = {
+      fg = palette.white,
+      bg = palette.base1,
     },
     -- }}}
     -- Fidget {{{
