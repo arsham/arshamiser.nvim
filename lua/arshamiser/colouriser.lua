@@ -740,6 +740,25 @@ end
 
 local plugin_syntax = function(palette) -- Plugins {{{
   return {
+    -- Listish {{{
+    ListishQfSign = {
+      fg = palette.purple,
+      bg = palette.base2,
+    },
+    ListishQfExt = {
+      fg = palette.purple,
+      bg = palette.base0,
+    },
+    ListishLocalSign = {
+      fg = palette.orange,
+      bg = palette.base2,
+    },
+
+    ListishLocalExt = {
+      fg = palette.orange,
+      bg = palette.base0,
+    },
+    -- }}}
     -- CMP {{{
     CmpDocumentation = {
       fg = palette.green,
