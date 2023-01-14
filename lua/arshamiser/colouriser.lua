@@ -476,6 +476,11 @@ local internals = function(palette) -- Internals {{{
       fg = palette.border,
       bg = palette.base2,
     },
+    Constructor = {
+      -- For constructor calls and definitions: `= { }` in Lua, and Java
+      -- constructors.
+      fg = palette.purple,
+    },
     Constant = {
       fg = palette.aqua,
     },
@@ -488,6 +493,8 @@ local internals = function(palette) -- Internals {{{
     Boolean = {
       -- a boolean constant: TRUE, false
       fg = palette.purple,
+    Enum = {
+      fg = palette.orange,
     },
     Character = {
       fg = palette.yellow,
@@ -503,6 +510,9 @@ local internals = function(palette) -- Internals {{{
       -- struct, union, enum, etc.
       fg = palette.aqua,
     },
+    Struct = {
+      link = "Structure",
+    },
     StorageClass = {
       -- static, register, volatile, etc.
       fg = palette.aqua,
@@ -514,8 +524,17 @@ local internals = function(palette) -- Internals {{{
     Identifier = {
       fg = palette.white,
     },
+    Field = {
+      fg = palette.green,
+    },
+    Property = {
+      fg = palette.green,
+    },
     Function = {
       fg = palette.green,
+    },
+    Method = {
+      fg = palette.aqua,
     },
     Statement = {
       -- any statement
@@ -523,6 +542,9 @@ local internals = function(palette) -- Internals {{{
     },
     Operator = {
       fg = palette.pink,
+    },
+    Parameter = {
+      fg = palette.yellow_light,
     },
     Label = {
       -- case, default, etc.
@@ -619,6 +641,9 @@ local internals = function(palette) -- Internals {{{
       -- placeholder characters substituted for concealed text (see
       -- 'conceallevel')
       fg = palette.grey,
+    Variable = {
+      fg = palette.white,
+    },
     },
     -- }}}
     WildMenu = { -- {{{
@@ -807,16 +832,16 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.orange,
     },
     CmpItemKindConstant = {
-      fg = palette.magenta,
+      link = "Constant",
     },
     CmpItemKindConstructor = {
-      fg = palette.blue,
+      link = "Constructor",
     },
     CmpItemKindDefault = {
       fg = palette.green_dark,
     },
     CmpItemKindEnum = {
-      fg = palette.orange,
+      link = "Enum",
     },
     CmpItemKindEnumMember = {
       fg = palette.green,
@@ -825,28 +850,37 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.orange,
     },
     CmpItemKindField = {
-      fg = palette.green,
+      link = "Field",
     },
     CmpItemKindFunction = {
-      fg = palette.blue,
+      link = "Function",
     },
     CmpItemKindInterface = {
       fg = palette.aqua,
     },
     CmpItemKindKeyword = {
-      fg = palette.cyan,
+      link = "Keyword",
     },
     CmpItemKindMethod = {
-      fg = palette.blue,
+      link = "Method",
     },
     CmpItemKindModule = {
       fg = palette.yellow,
     },
     CmpItemKindOperator = {
-      fg = palette.green,
+      link = "Operator",
     },
     CmpItemKindProperty = {
-      fg = palette.green,
+      link = "Property",
+    },
+    CmpItemKindColor = {
+      fg = palette.accent,
+    },
+    CmpItemKindFile = {
+      fg = palette.blue_pale,
+    },
+    CmpItemKindFolder = {
+      fg = palette.yellow,
     },
     CmpItemKindReference = {
       fg = palette.magenta,
@@ -855,13 +889,13 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.blue,
     },
     CmpItemKindStruct = {
-      fg = palette.orange,
+      link = "Struct",
     },
     CmpItemKindText = {
       fg = palette.aqua,
     },
     CmpItemKindTypeParameter = {
-      fg = palette.green,
+      link = "Parameter",
     },
     CmpItemKindUnit = {
       fg = palette.orange,
@@ -870,7 +904,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.magenta,
     },
     CmpItemKindVariable = {
-      fg = palette.aqua,
+      link = "Variable",
     },
     CmpItemMenu = {
       fg = palette.base7,
