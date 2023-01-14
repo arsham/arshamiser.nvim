@@ -1247,6 +1247,9 @@ local plugin_syntax = function(palette) -- Plugins {{{
     NeoTreeGitDeleted = {
       fg = palette.red,
     },
+    NeoTreeGitUntracked = {
+      fg = palette.orange_light,
+    },
     NeoTreeGitStaged = {
       fg = palette.comments,
     },
@@ -1261,6 +1264,9 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.pink,
     },
     NeoTreeGitModified = {
+      fg = palette.blue,
+    },
+    NeoTreeModified = {
       fg = palette.blue,
     },
     -- }}}
