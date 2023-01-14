@@ -301,93 +301,8 @@ local internals = function(palette) -- Internals {{{
     TabLineModified = {
       bg = palette.blue_dark,
       fg = palette.white,
-    }, --}}}
-    -- GPS {{{
-    NavicIcons = {
-      fg = palette.blue_pale,
-      bg = palette.base3,
     },
-    NavicText = {
-      fg = palette.white,
-    },
-    NavicIconsFile = {
-      link = "CmpItemKindFile",
-    },
-    NavicIconsModule = {
-      link = "CmpItemKindModule",
-    },
-    NavicIconsNamespace = {
-      link = "CmpItemKindNamespace",
-    },
-    NavicIconsPackage = {
-      link = "CmpItemKindPackage",
-    },
-    NavicIconsClass = {
-      link = "CmpItemKindClass",
-    },
-    NavicIconsMethod = {
-      link = "CmpItemKindMethod",
-    },
-    NavicIconsProperty = {
-      link = "CmpItemKindProperty",
-    },
-    NavicIconsField = {
-      link = "CmpItemKindField",
-    },
-    NavicIconsConstructor = {
-      link = "CmpItemKindConstructor",
-    },
-    NavicIconsEnum = {
-      link = "CmpItemKindEnum",
-    },
-    NavicIconsInterface = {
-      link = "CmpItemKindInterface",
-    },
-    NavicIconsFunction = {
-      link = "CmpItemKindFunction",
-    },
-    NavicIconsVariable = {
-      link = "CmpItemKindVariable",
-    },
-    NavicIconsConstant = {
-      link = "CmpItemKindConstant",
-    },
-    NavicIconsString = {
-      link = "CmpItemKindString",
-    },
-    NavicIconsNumber = {
-      link = "CmpItemKindNumber",
-    },
-    NavicIconsBoolean = {
-      link = "CmpItemKindBoolean",
-    },
-    NavicIconsArray = {
-      link = "CmpItemKindArray",
-    },
-    NavicIconsObject = {
-      link = "CmpItemKindObject",
-    },
-    NavicIconsKey = {
-      link = "CmpItemKindKey",
-    },
-    NavicIconsNull = {
-      link = "CmpItemKindNull",
-    },
-    NavicIconsEnumMember = {
-      link = "CmpItemKindEnumMember",
-    },
-    NavicIconsStruct = {
-      link = "CmpItemKindStruct",
-    },
-    NavicIconsEvent = {
-      link = "CmpItemKindEvent",
-    },
-    NavicIconsOperator = {
-      link = "CmpItemKindOperator",
-    },
-    NavicIconsTypeParameter = {
-      link = "CmpItemKindTypeParameter",
-    }, --}}}
+    -- }}}
     -- Spell check {{{
     SpellBad = {
       -- Word that is not recognized by the spellchecker. |spell| Combined
@@ -493,6 +408,7 @@ local internals = function(palette) -- Internals {{{
     Boolean = {
       -- a boolean constant: TRUE, false
       fg = palette.purple,
+    },
     Enum = {
       fg = palette.orange,
     },
@@ -641,9 +557,9 @@ local internals = function(palette) -- Internals {{{
       -- placeholder characters substituted for concealed text (see
       -- 'conceallevel')
       fg = palette.grey,
-    Variable = {
-      fg = palette.white,
-    },
+      Variable = {
+        fg = palette.white,
+      },
     },
     -- }}}
     WildMenu = { -- {{{
@@ -1489,6 +1405,93 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.pink_light,
       bg = palette.none,
       italic = true,
+    },
+    -- }}}
+    -- Navic {{{
+    NavicIcons = {
+      fg = palette.blue_pale,
+      bg = palette.base3,
+    },
+    NavicText = {
+      fg = palette.white,
+    },
+    NavicIconsFile = {
+      link = "CmpItemKindFile",
+    },
+    NavicIconsModule = {
+      link = "CmpItemKindModule",
+    },
+    NavicIconsNamespace = {
+      link = "Namespace",
+    },
+    NavicIconsPackage = {
+      link = "CmpItemKindPackage",
+    },
+    NavicIconsClass = {
+      link = "CmpItemKindClass",
+    },
+    NavicIconsMethod = {
+      link = "Method",
+    },
+    NavicIconsProperty = {
+      link = "Property",
+    },
+    NavicIconsField = {
+      link = "Field",
+    },
+    NavicIconsConstructor = {
+      link = "Constructor",
+    },
+    NavicIconsEnum = {
+      link = "Enum",
+    },
+    NavicIconsInterface = {
+      link = "CmpItemKindInterface",
+    },
+    NavicIconsFunction = {
+      link = "Function",
+    },
+    NavicIconsVariable = {
+      link = "Variable",
+    },
+    NavicIconsConstant = {
+      link = "Constant",
+    },
+    NavicIconsString = {
+      link = "CmpItemKindString",
+    },
+    NavicIconsNumber = {
+      link = "Number",
+    },
+    NavicIconsBoolean = {
+      link = "CmpItemKindBoolean",
+    },
+    NavicIconsArray = {
+      link = "CmpItemKindArray",
+    },
+    NavicIconsObject = {
+      link = "CmpItemKindObject",
+    },
+    NavicIconsKey = {
+      link = "CmpItemKindKey",
+    },
+    NavicIconsNull = {
+      link = "CmpItemKindNull",
+    },
+    NavicIconsEnumMember = {
+      link = "CmpItemKindEnumMember",
+    },
+    NavicIconsStruct = {
+      link = "Struct",
+    },
+    NavicIconsEvent = {
+      link = "CmpItemKindEvent",
+    },
+    NavicIconsOperator = {
+      link = "Operator",
+    },
+    NavicIconsTypeParameter = {
+      link = "Parameter",
     },
     -- }}}
   }
