@@ -17,8 +17,9 @@ local internals = function(palette) -- Internals {{{
     NormalFloat = {
       -- normal text and background color for floating windows
       bg = palette.pmenu,
-    }, -- }}}
-    Pmenu = { --{{{
+    },
+    -- }}}
+    Pmenu = { -- {{{
       -- Popup menu: normal item.
       bg = palette.pmenu,
     },
@@ -41,8 +42,9 @@ local internals = function(palette) -- Internals {{{
       -- Popup menu: scrollbar.
       fg = palette.none,
       bg = palette.base3,
-    }, --}}}
-    Cursor = { --{{{
+    },
+    -- }}}
+    Cursor = { -- {{{
       fg = palette.none,
       bg = palette.none,
       reverse = true,
@@ -85,7 +87,8 @@ local internals = function(palette) -- Internals {{{
       -- if foreground (ctermfg OR fg) is not set.
       bg = palette.base3,
     },
-    ToolbarLine = {
+    -- }}}
+    ToolbarLine = { -- {{{
       fg = palette.white,
       bg = palette.base3,
     },
@@ -93,8 +96,10 @@ local internals = function(palette) -- Internals {{{
       fg = palette.white,
       bg = palette.none,
       bold = true,
-    }, --}}}
-    NormalMode = { --{{{
+    },
+    -- }}}
+    -- Modes {{{
+    NormalMode = {
       -- Normal mode message in the cmdline
       fg = palette.accent,
       bg = palette.none,
@@ -123,8 +128,10 @@ local internals = function(palette) -- Internals {{{
       fg = palette.grey,
       bg = palette.none,
       reverse = true,
-    }, --}}}
-    healthError = { --{{{
+    },
+    -- }}}
+    -- Healthcheck {{{
+    healthError = {
       fg = palette.error,
     },
     healthSuccess = {
@@ -143,7 +150,7 @@ local internals = function(palette) -- Internals {{{
       -- See also |hl-EndOfBuffer|.
       fg = palette.base5,
     }, --}}}
-    Visual = { --{{{
+    Visual = { -- {{{
       -- Visual mode selection
       bg = palette.base5,
     },
@@ -168,8 +175,9 @@ local internals = function(palette) -- Internals {{{
       -- ":s///c"
       fg = palette.base2,
       bg = palette.yellow,
-    }, --}}}
-    CursorLineNr = { --{{{
+    },
+    -- }}}
+    CursorLineNr = { -- {{{
       -- Like LineNr when 'cursorline' or 'relativenumber' is set for the
       -- cursor line.
       fg = palette.orange,
@@ -185,7 +193,7 @@ local internals = function(palette) -- Internals {{{
       -- |hit-enter| prompt and yes/no questions
       fg = palette.yellow,
     }, --}}}
-    ModeMsg = { --{{{
+    ModeMsg = { -- {{{
       -- 'showmode' message (e.g., "-- INSERT -- ")
       fg = palette.white,
       bg = palette.none,
@@ -212,8 +220,9 @@ local internals = function(palette) -- Internals {{{
       fg = palette.yellow,
       bg = palette.none,
       bold = true,
-    }, --}}}
-    VertSplit = { --{{{
+    },
+    -- }}}
+    VertSplit = { -- {{{
       fg = palette.blue_pale,
       bg = palette.base0,
     },
@@ -221,7 +230,7 @@ local internals = function(palette) -- Internals {{{
       fg = palette.base6,
       bg = palette.base2,
     },
-    SignColumn = {
+    SignColumn = { -- {{{
       fg = palette.base5,
       bg = palette.base2,
     },
@@ -229,8 +238,9 @@ local internals = function(palette) -- Internals {{{
       -- column where |signs| are displayed
       bg = palette.sidebar_bg,
       fg = palette.white,
-    }, --}}}
-    StatusLine = { --{{{
+    },
+    -- }}}
+    StatusLine = { -- {{{
       -- status line of current window
       fg = palette.base7,
       bg = palette.base2,
@@ -258,8 +268,9 @@ local internals = function(palette) -- Internals {{{
       -- titles for output from ":set all", ":autocmd" etc.
       fg = palette.yellow,
       bold = true,
-    }, --}}}
-    TabLine = { --{{{
+    },
+    -- }}}
+    TabLine = { -- {{{
       -- tab pages line, not active tab page label
       bg = palette.blue_dark,
       fg = palette.grey_light,
@@ -377,7 +388,8 @@ local internals = function(palette) -- Internals {{{
     NavicIconsTypeParameter = {
       link = "CmpItemKindTypeParameter",
     }, --}}}
-    SpellBad = { --{{{
+    -- Spell check {{{
+    SpellBad = {
       -- Word that is not recognized by the spellchecker. |spell| Combined
       -- with the highlighting used otherwise.
       fg = palette.red,
@@ -409,8 +421,10 @@ local internals = function(palette) -- Internals {{{
       bg = palette.none,
       undercurl = true,
       sp = palette.pink,
-    }, --}}}
-    DiffAdd = { -- {{{
+    },
+    --}}}
+    -- Diff {{{
+    DiffAdd = {
       -- diff mode: Added line
       bg = palette.diff_add_bg,
     },
@@ -451,7 +465,8 @@ local internals = function(palette) -- Internals {{{
       fg = palette.purple,
     },
     -- }}}
-    Folded = { --{{{
+    -- Folds {{{
+    Folded = {
       -- line used for closed folds
       fg = palette.border,
       bg = palette.base3,
@@ -535,8 +550,8 @@ local internals = function(palette) -- Internals {{{
     PreCondit = {
       -- preprocessor #if, #else, #endif, etc.
       fg = palette.pink,
-    }, --}}}
-    Special = { --{{{
+    },
+    Special = {
       -- any special symbol
       fg = palette.white,
     },
@@ -604,13 +619,16 @@ local internals = function(palette) -- Internals {{{
       -- placeholder characters substituted for concealed text (see
       -- 'conceallevel')
       fg = palette.grey,
-    }, --}}}
-    WildMenu = { --{{{
+    },
+    -- }}}
+    WildMenu = { -- {{{
       -- current match in 'wildmenu' completion
       fg = palette.white,
       bg = palette.orange,
-    }, --}}}
-    QuickFixLine = { --{{{
+    },
+    --}}}
+    -- Quickfix {{{
+    QuickFixLine = {
       -- Current |quickfix| item in the quickfix window. Combined with
       -- |hl-CursorLine| when the cursor is there.
       fg = palette.purple,
@@ -707,8 +725,9 @@ local internals = function(palette) -- Internals {{{
     },
     markdownH3Delimiter = {
       fg = palette.green,
-    }, --}}}
-    Conditional = { --{{{
+    },
+    --}}}
+    Conditional = { -- {{{
       fg = palette.pink,
     },
     Directory = {
@@ -855,7 +874,8 @@ local plugin_syntax = function(palette) -- Plugins {{{
     },
     CmpItemMenu = {
       fg = palette.base7,
-    }, --}}}
+    },
+    --}}}
     -- Treesitter {{{
     ["@string"] = {
       fg = palette.yellow,
