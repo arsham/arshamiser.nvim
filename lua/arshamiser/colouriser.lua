@@ -66,6 +66,16 @@ local internals = function(palette) -- Internals {{{
       bg = palette.none,
       reverse = true,
     },
+    TermCursor = {
+      fg = palette.none,
+      bg = palette.none,
+      reverse = true,
+    },
+    TermCursorNC = {
+      fg = palette.none,
+      bg = palette.none,
+      reverse = true,
+    },
     CursorIM = {
       -- like Cursor, but used when in IME mode.
       fg = palette.none,
