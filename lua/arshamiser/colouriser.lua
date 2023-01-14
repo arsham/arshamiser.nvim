@@ -1082,6 +1082,23 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.accent,
       bg = palette.highlight,
     },
+    LspCodeLensSeparator = {
+      fg = palette.context,
+      italic = true,
+    },
+    LspDiagnosticsHint = {
+      fg = palette.hint,
+    },
+    LspDiagnosticsInfo = {
+      fg = palette.info,
+    },
+    LspDiagnosticsWarning = {
+      link = "Warnings",
+    },
+    LspHint = {
+      fg = palette.hint,
+      italic = true,
+    },
     -- }}}
     -- Diagnostics {{{
     DiagnosticError = {
@@ -1111,6 +1128,9 @@ local plugin_syntax = function(palette) -- Plugins {{{
     DiagnosticLineNrHint = {
       fg = palette.base4,
       bg = palette.blue_pale,
+    },
+    DiagnosticOther = {
+      fg = palette.purple,
     },
     -- }}}
     -- ALE {{{
