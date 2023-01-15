@@ -172,6 +172,7 @@ end --}}}
 local function parent_pathname(path) --{{{
   local i = path:find("[\\/:][^\\/:]*$")
   if not i then
+    ---@diagnostic disable-next-line: missing-return-value
     return
   end
   return path:sub(1, i - 1)
@@ -181,7 +182,8 @@ end --}}}
 -- galaxyline.
 ---@param path string?
 ---@return string
-local function get_git_dir(path) --{{{
+local function get_git_dir(path, skip_worktree) --{{{
+  skip_worktree = skip_worktree or false
   -- Checks if provided directory contains git directory
   local function has_git_dir(dir) --{{{
     local git_dir = dir .. "/.git"
@@ -192,6 +194,9 @@ local function get_git_dir(path) --{{{
 
   -- Get git directory from git file if present
   local function has_git_file(dir) --{{{
+    if skip_worktree then
+      return dir
+    end
     local gitfile = io.open(dir .. "/.git")
     if gitfile ~= nil then
       local git_dir = gitfile:read():match("gitdir: (.*)")
@@ -234,6 +239,7 @@ local function get_git_dir(path) --{{{
   end
 
   if not git_dir then
+    ---@diagnostic disable-next-line: missing-return-value
     return
   end
 
@@ -268,41 +274,25 @@ function M.dir_name(_, opts) --{{{
   return vim.fn.expand("%:h") or ""
 end --}}}
 
-local function short_filename(short) --{{{
-  if #vim.fn.expand("%:p") == 0 then
-    return "-"
-  end
-  if short then
-    return vim.fn.expand("%:t")
-  end
-  return vim.fn.expand("%:~")
-end --}}}
+local file_provider = require("feline.providers.file")
 
-local function file_readonly() --{{{
-  if vim.bo.filetype == "help" then
-    return ""
+function M.filename(component, opts) --{{{
+  local filename, icon = file_provider.file_info(component, opts)
+  local git_dir = get_git_dir(".", true)
+  if not git_dir then
+    git_dir = ""
   end
-  local icon = ""
-  if vim.bo.readonly == true then
-    return " " .. icon .. " "
-  end
-  return ""
-end --}}}
 
-function M.filename(_, opts) --{{{
-  local short = opts.short or false
-  local file = short_filename(short)
-  if vim.fn.empty(file) == 1 then
-    return ""
+  local git_root = git_dir:gsub("/.git", ""):gsub("%-", "%%-")
+  -- local git_root = vim.fn.FugitiveCommonDir():gsub("/.git", "")
+
+  local pos = string.find(filename, git_root)
+  if pos == nil then
+    return filename, icon
   end
-  if string.len(file_readonly()) ~= 0 then
-    return file .. file_readonly()
-  end
-  local icon = ""
-  if vim.bo.modifiable and vim.bo.modified then
-    return file .. " " .. icon .. "  "
-  end
-  return file .. " "
+
+  filename = string.sub(filename, pos + string.len(git_root))
+  return filename:gsub("^/", ""), ""
 end --}}}
 
 function M.search_results() --{{{

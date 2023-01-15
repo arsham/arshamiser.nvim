@@ -225,17 +225,9 @@ table.insert(components.active[2], {
 -- File info {{{
 table.insert(components.active[2], {
   provider = {
-    name = "file_info",
+    name = "filename",
     opts = {
       type = "full-path",
-      file_modified_icon = "",
-      file_readonly_icon = "🔒",
-    },
-  },
-  short_provider = {
-    name = "file_info",
-    opts = {
-      type = "relative-short",
       file_modified_icon = "",
       file_readonly_icon = "🔒",
     },
@@ -832,6 +824,7 @@ require("feline").setup({ -- {{{
     sqls_status = util.sqls_status,
     recording_macro = util.recording_macro,
     visually_selected = util.visually_selected,
+    filename = util.filename,
   },
 })
 -- }}}
