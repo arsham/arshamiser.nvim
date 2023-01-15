@@ -642,14 +642,6 @@ local internals = function(palette) -- Internals {{{
       fg = palette.link,
       underline = true,
     },
-    htmlH1 = {
-      fg = palette.cyan,
-      bold = true,
-    },
-    htmlH2 = {
-      fg = palette.red,
-      bold = true,
-    },
     mkdCodeDelimiter = {
       bg = palette.terminal_black,
       fg = palette.white,
@@ -671,18 +663,6 @@ local internals = function(palette) -- Internals {{{
     },
     markdownCodeBlock = {
       fg = palette.teal,
-    },
-    htmlH3 = {
-      fg = palette.green,
-      bold = true,
-    },
-    htmlH4 = {
-      fg = palette.yellow,
-      bold = true,
-    },
-    htmlH5 = {
-      fg = palette.purple,
-      bold = true,
     },
     markdownH1 = {
       fg = palette.cyan,
@@ -791,6 +771,157 @@ local internals = function(palette) -- Internals {{{
     -- Help {{{
     helpHyperTextJump = {
       link = "Statement",
+    },
+    -- }}}
+    -- Web {{{
+    cssAttr = {
+      fg = palette.orange,
+    },
+    cssAttrRegion = {
+      fg = palette.orange,
+    },
+    cssBraces = {
+      fg = palette.base0,
+    },
+    cssClassName = {
+      fg = palette.yellow,
+    },
+    cssColor = {
+      fg = palette.orange,
+    },
+    cssDefinition = {
+      fg = palette.base0,
+    },
+    cssFunction = {
+      fg = palette.purple,
+    },
+    cssFunctionName = {
+      fg = palette.yellow,
+    },
+    cssIdentifier = {
+      fg = palette.yellow,
+    },
+    cssImportant = {
+      fg = palette.blue,
+    },
+    cssInclude = {
+      fg = palette.purple,
+    },
+    cssProp = {
+      fg = palette.base0,
+    },
+    cssPseudoClass = {
+      fg = palette.yellow,
+    },
+    cssPseudoClassId = {
+      fg = palette.yellow,
+    },
+    cssPseudoClassLang = {
+      fg = palette.yellow,
+    },
+    cssStyle = {
+      fg = palette.base0,
+    },
+    cssTagName = {
+      fg = palette.yellow,
+    },
+    cssUnitDecorators = {
+      fg = palette.orange,
+    },
+    cssValueLength = {
+      fg = palette.orange,
+    },
+    cssValueNumber = {
+      link = "Number",
+    },
+    cssVendor = {
+      fg = palette.orange,
+    },
+    debugPc = {
+      fg = palette.none,
+      bg = palette.blue,
+    },
+    diffFileId = {
+      fg = palette.blue,
+      bold = true,
+      reverse = true,
+    },
+    hclTSPunctSpecial = {
+      fg = palette.grey_light,
+    },
+    htmlArg = {
+      fg = palette.base0,
+    },
+    htmlComment = {
+      fg = palette.green,
+    },
+    htmlH1 = {
+      fg = palette.cyan,
+      bold = true,
+    },
+    htmlH2 = {
+      fg = palette.red,
+      bold = true,
+    },
+    htmlH3 = {
+      fg = palette.green,
+      bold = true,
+    },
+    htmlH4 = {
+      fg = palette.yellow,
+      bold = true,
+    },
+    htmlH5 = {
+      fg = palette.purple,
+      bold = true,
+    },
+    htmlH6 = {
+      fg = palette.base0,
+    },
+    htmlHead = {
+      fg = palette.base0,
+    },
+    htmlTag = {
+      fg = palette.blue,
+    },
+    htmlTagN = {
+      fg = palette.blue,
+    },
+    htmlTagName = {
+      fg = palette.blue,
+    },
+    htmlTitle = {
+      fg = palette.base0,
+    },
+    jsonKeyword = {
+      link = "Keyword",
+    },
+    luaFunc = {
+      fg = palette.yellow,
+    },
+    luaFunction = {
+      fg = palette.blue,
+    },
+    tomlTSProperty = {
+      link = "Property",
+    },
+    xmlEndTag = {
+      fg = palette.cyan,
+    },
+    xmlTag = {
+      fg = palette.cyan,
+    },
+    xmlTagName = {
+      fg = palette.cyan,
+    },
+    yamlBlockMappingKey = {
+      fg = palette.blue,
+    },
+    yamlPlainScalar = {
+      fg = palette.orange,
+    },
+    yamlTSField = {
+      fg = palette.blue,
     },
     -- }}}
   }
