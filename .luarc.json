@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "Lua.diagnostics.disable": [
+    "missing-parameter",
+    "undefined-field",
+    "cast-local-type"
+  ],
+  "Lua.diagnostics.globals": ["vim", "_t", "require"],
+  "Lua.workspace.checkThirdParty": false,
+  "Lua.workspace.library": [
+    "runtime/lua",
+    "/home/arsham/.cache/nvim/lazy/neodev.nvim/types/nightly",
+    "/usr/share/nvim/runtime",
+    "/home/arsham/.cache/nvim/lazy/plenary.nvim/lua",
+    "/home/arsham/.cache/nvim/lazy/arshlib.nvim/lua",
+    "${3rd}/luassert/library"
+  ]
+}
