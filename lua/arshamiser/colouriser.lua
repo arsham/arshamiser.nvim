@@ -637,6 +637,7 @@ local internals = function(palette) -- Internals {{{
       fg = palette.blue,
     },
     -- }}}
+    -- Markdown {{{
     htmlLink = {
       fg = palette.link,
       underline = true,
@@ -691,16 +692,26 @@ local internals = function(palette) -- Internals {{{
       fg = palette.red,
       bold = true,
     },
+    markdownH3 = {
+      fg = palette.green,
+      bold = true,
+    },
+    markdownH4 = {
+      link = "Title",
+    },
+    markdownH5 = {
+      link = "Title",
+    },
+    markdownH6 = {
+      link = "Title",
+    },
     markdownLinkText = {
       fg = palette.blue,
       underline = true,
     },
     debugPC = {
+      -- used for highlighting the current line in terminal-debug
       bg = palette.sidebar_bg,
-    }, -- used for highlighting the current line in terminal-debug
-    markdownH3 = {
-      fg = palette.green,
-      bold = true,
     },
     markdownH1Delimiter = {
       -- character that needs attention like , or .
@@ -711,6 +722,62 @@ local internals = function(palette) -- Internals {{{
     },
     markdownH3Delimiter = {
       fg = palette.green,
+    },
+    markdownBlockquote = {
+      fg = palette.orange,
+    },
+    markdownBold = {
+      fg = palette.blue,
+      bold = true,
+    },
+    markdownItalic = {
+      link = "Italic",
+    },
+    markdownBoldItalic = {
+      fg = palette.yellow,
+      bold = true,
+      italic = true,
+    },
+    markdownCodeDelimiter = {
+      fg = palette.orange,
+    },
+    markdownEscape = {
+      fg = palette.yellow,
+    },
+    markdownFootnote = {
+      fg = palette.orange,
+    },
+    markdownFootnoteDefinition = {
+      fg = palette.orange,
+    },
+    markdownHeadingRule = {
+      fg = palette.base0,
+      bold = true,
+    },
+    markdownId = {
+      link = "Identifier",
+    },
+    markdownIdDeclaration = {
+      fg = palette.blue,
+    },
+    markdownIdDelimiter = {
+      fg = palette.grey_light,
+    },
+    markdownLinkDelimiter = {
+      fg = palette.grey_light,
+    },
+    markdownListMarker = {
+      fg = palette.blue,
+    },
+    markdownOrderedListMarker = {
+      fg = palette.purple,
+    },
+    markdownRule = {
+      fg = palette.gray,
+    },
+    markdownUrl = {
+      fg = palette.cyan,
+      underdotted = true,
     },
     --}}}
     Conditional = { -- {{{
