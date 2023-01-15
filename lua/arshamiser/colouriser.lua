@@ -150,16 +150,7 @@ local internals = function(palette) -- Internals {{{
     healthWarning = {
       fg = palette.yellow,
     },
-    Warnings = {
-      fg = palette.yellow,
-    },
-    NonText = {
-      -- '@' at the end of the window, characters from 'showbreak' and other
-      -- characters that do not really exist in the text (e.g., ">" displayed
-      -- when a double-wide character doesn't fit at the end of the line).
-      -- See also |hl-EndOfBuffer|.
-      fg = palette.base5,
-    }, --}}}
+    -- }}}
     Visual = { -- {{{
       -- Visual mode selection
       bg = palette.base5,
@@ -186,6 +177,19 @@ local internals = function(palette) -- Internals {{{
       fg = palette.base2,
       bg = palette.yellow,
     },
+    Conceal = {
+      -- placeholder characters substituted for concealed text (see
+      -- 'conceallevel')
+      fg = palette.grey,
+    },
+    Whitespace = {
+      -- "nbsp", "space", "tab" and "trail" in 'listchars'
+      fg = palette.base3,
+    },
+    ExtraWhitespace = {
+      fg = palette.base1,
+      bg = palette.diff_add_fg,
+    },
     -- }}}
     CursorLineNr = { -- {{{
       -- Like LineNr when 'cursorline' or 'relativenumber' is set for the
@@ -193,16 +197,11 @@ local internals = function(palette) -- Internals {{{
       fg = palette.orange,
       bg = palette.base2,
     },
-    MatchParen = {
-      -- The character under the cursor or just before it, if it is a paired
-      -- bracket, and its match. |pi_paren.txt|
-      fg = palette.pink,
-      bg = palette.none,
+    LineNr = {
+      fg = palette.base6,
+      bg = palette.base2,
     },
-    Question = {
-      -- |hit-enter| prompt and yes/no questions
-      fg = palette.yellow,
-    }, --}}}
+    -- }}}
     ModeMsg = { -- {{{
       -- 'showmode' message (e.g., "-- INSERT -- ")
       fg = palette.white,
@@ -225,6 +224,9 @@ local internals = function(palette) -- Internals {{{
       bg = palette.none,
       bold = true,
     },
+    MsgSeparator = {
+      link = "StatusLine",
+    },
     WarningMsg = {
       -- warning messages
       fg = palette.yellow,
@@ -236,10 +238,7 @@ local internals = function(palette) -- Internals {{{
       fg = palette.blue_pale,
       bg = palette.base0,
     },
-    LineNr = {
-      fg = palette.base6,
-      bg = palette.base2,
-    },
+    -- }}}
     SignColumn = { -- {{{
       fg = palette.base5,
       bg = palette.base2,
@@ -248,6 +247,11 @@ local internals = function(palette) -- Internals {{{
       -- column where |signs| are displayed
       bg = palette.sidebar_bg,
       fg = palette.white,
+    },
+    EndOfBuffer = {
+      -- filler lines (~) after the end of the buffer.
+      fg = palette.base2,
+      bg = palette.none,
     },
     -- }}}
     StatusLine = { -- {{{
@@ -401,6 +405,8 @@ local internals = function(palette) -- Internals {{{
       fg = palette.border,
       bg = palette.base2,
     },
+    -- }}}
+    -- Language {{{
     Constructor = {
       -- For constructor calls and definitions: `= { }` in Lua, and Java
       -- constructors.
@@ -561,24 +567,39 @@ local internals = function(palette) -- Internals {{{
       -- any erroneous construct
       fg = palette.error,
     },
-    Terminal = {
-      fg = palette.white,
-      bg = palette.base2,
+    Warnings = {
+      fg = palette.yellow,
     },
-    EndOfBuffer = {
-      -- filler lines (~) after the end of the buffer.
+    Info = {
+      fg = palette.info,
+    },
+    Hint = {
+      fg = palette.hint,
+    },
+    Debug = {
+      -- debugging statements
+      fg = palette.orange,
+    },
+    debugBreakpoint = {
       fg = palette.base2,
-      bg = palette.none,
+      bg = palette.red,
     },
-    Conceal = {
-      -- placeholder characters substituted for concealed text (see
-      -- 'conceallevel')
-      fg = palette.grey,
     Variable = {
       fg = palette.white,
     },
     Return = {
       fg = palette.pink,
+    },
+    NonText = {
+      -- '@' at the end of the window, characters from 'showbreak' and other
+      -- characters that do not really exist in the text (e.g., ">" displayed
+      -- when a double-wide character doesn't fit at the end of the line).
+      -- See also |hl-EndOfBuffer|.
+      fg = palette.base5,
+    },
+    Question = {
+      -- |hit-enter| prompt and yes/no questions
+      fg = palette.yellow,
     },
     Repeat = {
       fg = palette.pink,
@@ -587,6 +608,10 @@ local internals = function(palette) -- Internals {{{
       -- For exception related keywords.  try, catch, throw
       fg = palette.pink,
     },
+    -- }}}
+    Terminal = { -- {{{
+      fg = palette.white,
+      bg = palette.base2,
     },
     -- }}}
     WildMenu = { -- {{{
@@ -610,15 +635,8 @@ local internals = function(palette) -- Internals {{{
     },
     qfFileName = {
       fg = palette.blue,
-    }, --}}}
-    Debug = { --{{{
-      -- debugging statements
-      fg = palette.orange,
     },
-    debugBreakpoint = {
-      fg = palette.base2,
-      bg = palette.red,
-    },
+    -- }}}
     htmlLink = {
       fg = palette.link,
       underline = true,
@@ -702,19 +720,12 @@ local internals = function(palette) -- Internals {{{
       -- directory names (and other special names in listings)
       fg = palette.aqua,
     },
-    Whitespace = {
-      -- "nbsp", "space", "tab" and "trail" in 'listchars'
-      fg = palette.base3,
-    },
-    ExtraWhitespace = {
-      fg = palette.base1,
-      bg = palette.diff_add_fg,
-    }, --}}}
+    --}}}
     -- Help {{{
     helpHyperTextJump = {
       link = "Statement",
     },
-    --}}}
+    -- }}}
   }
 end
 -- }}}
@@ -1394,9 +1405,6 @@ local plugin_syntax = function(palette) -- Plugins {{{
     BqfPreviewBorder = {
       fg = palette.green_dark,
     },
-    BqfPreviewRange = {
-      link = "Search",
-    },
     --}}}
     -- Misc {{{
     SubstituteExchange = {
@@ -1440,6 +1448,14 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.pink_light,
       bg = palette.none,
       italic = true,
+    },
+    -- }}}
+    -- Vim Matchup {{{
+    MatchParen = {
+      -- The character under the cursor or just before it, if it is a paired
+      -- bracket, and its match. |pi_paren.txt|
+      fg = palette.red,
+      bg = palette.none,
     },
     -- }}}
     -- Navic {{{
