@@ -50,6 +50,7 @@ local light = {
   error          = "#C46476",
   warning        = "#C78F73",
   info           = "#588DC4",
+  hint           = "#8ac5d6",
 
   none           = "NONE",
 }
@@ -100,6 +101,7 @@ local dark = {
   error          = '#FD6883',
   warning        = '#FC9867',
   info           = "#3B6085",
+  hint           = "#46a4be",
 
   none           = 'NONE',
 }

@@ -97,6 +97,16 @@ local internals = function(palette) -- Internals {{{
       -- if foreground (ctermfg OR fg) is not set.
       bg = palette.base3,
     },
+    CursorLineNr = {
+      -- Like LineNr when 'cursorline' or 'relativenumber' is set for the
+      -- cursor line.
+      fg = palette.orange,
+      bg = palette.base2,
+    },
+    LineNr = {
+      fg = palette.base6,
+      bg = palette.base2,
+    },
     -- }}}
     ToolbarLine = { -- {{{
       fg = palette.white,
@@ -189,17 +199,6 @@ local internals = function(palette) -- Internals {{{
     ExtraWhitespace = {
       fg = palette.base1,
       bg = palette.diff_add_fg,
-    },
-    -- }}}
-    CursorLineNr = { -- {{{
-      -- Like LineNr when 'cursorline' or 'relativenumber' is set for the
-      -- cursor line.
-      fg = palette.orange,
-      bg = palette.base2,
-    },
-    LineNr = {
-      fg = palette.base6,
-      bg = palette.base2,
     },
     -- }}}
     ModeMsg = { -- {{{
