@@ -1750,6 +1750,30 @@ local plugin_syntax = function(palette) -- Plugins {{{
       link = "Parameter",
     },
     -- }}}
+    -- Lazy {{{
+    LazyH1 = {
+      link = "LazyButtonActive",
+    },
+    LazyButton = {
+      link = "CursorLine",
+    },
+    LazyButtonActive = {
+      fg = palette.orange,
+      bg = palette.base3,
+    },
+    LazySpecial = {
+      fg = palette.cyan,
+    },
+    LazyReasonPlugin = {
+      fg = palette.orange_light,
+    },
+    LazyReasonStart = {
+      fg = palette.red,
+    },
+    LazyReasonEvent = {
+      fg = palette.green,
+    },
+    -- }}}
   }
 end
 -- }}}
