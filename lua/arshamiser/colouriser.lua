@@ -417,12 +417,14 @@ local internals = function(palette) -- Internals {{{
     },
     Boolean = {
       -- a boolean constant: TRUE, false
-      fg = palette.purple,
+      fg = palette.orange,
     },
     Enum = {
       fg = palette.orange,
     },
     Character = {
+      -- For characters.
+      -- any character constant: 'c', '\n'
       fg = palette.yellow,
     },
     String = {
@@ -450,6 +452,10 @@ local internals = function(palette) -- Internals {{{
     Identifier = {
       fg = palette.white,
     },
+    Namespace = {
+      -- For identifiers referring to modules and namespaces.
+      fg = palette.purple,
+    },
     Field = {
       fg = palette.green,
     },
@@ -473,7 +479,7 @@ local internals = function(palette) -- Internals {{{
       fg = palette.yellow_light,
     },
     Label = {
-      -- case, default, etc.
+      -- For labels: `label:` in C and `:label:` in Lua, case, default, etc.
       fg = palette.pink,
     },
     Keyword = {
@@ -484,7 +490,8 @@ local internals = function(palette) -- Internals {{{
       fg = palette.green,
     },
     Include = {
-      -- preprocessor #include
+      -- For includes: `#include` in C, `use` or `extern crate` in Rust, or
+      -- `require` in Lua.
       fg = palette.pink,
     },
     Define = {
@@ -505,7 +512,7 @@ local internals = function(palette) -- Internals {{{
     },
     SpecialChar = {
       -- special character in a constant
-      fg = palette.pink,
+      fg = palette.purple,
     },
     SpecialKey = {
       -- Unprintable characters: text displayed differently from what it
@@ -521,7 +528,7 @@ local internals = function(palette) -- Internals {{{
       bold = true,
     },
     Tag = {
-      -- you can use CTRL-] on this
+      -- Tags like html tag names. you can use CTRL-] on this
       fg = palette.orange,
     },
     Todo = {
@@ -552,7 +559,7 @@ local internals = function(palette) -- Internals {{{
     },
     Error = {
       -- any erroneous construct
-      fg = palette.red,
+      fg = palette.error,
     },
     Terminal = {
       fg = palette.white,
@@ -567,9 +574,19 @@ local internals = function(palette) -- Internals {{{
       -- placeholder characters substituted for concealed text (see
       -- 'conceallevel')
       fg = palette.grey,
-      Variable = {
-        fg = palette.white,
-      },
+    Variable = {
+      fg = palette.white,
+    },
+    Return = {
+      fg = palette.pink,
+    },
+    Repeat = {
+      fg = palette.pink,
+    },
+    Exception = {
+      -- For exception related keywords.  try, catch, throw
+      fg = palette.pink,
+    },
     },
     -- }}}
     WildMenu = { -- {{{
@@ -684,12 +701,6 @@ local internals = function(palette) -- Internals {{{
     Directory = {
       -- directory names (and other special names in listings)
       fg = palette.aqua,
-    },
-    Repeat = {
-      fg = palette.pink,
-    },
-    Exception = {
-      fg = palette.pink,
     },
     Whitespace = {
       -- "nbsp", "space", "tab" and "trail" in 'listchars'
@@ -838,26 +849,26 @@ local plugin_syntax = function(palette) -- Plugins {{{
     --}}}
     -- Treesitter {{{
     ["@string"] = {
-      fg = palette.yellow,
+      link = "String",
     },
     ["@string.regex"] = {
       -- For regexes.
       fg = palette.purple,
     },
     ["@string.escape"] = {
-      -- For escape characters within a string.
-      fg = palette.purple,
+      link = "SpecialChar",
     },
     ["@include"] = {
-      -- For includes: `#include` in C, `use` or `extern crate` in Rust, or
-      -- `require` in Lua.
-      fg = palette.pink,
+      link = "Include",
     },
     ["@variable"] = {
-      fg = palette.white,
+      link = "Variable",
     },
     ["@variable.builtin"] = {
       fg = palette.orange,
+    },
+    ["@enum"] = {
+      link = "Enum",
     },
     ["@annotation"] = {
       -- For C++/Dart attributes, annotations that can be attached to the
@@ -868,14 +879,13 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.yellow,
     },
     ["@boolean"] = {
-      -- For booleans.
-      fg = palette.orange,
+      link = "Boolean",
     },
     ["@comment"] = {
-      fg = palette.base6,
+      link = "Comment",
     },
     ["@constant"] = {
-      fg = palette.aqua,
+      link = "Constant",
     },
     ["@constant.builtin"] = {
       -- For constant that are built in the language: `nil` in Lua.
@@ -886,25 +896,19 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.purple,
     },
     ["@error"] = {
-      -- For syntax/parser errors.
-      fg = palette.error,
-      italic = true,
+      link = "Error",
     },
     ["@conditional"] = {
-      fg = palette.pink,
+      link = "Conditional",
     },
     ["@character"] = {
-      -- For characters.
-      -- any character constant: 'c', '\n'
-      fg = palette.yellow,
+      link = "Character",
     },
     ["@constructor"] = {
-      -- For constructor calls and definitions: `= { }` in Lua, and Java
-      -- constructors.
-      fg = palette.purple,
+      link = "Constructor",
     },
     ["@function"] = {
-      fg = palette.green,
+      link = "Function",
     },
     ["@function.call"] = {
       fg = palette.green,
@@ -918,44 +922,43 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.green,
     },
     ["@keyword"] = {
-      fg = palette.pink_light,
+      link = "Keyword",
     },
     ["@keyword.function"] = {
-      fg = palette.pink,
+      link = "Function",
     },
     ["@keyword.operator"] = {
-      fg = palette.pink,
+      link = "Operator",
     },
     ["@keyword.return"] = {
-      fg = palette.pink,
+      link = "Return",
     },
     ["@method"] = {
-      fg = palette.aqua,
+      link = "Method",
     },
     ["@method.call"] = {
       fg = palette.aqua,
     },
     ["@namespace"] = {
-      -- For identifiers referring to modules and namespaces.
-      fg = palette.purple,
+      link = "Namespace",
     },
     ["@number"] = {
-      fg = palette.purple,
+      link = "Number",
     },
     ["@operator"] = {
-      fg = palette.pink,
+      link = "Operator",
     },
     ["@parameter"] = {
-      fg = palette.yellow_light,
+      link = "Parameter",
     },
     ["@parameter.reference"] = {
       fg = palette.white,
     },
     ["@property"] = {
-      fg = palette.green,
+      link = "Property",
     },
     ["@punctuation.delimiter"] = {
-      fg = palette.white,
+      link = "Delimiter",
     },
     ["@punctuation.bracket"] = {
       fg = palette.white,
@@ -966,15 +969,14 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.pink,
     },
     ["@repeat"] = {
-      fg = palette.pink,
+      link = "Repeat",
     },
     ["@symbol"] = {
       -- For identifiers referring to symbols or atoms.
       fg = palette.yellow,
     },
     ["@tag"] = {
-      -- Tags like html tag names.
-      fg = palette.pink,
+      link = "Tag",
     },
     ["@tag.delimiter"] = {
       -- Tag delimiter like `<` `>` `/`
@@ -1015,26 +1017,23 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.green,
     },
     ["@label"] = {
-      -- For labels: `label:` in C and `:label:` in Lua.
-      fg = palette.pink,
+      link = "Label",
     },
     ["@type"] = {
-      -- For types.
-      fg = palette.aqua,
+      link = "Type",
     },
     ["@type.builtin"] = {
       -- For builtin types.
       fg = palette.purple,
     },
     ["@exception"] = {
-      -- For exception related keywords.  try, catch, throw
-      fg = palette.pink,
+      link = "Exception",
     },
     ["@field"] = {
-      fg = palette.green,
+      link = "Field",
     },
     ["@float"] = {
-      fg = palette.purple,
+      link = "Float",
     },
     ["@text.note"] = {
       fg = palette.orange,
