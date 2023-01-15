@@ -1,0 +1,164 @@
+arshamiser.txt                                         Powerful FZF setup in Lua
+
+
+==============================================================================
+CONTENTS                                                 *arshamiser-contents*
+
+1. Introduction .................................... |arshamiser-introduction|
+2. Requirements .................................... |arshamiser-requirements|
+3. Installation .................................... |arshamiser-installation|
+   - Lazy .................................................. |arshamiser-lazy|
+   - Packer .............................................. |arshamiser-packer|
+   - Config .............................................. |arshamiser-config|
+   - Lazy Loading .................................. |arshamiser-lazy_loading|
+4. License .............................................. |arshamiser-license|
+
+==============================================================================
+INTRODUCTION                                         *arshamiser-introduction*
+
+Neovim status bar, colour scheme, foldtext and tabline functions. It has
+support for `cmdheight=0` for macro recording message and visually selected
+count.
+
+==============================================================================
+REQUIREMENTS                                         *arshamiser-requirements*
+
+This library supports Neovim v0.8.0 and newer.
+
+This plugin depends are the following libraries. Please make sure to add them
+as dependencies in your package manager:
+
+* arshlib.nvim <https://github.com/arsham/arshlib.nvim>
+* feline.nvim <https://github.com/famiu/feline.nvim>
+* heirline.nvim <https://github.com/rebelot/heirline.nvim>
+* nvim-web-devicons <https://github.com/kyazdani42/nvim-web-devicons>
+* sqls.nvim <https://github.com/nanotee/sqls.nvim>
+
+==============================================================================
+INSTALLATION                                         *arshamiser-installation*
+
+Use your favourite package manager to install this library.
+
+------------------------------------------------------------------------------
+LAZY                                                         *arshamiser-lazy*
+
+>lua
+  {
+  	"arsham/arshamiser.nvim",
+  	dependencies = {
+  		"arsham/arshlib.nvim",
+  		"famiu/feline.nvim",
+  		"rebelot/heirline.nvim",
+  		"kyazdani42/nvim-web-devicons",
+  	},
+  	config = function()
+  		-- ignore any parts you don't want to use
+  		vim.cmd.colorscheme("arshamiser_light")
+  		require("arshamiser.feliniser")
+  		-- or:
+  		-- require("arshamiser.heirliniser")
+  		_G.custom_foldtext = require("arshamiser.folding").foldtext
+  		vim.opt.foldtext = "v:lua.custom_foldtext()"
+  		-- if you want to draw a tabline:
+  		vim.api.nvim_set_option("tabline", [[%{%v:lua.require("arshamiser.tabline").draw()%}]])
+  	end,
+  }
+<
+
+------------------------------------------------------------------------------
+PACKER                                                     *arshamiser-packer*
+
+>lua
+  use({
+    "arsham/arshamiser.nvim",
+    requires = {
+      "arsham/arshlib.nvim",
+      "famiu/feline.nvim",
+      "rebelot/heirline.nvim",
+      "kyazdani42/nvim-web-devicons",
+    },
+    config = function()
+      -- ignore any parts you don't want to use
+      vim.cmd.colorscheme("arshamiser_light")
+      require("arshamiser.feliniser")
+      -- or:
+      -- require("arshamiser.heirliniser")
+      _G.custom_foldtext = require("arshamiser.folding").foldtext
+      vim.opt.foldtext = "v:lua.custom_foldtext()"
+      -- if you want to draw a tabline:
+      vim.api.nvim_set_option("tabline", [[%{%v:lua.require("arshamiser.tabline").draw()%}]])
+    end,
+  })
+<
+
+------------------------------------------------------------------------------
+CONFIG                                                     *arshamiser-config*
+
+By default this pluging uses a palette for the colour scheme. You can use your
+own palette if you want:
+>lua
+    local colouriser = require("arshamiser.colouriser")
+    local palette = {} -- see the palette.lua for the values
+    colouriser.setup(palette, "my_awesome_scheme")
+<
+
+------------------------------------------------------------------------------
+LAZY LOADING                                         *arshamiser-lazy_loading*
+
+You can defer setting the colorscheme until the UI loads. Packer example:
+>lua
+    use({
+      "arsham/arshamiser.nvim",
+      requires = {
+        "arsham/arshlib.nvim",
+        "famiu/feline.nvim",
+        "rebelot/heirline.nvim",
+        "kyazdani42/nvim-web-devicons",
+        "nanotee/sqls.nvim",
+      },
+      config = function()
+        vim.api.nvim_create_autocmd("UIEnter", {
+          events = "UIEnter",
+          pattern = "*",
+          callback = function()
+            vim.cmd.colorscheme("arshamiser_light")
+            require("arshamiser.feliniser")
+            -- or:
+            -- require("arshamiser.heirliniser")
+            _G.custom_foldtext = require("arshamiser.folding").foldtext
+            vim.opt.foldtext = "v:lua.custom_foldtext()"
+            -- if you want to draw a tabline:
+            vim.api.nvim_set_option("tabline", [[%{%v:lua.require("arshamiser.tabline").draw()%}]])
+          end,
+        })
+      end,
+      event = { "UIEnter" },
+    })
+<
+
+------------------------------------------------------------------------------
+LICENSE                                                   *arshamiser-license*
+
+MIT License                                                                   ~
+                                                                              ~
+Copyright (c) 2023 Arsham Shirvani                                            ~
+                                                                              ~
+Permission is hereby granted, free of charge, to any person obtaining a copy  ~
+of this software and associated documentation files (the "Software"), to deal ~
+in the Software without restriction, including without limitation the rights  ~
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     ~
+copies of the Software, and to permit persons to whom the Software is         ~
+furnished to do so, subject to the following conditions:                      ~
+                                                                              ~
+The above copyright notice and this permission notice shall be included in all~
+copies or substantial portions of the Software.                               ~
+                                                                              ~
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    ~
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      ~
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   ~
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        ~
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, ~
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE ~
+SOFTWARE.                                                                     ~
+
+vim:tw=78:ft=help
