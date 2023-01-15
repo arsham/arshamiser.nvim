@@ -1648,6 +1648,14 @@ local plugin_syntax = function(palette) -- Plugins {{{
       italic = true,
     },
     -- }}}
+    -- Crates {{{
+    CratesNvimLoading = {
+      fg = palette.hint,
+    },
+    CratesNvimVersion = {
+      fg = palette.hint,
+    },
+    -- }}}
     -- Vim Matchup {{{
     MatchParen = {
       -- The character under the cursor or just before it, if it is a paired
