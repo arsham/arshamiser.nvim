@@ -22,6 +22,12 @@ count.
 
 ![go](https://user-images.githubusercontent.com/428611/148667079-f441fc97-4157-4ed3-b2bb-81a64d358107.png)
 
+## Palettes
+
+![arshamiser_light](https://user-images.githubusercontent.com/58662350/230141514-bcbcb09c-a0a8-45a4-b295-ff2f093da75f.png)
+
+![arshamiser_dark](https://user-images.githubusercontent.com/58662350/230141490-909545ed-b1a2-435a-b11a-58712c63ae4c.png)
+
 ## Requirements
 
 This library supports [Neovim
