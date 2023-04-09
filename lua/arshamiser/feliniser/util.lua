@@ -66,6 +66,7 @@ M.colors = {--{{{
 }
 --}}}
 
+-- stylua: ignore
 M.mode_mappings = {--{{{
   ['n']   = {'Normal',       '-'},
   ['no']  = {'Op·Pending',   'P'},
@@ -274,16 +275,17 @@ function M.dir_name(_, opts) --{{{
   return vim.fn.expand("%:h") or ""
 end --}}}
 
-local file_provider = require("feline.providers.file")
-
 function M.filename(component, opts) --{{{
+  local file_provider = require("feline.providers.file")
   local filename, icon = file_provider.file_info(component, opts)
   local git_dir = get_git_dir(".", true)
   if not git_dir then
     git_dir = ""
   end
 
-  local git_root = git_dir:gsub("/.git", ""):gsub("%-", "%%-")
+  local git_root = git_dir:gsub("/.git", "")
+  local length = string.len(git_root)
+  git_root = git_root:gsub("%-", "%%-")
   -- local git_root = vim.fn.FugitiveCommonDir():gsub("/.git", "")
 
   local pos = string.find(filename, git_root)
@@ -291,7 +293,7 @@ function M.filename(component, opts) --{{{
     return filename, icon
   end
 
-  filename = string.sub(filename, pos + string.len(git_root))
+  filename = string.sub(filename, pos + length)
   return filename:gsub("^/", ""), ""
 end --}}}
 
@@ -338,6 +340,7 @@ local lsp_config = { --{{{
   lsp_icon = " ",
 }
 --}}}
+
 local lsp_names = { --{{{
   ["null-ls"] = "Null",
   ["diagnostics_on_open"] = "Diagnostics",

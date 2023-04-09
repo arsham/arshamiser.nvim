@@ -5,7 +5,6 @@ local util = require("arshamiser.heirliniser.util")
 
 local space = { provider = " " }
 local spring = { provider = "%=" }
-local null = { provider = "" }
 
 local inactive_left_slant = { --{{{
   provider = util.separators.slant_right_2,
@@ -84,30 +83,38 @@ local git = { --{{{
   init = function(self)
     self.status_dict = vim.b.gitsigns_status_dict
   end,
-  heirline.make_flexible_component(2, {
-    { provider = "  ", hl = { fg = util.colours.git.add } },
+  {
+    flexible = 2,
     {
-      provider = function(self)
-        return self.status_dict.head
-      end,
+      { provider = "  ", hl = { fg = util.colours.git.add } },
+      {
+        provider = function(self)
+          return self.status_dict.head
+        end,
+      },
     },
-  }, null),
+  },
   {
     condition = function(self)
       return self.has_changes == self.status_dict.added ~= 0
         or self.status_dict.removed ~= 0
         or self.status_dict.changed ~= 0
     end,
-    heirline.make_flexible_component(4, {
-      git_count("added", "add", "  "),
-      git_count("removed", "del", "  "),
-      git_count("changed", "change", " 柳"),
-    }, {
-      git_count("removed", "del", "  "),
-      git_count("changed", "change", " 柳"),
-    }, {
-      git_count("removed", "del", "  "),
-    }, null),
+    {
+      flexible = 4,
+      {
+        git_count("added", "add", "  "),
+        git_count("removed", "del", "  "),
+        git_count("changed", "change", " 柳"),
+      },
+      {
+        git_count("removed", "del", "  "),
+        git_count("changed", "change", " 柳"),
+      },
+      {
+        git_count("removed", "del", "  "),
+      },
+    },
   },
 } --}}}
 
@@ -133,7 +140,6 @@ local file_size = { -- Filesize {{{
 } --}}}
 
 local file_lock_info = { -- Modified / Readonly {{{
-
   {
     provider = function()
       if vim.bo.modified then
@@ -152,22 +158,21 @@ local file_lock_info = { -- Modified / Readonly {{{
     hl = { fg = util.colours.orange },
   },
 }
+
 local file_name = { -- Filename {{{
-  init = function(self)
-    self.filename = vim.fn.fnamemodify(self.filename, ":.")
-    if self.filename == "" then
-      return "[No Name]"
-    end
-  end,
-  heirline.make_flexible_component(1, {
-    provider = function(self)
-      return self.filename
-    end,
-  }, {
-    provider = function(self)
-      return vim.fn.pathshorten(self.filename)
-    end,
-  }),
+  {
+    flexible = 1,
+    {
+      provider = function(self)
+        return self.short_filename
+      end,
+    },
+    {
+      provider = function(self)
+        return vim.fn.pathshorten(self.short_filename)
+      end,
+    },
+  },
 } --}}}
 
 local file_icon = { -- File icon {{{
@@ -189,24 +194,30 @@ local folder_name = {
 }
 
 local fileinfo = { --{{{
-  heirline.make_flexible_component(3, {
-    folder_name,
-    file_icon,
-    file_name,
-    file_lock_info,
-    space,
-    file_size,
-  }, {
-    folder_name,
-    file_icon,
-    file_name,
-    file_lock_info,
-  }, {
-    folder_name,
-    file_name,
-  }, {
-    file_name,
-  }),
+  {
+    flexible = 3,
+    {
+      folder_name,
+      file_icon,
+      file_name,
+      file_lock_info,
+      space,
+      file_size,
+    },
+    {
+      folder_name,
+      file_icon,
+      file_name,
+      file_lock_info,
+    },
+    {
+      folder_name,
+      file_name,
+    },
+    {
+      file_name,
+    },
+  },
 } --}}}
 
 local active_left_segment = { --{{{
@@ -214,7 +225,7 @@ local active_left_segment = { --{{{
     fg = util.colours.grey_fg,
   },
   vim_mode,
-  heirline.make_flexible_component(3, fold_method, null),
+  { flexible = 3, fold_method },
   heirline.surround({ " ", " " }, util.colours.statusline_bg, git),
 } --}}}
 
@@ -256,20 +267,24 @@ local active_right_segment = { --{{{
       icon = "  ",
     },
     condition = conditions.lsp_attached,
-    heirline.make_flexible_component(2, {
+    {
+      flexible = 2,
       {
-        provider = function(self)
-          return self.icon .. feliniser.lsp_client_names()
-        end,
+        {
+          provider = function(self)
+            return self.icon .. feliniser.lsp_client_names()
+          end,
+        },
+        { provider = feliniser.get_lsp_progress },
       },
-      -- { provider = feliniser.get_lsp_progress },
-    }, {
       {
-        provider = function(self)
-          return self.icon .. feliniser.lsp_client_names()
-        end,
+        {
+          provider = function(self)
+            return self.icon .. feliniser.lsp_client_names()
+          end,
+        },
       },
-    }, null),
+    },
   },
 
   { -- Diagnostics {{{
@@ -326,8 +341,8 @@ local active_right_segment = { --{{{
     },
   }, --}}}
 
-  heirline.make_flexible_component( -- Filetype {{{
-    2,
+  { -- Filetype {{{
+    flexible = 2,
     {
       hl = function(self)
         return {
@@ -348,8 +363,7 @@ local active_right_segment = { --{{{
         end,
       },
     },
-    null
-  ), --}}}
+  }, --}}}
 
   space,
   { provider = feliniser.search_results },
@@ -488,24 +502,28 @@ local help_file_name = { --{{{
 } --}}}
 
 local status_line = { --{{{
-  init = function(self)
-    self.filename = vim.api.nvim_buf_get_name(0)
-    local extension = vim.fn.fnamemodify(self.filename, ":e")
-    self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(
-      self.filename,
-      extension,
-      { default = true }
-    )
-    self.mode = vim.fn.mode(1)
-  end,
+  statusline = {
+    init = function(self)
+      self.filename = vim.api.nvim_buf_get_name(0)
+      self.short_filename = vim.fn.fnamemodify(self.filename, ":.")
+      if self.short_filename == "" then
+        self.short_filename = "[No Name]"
+      end
 
-  stop_when = function(_, out)
-    return out ~= ""
-  end,
-  help_file_name,
-  disabled_buffers,
-  active_status_line,
-  inactive_status_line,
+      local extension = vim.fn.fnamemodify(self.filename, ":e")
+      self.icon, self.icon_color =
+        require("nvim-web-devicons").get_icon_color(self.filename, extension, { default = true })
+      self.mode = vim.fn.mode(1)
+    end,
+
+    stop_when = function(_, out)
+      return out ~= ""
+    end,
+    help_file_name,
+    disabled_buffers,
+    active_status_line,
+    inactive_status_line,
+  },
 } --}}}
 
 require("heirline").setup(status_line)
