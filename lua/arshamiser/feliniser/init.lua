@@ -295,7 +295,7 @@ table.insert(components.active[3], {
 -- }}}
 
 -- LSP client names {{{
-table.insert(components.active[3], {
+local lsp_names = {
   provider = "lsp_clients",
   enabled = function()
     return lsp.is_lsp_attached()
@@ -303,11 +303,16 @@ table.insert(components.active[3], {
   hl = right_ribbon_hl,
   priority = 3,
   truncate_hide = true,
-})
+}
+
+vim.schedule(function()
+  table.insert(components.active[3], 2, lsp_names)
+end)
 -- }}}
 
 -- Diagnostics {{{
-table.insert(components.active[3], {
+local diagnostics = {}
+table.insert(diagnostics, {
   provider = "diag_errors",
   enabled = function()
     return util.diagnostics_exist(vim.diagnostic.ERROR)
@@ -318,7 +323,7 @@ table.insert(components.active[3], {
   },
 })
 
-table.insert(components.active[3], {
+table.insert(diagnostics, {
   provider = "diag_warnings",
   enabled = function()
     return util.diagnostics_exist(vim.diagnostic.WARN)
@@ -329,7 +334,7 @@ table.insert(components.active[3], {
   },
 })
 
-table.insert(components.active[3], {
+table.insert(diagnostics, {
   provider = "diag_hints",
   enabled = function()
     return util.diagnostics_exist(vim.diagnostic.HINT)
@@ -340,7 +345,7 @@ table.insert(components.active[3], {
   },
 })
 
-table.insert(components.active[3], {
+table.insert(diagnostics, {
   provider = "diag_info",
   enabled = function()
     return util.diagnostics_exist(vim.diagnostic.INFO)
@@ -350,6 +355,12 @@ table.insert(components.active[3], {
     bg = "statusline_bg",
   },
 })
+
+vim.schedule(function()
+  for _, diag in ipairs(diagnostics) do
+    table.insert(components.active[3], 3, diag)
+  end
+end)
 -- }}}
 
 -- Spell checker {{{
