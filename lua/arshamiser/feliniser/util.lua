@@ -360,11 +360,17 @@ local lsp_names = { --{{{
   yamlls = "YAML",
 }
 --}}}
+
+local get_clients = (
+  vim.lsp.get_clients ~= nil and vim.lsp.get_clients -- nvim 0.10+
+  or vim.lsp.get_active_clients
+)
+
 -- Credit goes to the feline author.
 function M.lsp_client_names() --{{{
   local clients = {}
 
-  for _, client in pairs(vim.lsp.buf_get_clients(0)) do
+  for _, client in pairs(get_clients()) do
     local name = lsp_names[client.name] or client.name
     clients[#clients + 1] = name
   end
@@ -397,7 +403,7 @@ end --}}}
 ---@param severity string
 ---@return number
 function M.get_diagnostics_count(severity) --{{{
-  local active_clients = vim.lsp.buf_get_clients(0)
+  local active_clients = get_clients()
   if not active_clients then
     return 0
   end
