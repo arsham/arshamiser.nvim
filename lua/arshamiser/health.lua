@@ -8,6 +8,7 @@ local libs = {
   heirline = "rebelot/heirline.nvim",
   ["nvim-web-devicons"] = "kyazdani42/nvim-web-devicons",
   sqls = "nanotee/sqls.nvim",
+  gitsigns = "lewis6991/gitsigns.nvim",
 }
 
 M.check = function()
