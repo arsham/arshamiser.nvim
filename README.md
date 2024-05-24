@@ -56,6 +56,7 @@ Use your favourite package manager to install this library.
 		"famiu/feline.nvim",
 		"rebelot/heirline.nvim",
 		"kyazdani42/nvim-web-devicons",
+		"lewis6991/gitsigns.nvim",
 	},
 	config = function()
 		-- ignore any parts you don't want to use
@@ -82,6 +83,7 @@ use({
     "famiu/feline.nvim",
     "rebelot/heirline.nvim",
     "kyazdani42/nvim-web-devicons",
+    "lewis6991/gitsigns.nvim",
   },
   config = function()
     -- ignore any parts you don't want to use
@@ -122,6 +124,7 @@ use({
     "rebelot/heirline.nvim",
     "kyazdani42/nvim-web-devicons",
     "nanotee/sqls.nvim",
+    "lewis6991/gitsigns.nvim",
   },
   config = function()
     vim.api.nvim_create_autocmd("UIEnter", {
