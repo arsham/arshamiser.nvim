@@ -358,6 +358,86 @@ table.insert(components.active[3], {
 })
 -- }}}
 
+local get_clients = (
+  vim.lsp.get_clients ~= nil and vim.lsp.get_clients -- nvim 0.10+
+  or vim.lsp.get_active_clients
+)
+
+-- Copilot {{{
+local copilot = {
+  provider = function()
+    local status = require("copilot.api").status.data
+    local icon = " "
+    return icon .. (status.message or "")
+  end,
+  enabled = function()
+    local ok, clients = pcall(get_clients, { name = "copilot", bufnr = 0 })
+    return ok and #clients > 0
+  end,
+  hl = function()
+    local colors = {
+      [""] = "statusline_bg",
+      ["Normal"] = "green",
+      ["Warning"] = "red",
+      ["InProgress"] = "yellow",
+    }
+    local status = require("copilot.api").status.data
+    return {
+      fg = colors[status.status],
+      bg = "statusline_bg",
+    }
+  end,
+}
+
+vim.schedule(function()
+  table.insert(components.active[3], 2, copilot)
+end)
+-- }}}
+
+-- Overseer {{{
+local overseer = {
+  provider = "overseer",
+  enabled = function()
+    if not vim.g.overseer_started then
+      return false
+    end
+    local ok, ovs = pcall(require, "overseer")
+    if ok then
+      return #ovs.list_tasks() > 0
+    end
+    return false
+  end,
+  hl = function()
+    local ovs = require("overseer")
+    local tasks = ovs.task_list
+    local STATUS = ovs.constants.STATUS
+    local colors = {
+      ["FAILURE"] = "red",
+      ["CANCELED"] = "gray",
+      ["SUCCESS"] = "green",
+      ["RUNNING"] = "yellow",
+    }
+    local tasks_by_status = ovs.util.tbl_group_by(tasks.list_tasks({ unique = true }), "status")
+
+    local color = colors["SUCCESS"]
+    for _, status in ipairs(STATUS.values) do
+      local status_tasks = tasks_by_status[status]
+      if status_tasks then
+        color = colors[status]
+      end
+    end
+    return {
+      fg = color,
+      bg = "statusline_bg",
+    }
+  end,
+}
+
+vim.schedule(function()
+  table.insert(components.active[3], 3, overseer)
+end)
+-- }}}
+
 -- LSP client names {{{
 local lsp_names = {
   provider = {
@@ -376,7 +456,7 @@ local lsp_names = {
 }
 
 vim.schedule(function()
-  table.insert(components.active[3], 2, lsp_names)
+  table.insert(components.active[3], 4, lsp_names)
 end)
 -- }}}
 
@@ -440,7 +520,7 @@ table.insert(diagnostics, {
 
 vim.schedule(function()
   for _, diag in ipairs(diagnostics) do
-    table.insert(components.active[3], 3, diag)
+    table.insert(components.active[3], 5, diag)
   end
 end)
 -- }}}
@@ -960,6 +1040,7 @@ require("feline").setup({ -- {{{
     recording_macro = util.recording_macro,
     visually_selected = util.visually_selected,
     filename = util.filename,
+    overseer = util.overseer,
     just_text = util.just_text,
   },
 })

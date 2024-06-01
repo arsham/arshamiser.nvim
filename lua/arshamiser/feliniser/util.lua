@@ -534,6 +534,66 @@ function M.visually_selected()
   return "𝒱 " .. selection_count()
 end
 
+function M.overseer()
+  local ok, overseer = pcall(require, "overseer")
+  if not ok then
+    return
+  end
+  local tasks = overseer.task_list
+  local STATUS = overseer.constants.STATUS
+  local symbols = {
+    ["FAILURE"] = "",
+    ["CANCELED"] = "",
+    ["SUCCESS"] = "",
+    ["RUNNING"] = "󰑮",
+  }
+  local tasks_by_status = overseer.util.tbl_group_by(tasks.list_tasks({ unique = true }), "status")
+
+  local all_symbols = {}
+  for _, status in ipairs(STATUS.values) do
+    local status_tasks = tasks_by_status[status]
+    if symbols[status] and status_tasks then
+      table.insert(all_symbols, symbols[status])
+    end
+  end
+  table.insert(all_symbols, " ")
+  return table.concat(all_symbols, " ")
+end
+
+function M.just_text(_, opts)
+  return opts.text
+end
+function M.file_size()
+  local suffix = { "b", "k", "M", "G", "T", "P", "E" }
+  local index = 1
+
+  local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
+
+  if fsize < 0 then
+    fsize = 0
+  end
+
+  while fsize > 1024 and index < 7 do
+    fsize = fsize / 1024
+    index = index + 1
+  end
+
+  return string.format(index == 1 and "%g%s " or "%.2f%s ", fsize, suffix[index])
+end
+
+function M.line_percentage()
+  local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+  local lines = vim.api.nvim_buf_line_count(0)
+
+  if curr_line == 1 then
+    return "Top"
+  elseif curr_line == lines then
+    return "Bot"
+  else
+    return string.format("%2d%%%%", math.ceil(curr_line / lines * 99))
+  end
+end
+
 return M
 
 -- vim: fdm=marker fdl=0
