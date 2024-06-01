@@ -24,7 +24,11 @@ local right_ribbon_hl = {
 
 -- Vim mode {{{
 table.insert(components.active[1], {
-  provider = "  ",
+  provider = {
+    opts = { text = "  " },
+    name = "just_text",
+    update = { "ModeChanged" },
+  },
   hl = function()
     return {
       fg = "statusline_bg",
@@ -36,7 +40,10 @@ table.insert(components.active[1], {
 })
 
 table.insert(components.active[1], {
-  provider = "vim_mode",
+  provider = {
+    name = "vim_mode",
+    update = { "ModeChanged" },
+  },
   hl = function()
     return {
       fg = vi_mode_utils.get_mode_color(),
@@ -58,7 +65,10 @@ table.insert(components.active[1], {
 
 -- Scroll binding {{{
 table.insert(components.active[1], {
-  provider = " ",
+  provider = {
+    name = "just_text",
+    opts = { text = " " },
+  },
   enabled = function()
     return vim.opt_local.scrollbind:get()
   end,
@@ -89,7 +99,10 @@ table.insert(components.active[1], {
 
 -- Recording macro {{{
 table.insert(components.active[1], {
-  provider = "recording_macro",
+  provider = {
+    name = "recording_macro",
+    update = { "RecordingEnter", "RecordingLeave" },
+  },
   enabled = function()
     return vim.fn.reg_recording() ~= ""
   end,
@@ -110,7 +123,13 @@ table.insert(components.active[1], {
 
 -- Git branch {{{
 table.insert(components.active[1], {
-  provider = "git_branch",
+  provider = {
+    name = "git_branch",
+    update = {
+      "FocusGained",
+      "ModeChanged",
+    },
+  },
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
@@ -130,7 +149,12 @@ table.insert(components.active[1], {
 
 -- Git diff {{{
 table.insert(components.active[1], {
-  provider = "git_diff_added",
+  provider = {
+    name = "git_diff_added",
+    update = {
+      "BufWritePost",
+    },
+  },
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
@@ -143,7 +167,12 @@ table.insert(components.active[1], {
 })
 
 table.insert(components.active[1], {
-  provider = "git_diff_changed",
+  provider = {
+    name = "git_diff_changed",
+    update = {
+      "BufWritePost",
+    },
+  },
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
@@ -156,7 +185,12 @@ table.insert(components.active[1], {
 })
 
 table.insert(components.active[1], {
-  provider = "git_diff_removed",
+  provider = {
+    name = "git_diff_removed",
+    update = {
+      "BufWritePost",
+    },
+  },
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
@@ -169,9 +203,15 @@ table.insert(components.active[1], {
 })
 -- }}}
 
--- Left angle {{{
+-- Right angle {{{
 table.insert(components.active[1], {
-  provider = " ",
+  provider = {
+    name = "just_text",
+    opts = {
+      text = " ",
+    },
+    update = false,
+  },
   hl = left_ribbon_hl,
   right_sep = {
     str = "right_filled",
@@ -185,7 +225,13 @@ table.insert(components.active[1], {
 
 -- Left angle {{{
 table.insert(components.active[2], {
-  provider = " ",
+  provider = {
+    name = "just_text",
+    opts = {
+      text = " ",
+    },
+    update = false,
+  },
   enabled = function()
     return vim.fn.expand("%:t") ~= ""
   end,
@@ -203,7 +249,10 @@ table.insert(components.active[2], {
 
 -- Git root {{{
 table.insert(components.active[2], {
-  provider = "git_root",
+  provider = {
+    name = "git_root",
+    update = false,
+  },
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
@@ -212,12 +261,11 @@ table.insert(components.active[2], {
   hl = left_ribbon_hl,
   left_sep = {
     str = "folder_icon",
-    hl = {
-      fg = util.colors.folder,
-    },
+    hl = left_ribbon_hl,
   },
   right_sep = {
     str = " ",
+    hl = left_ribbon_hl,
   },
 })
 -- }}}
@@ -226,6 +274,7 @@ table.insert(components.active[2], {
 table.insert(components.active[2], {
   provider = {
     name = "filename",
+    update = { "BufEnter", "BufReadPost", "BufWritePost", "TextChanged", "TextChangedI" },
     opts = {
       type = "full-path",
       file_modified_icon = "",
@@ -244,7 +293,10 @@ table.insert(components.active[2], {
 
 -- File size {{{
 table.insert(components.active[2], {
-  provider = "file_size",
+  provider = {
+    name = "file_size",
+    update = { "BufReadPost", "BufWritePost" },
+  },
   enabled = function()
     return vim.fn.expand("%:t") ~= ""
   end,
@@ -265,7 +317,13 @@ table.insert(components.active[2], {
 
 -- Right angle {{{
 table.insert(components.active[2], {
-  provider = " ",
+  provider = {
+    name = "just_text",
+    update = false,
+    opts = {
+      text = " ",
+    },
+  },
   enabled = function()
     return vim.fn.expand("%:t") ~= ""
   end,
@@ -282,7 +340,13 @@ table.insert(components.active[2], {
 
 -- Left angle {{{
 table.insert(components.active[3], {
-  provider = " ",
+  provider = {
+    name = "just_text",
+    opts = {
+      text = " ",
+    },
+    update = false,
+  },
   hl = right_ribbon_hl,
   left_sep = {
     str = "left_filled",
@@ -296,7 +360,13 @@ table.insert(components.active[3], {
 
 -- LSP client names {{{
 local lsp_names = {
-  provider = "lsp_clients",
+  provider = {
+    name = "lsp_clients",
+    update = {
+      "LspAttach",
+      "LspDetach",
+    },
+  },
   enabled = function()
     return lsp.is_lsp_attached()
   end,
@@ -313,7 +383,10 @@ end)
 -- Diagnostics {{{
 local diagnostics = {}
 table.insert(diagnostics, {
-  provider = "diag_errors",
+  provider = {
+    name = "diag_errors",
+    update = { "DiagnosticChanged" },
+  },
   enabled = function()
     return util.diagnostics_exist(vim.diagnostic.ERROR)
   end,
@@ -324,7 +397,10 @@ table.insert(diagnostics, {
 })
 
 table.insert(diagnostics, {
-  provider = "diag_warnings",
+  provider = {
+    name = "diag_warnings",
+    update = { "DiagnosticChanged" },
+  },
   enabled = function()
     return util.diagnostics_exist(vim.diagnostic.WARN)
   end,
@@ -335,7 +411,10 @@ table.insert(diagnostics, {
 })
 
 table.insert(diagnostics, {
-  provider = "diag_hints",
+  provider = {
+    name = "diag_hints",
+    update = { "DiagnosticChanged" },
+  },
   enabled = function()
     return util.diagnostics_exist(vim.diagnostic.HINT)
   end,
@@ -346,7 +425,10 @@ table.insert(diagnostics, {
 })
 
 table.insert(diagnostics, {
-  provider = "diag_info",
+  provider = {
+    name = "diag_info",
+    update = { "DiagnosticChanged" },
+  },
   enabled = function()
     return util.diagnostics_exist(vim.diagnostic.INFO)
   end,
@@ -365,7 +447,7 @@ end)
 
 -- Spell checker {{{
 table.insert(components.active[3], {
-  provider = "暈",
+  provider = "󰓆",
   enabled = function()
     return vim.wo.spell
   end,
@@ -454,7 +536,10 @@ table.insert(components.active[3], {
 
 -- File type {{{
 table.insert(components.active[3], {
-  provider = "file_type",
+  provider = {
+    name = "file_type",
+    update = { "FileType" },
+  },
   enabled = function()
     return vim.fn.expand("%:t") ~= ""
   end,
@@ -512,7 +597,12 @@ table.insert(components.active[3], {
 -- }}}
 
 table.insert(components.active[3], { -- {{{
-  provider = "",
+  provider = {
+    name = "just_text",
+    opts = {
+      text = "",
+    },
+  },
   hl = function()
     return {
       fg = "light_bg",
@@ -636,7 +726,13 @@ table.insert(components.active[3], {
 
 -- Git branch {{{
 table.insert(components.inactive[1], {
-  provider = "git_branch",
+  provider = {
+    name = "git_branch",
+    update = {
+      "FocusGained",
+      "ModeChanged",
+    },
+  },
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
@@ -658,7 +754,12 @@ table.insert(components.inactive[1], {
 
 -- Git diff {{{
 table.insert(components.inactive[1], {
-  provider = "git_diff_added",
+  provider = {
+    name = "git_diff_added",
+    update = {
+      "BufWritePost",
+    },
+  },
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
@@ -669,7 +770,12 @@ table.insert(components.inactive[1], {
 })
 
 table.insert(components.inactive[1], {
-  provider = "git_diff_changed",
+  provider = {
+    name = "git_diff_changed",
+    update = {
+      "BufWritePost",
+    },
+  },
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
@@ -680,7 +786,12 @@ table.insert(components.inactive[1], {
 })
 
 table.insert(components.inactive[1], {
-  provider = "git_diff_removed",
+  provider = {
+    name = "git_diff_removed",
+    update = {
+      "BufWritePost",
+    },
+  },
   enabled = function()
     return require("feline.providers.git").git_info_exists()
   end,
@@ -693,7 +804,13 @@ table.insert(components.inactive[1], {
 
 -- Left angle {{{
 table.insert(components.inactive[1], {
-  provider = " ",
+  provider = {
+    name = "just_text",
+    update = false,
+    opts = {
+      text = " ",
+    },
+  },
   hl = {
     fg = "white",
     bg = "mid_bg",
@@ -712,6 +829,7 @@ table.insert(components.inactive[1], {
 table.insert(components.inactive[2], {
   provider = {
     name = "file_info",
+    update = { "BufEnter", "BufReadPost", "BufWritePost", "TextChanged", "TextChangedI" },
     opts = {
       type = "full-path",
       file_modified_icon = "",
@@ -753,7 +871,13 @@ table.insert(components.inactive[2], {
 -- }}}
 
 table.insert(components.inactive[3], { -- {{{
-  provider = "",
+  provider = {
+    name = "just_text",
+    update = false,
+    opts = {
+      text = "",
+    },
+  },
   hl = {
     fg = "mid_bg",
     bg = "green_pale",
@@ -836,8 +960,15 @@ require("feline").setup({ -- {{{
     recording_macro = util.recording_macro,
     visually_selected = util.visually_selected,
     filename = util.filename,
+    just_text = util.just_text,
   },
 })
 -- }}}
+-- Force statusline redraw
+for i = 1, 5 do
+  vim.defer_fn(function()
+    vim.cmd.redrawstatus()
+  end, i * 200)
+end
 
 -- vim: foldmethod=marker foldlevel=0
