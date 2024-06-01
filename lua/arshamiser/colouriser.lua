@@ -1,17 +1,17 @@
 local internals = function(palette) -- Internals {{{
   return {
     Normal = { -- {{{
-      fg = palette.white,
-      bg = palette.base0,
+      fg = palette.fg,
+      bg = palette.bg,
     },
     NormalNC = {
       -- normal text in non-current windows
-      fg = palette.white,
-      bg = palette.base0,
+      fg = palette.fg,
+      bg = palette.bg,
     },
     NormalSB = {
       -- normal text in non-current windows
-      fg = palette.white,
+      fg = palette.fg,
       bg = palette.sidebar_bg,
     },
     NormalFloat = {
@@ -89,7 +89,6 @@ local internals = function(palette) -- Internals {{{
     },
     ColorColumn = {
       --  used for the columns set with 'colorcolumn'
-      fg = palette.none,
       bg = palette.color_column,
     },
     CursorLine = {
@@ -181,6 +180,9 @@ local internals = function(palette) -- Internals {{{
       bg = palette.accent,
       bold = true,
     },
+    CurSearch = {
+      link = "IncSearch",
+    },
     IncSearch = {
       -- 'incsearch' highlighting; also used for the text replaced with
       -- ":s///c"
@@ -237,8 +239,12 @@ local internals = function(palette) -- Internals {{{
       fg = palette.blue_pale,
       bg = palette.base0,
     },
+    WinSeparator = {
+      link = "VertSplit",
+    },
     -- }}}
     SignColumn = { -- {{{
+      -- column where |signs| are displayed
       fg = palette.base5,
       bg = palette.base2,
     },
@@ -462,16 +468,16 @@ local internals = function(palette) -- Internals {{{
       fg = palette.purple,
     },
     Field = {
-      fg = palette.green,
+      fg = palette.aqua,
     },
     Property = {
-      fg = palette.green,
+      fg = palette.aqua,
     },
     Function = {
       fg = palette.green,
     },
     Method = {
-      fg = palette.aqua,
+      link = "Function",
     },
     Statement = {
       -- any statement
@@ -481,7 +487,7 @@ local internals = function(palette) -- Internals {{{
       fg = palette.pink,
     },
     Parameter = {
-      fg = palette.yellow_light,
+      fg = palette.yellow,
     },
     Label = {
       -- For labels: `label:` in C and `:label:` in Lua, case, default, etc.
@@ -942,7 +948,6 @@ local plugin_syntax = function(palette) -- Plugins {{{
       fg = palette.orange,
       bg = palette.base2,
     },
-
     ListishLocalExt = {
       fg = palette.orange,
       bg = palette.base0,
@@ -966,12 +971,14 @@ local plugin_syntax = function(palette) -- Plugins {{{
     },
     CmpItemAbbrMatch = {
       fg = palette.blue,
+      bold = true,
     },
     CmpItemAbbrMatchFuzzy = {
       fg = palette.blue,
+      bold = true,
     },
     CmpItemKind = {
-      fg = palette.orange,
+      fg = palette.blue,
     },
     CmpItemKindClass = {
       fg = palette.orange,
@@ -1059,7 +1066,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
     ["@string"] = {
       link = "String",
     },
-    ["@string.regex"] = {
+    ["@string.regexp"] = {
       -- For regexes.
       fg = palette.purple,
     },
@@ -1073,7 +1080,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
       link = "Variable",
     },
     ["@variable.builtin"] = {
-      fg = palette.orange,
+      fg = palette.orange_light,
     },
     ["@enum"] = {
       link = "Enum",
@@ -1112,6 +1119,10 @@ local plugin_syntax = function(palette) -- Plugins {{{
     ["@character"] = {
       link = "Character",
     },
+    ["@character.special"] = {
+      -- special characters (e.g. wildcards)
+      link = "SpecialChar",
+    },
     ["@constructor"] = {
       link = "Constructor",
     },
@@ -1129,25 +1140,31 @@ local plugin_syntax = function(palette) -- Plugins {{{
       -- `macro_rules` in Rust.
       fg = palette.green,
     },
+    ["@identifier"] = {
+      link = "Identifier",
+    },
     ["@keyword"] = {
       link = "Keyword",
     },
     ["@keyword.function"] = {
-      link = "Function",
+      link = "Keyword",
     },
     ["@keyword.operator"] = {
-      link = "Operator",
+      link = "Keyword",
     },
     ["@keyword.return"] = {
-      link = "Return",
+      link = "Keyword",
+    },
+    ["@keyword.export"] = {
+      fg = palette.aqua,
     },
     ["@method"] = {
       link = "Method",
     },
     ["@method.call"] = {
-      fg = palette.aqua,
+      link = "Method",
     },
-    ["@namespace"] = {
+    ["@module"] = {
       link = "Namespace",
     },
     ["@number"] = {
@@ -1156,10 +1173,10 @@ local plugin_syntax = function(palette) -- Plugins {{{
     ["@operator"] = {
       link = "Operator",
     },
-    ["@parameter"] = {
+    ["@variable.parameter"] = {
       link = "Parameter",
     },
-    ["@parameter.reference"] = {
+    ["@variable.parameter.reference"] = {
       fg = palette.white,
     },
     ["@property"] = {
@@ -1171,7 +1188,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
     ["@punctuation.bracket"] = {
       fg = palette.white,
     },
-    ["@punctuation.special"] = {
+    ["@markup.list"] = {
       -- For special punctutation that does not fall in the catagories
       -- before.
       fg = palette.pink,
@@ -1179,7 +1196,7 @@ local plugin_syntax = function(palette) -- Plugins {{{
     ["@repeat"] = {
       link = "Repeat",
     },
-    ["@symbol"] = {
+    ["@markup.link.label"] = {
       -- For identifiers referring to symbols or atoms.
       fg = palette.yellow,
     },
@@ -1194,36 +1211,70 @@ local plugin_syntax = function(palette) -- Plugins {{{
       -- For strings considered text in a markup language.
       fg = palette.text,
     },
-    ["@text.reference"] = {
+    ["@markup.link"] = {
       fg = palette.yellow,
     },
-    ["@text.emphasis"] = {
+    ["@markup.emphasis"] = {
       -- For text to be represented with emphasis.
       fg = palette.blue_pale,
     },
-    ["@text.underline"] = {
+    ["@markup.strong"] = {
+      fg = palette.blue_pale,
+      -- style = { "bold" },
+    },
+    ["@markup.underline"] = {
       -- For text to be represented with an underline.
       fg = palette.white,
       bg = palette.none,
       underline = true,
     },
-    ["@text.title"] = {
+    ["@markup.strike"] = {
+      fg = palette.white,
+      -- style = { "strikethrough" },
+    },
+    ["@markup.heading"] = {
       -- Text that is part of a title.
       fg = palette.title,
       bg = palette.none,
       bold = true,
     },
-    ["@text.literal"] = {
+    ["@markup.raw"] = {
       -- Literal text.
       fg = palette.white,
     },
-    ["@text.uri"] = {
+    ["@markup.link.url"] = {
       -- Any URI like a link or email.
       fg = palette.link,
     },
     ["@tag.attribute"] = {
       fg = palette.green,
     },
+    ["@markup.math"] = {
+      fg = palette.blue,
+    },
+    ["@markup.environment"] = {
+      fg = palette.pink,
+    },
+    ["@markup.environment.name"] = {
+      fg = palette.blue,
+    },
+    ["@markup.todo"] = {
+      fg = palette.base,
+      bg = palette.yellow,
+    },
+    ["@markup.todo.checked"] = {
+      fg = palette.green,
+    },
+    ["@markup.todo.unchecked"] = {
+      fg = palette.green_dark,
+    },
+    ["@markup.diff.add"] = {
+      link = "diffAdded",
+    },
+    ["@markup.diff.delete"] = {
+      link = "diffRemoved",
+    },
+
     ["@label"] = {
       link = "Label",
     },
@@ -1234,27 +1285,36 @@ local plugin_syntax = function(palette) -- Plugins {{{
       -- For builtin types.
       fg = palette.purple,
     },
+    ["@type.definition"] = {
+      link = "@type",
+    },
+    ["@type.qualifier"] = {
+      link = "@type",
+    },
+    ["@storageclass"] = {
+      link = "StorageClass",
+    },
     ["@exception"] = {
       link = "Exception",
     },
-    ["@field"] = {
+    ["variable.@field"] = {
       link = "Field",
     },
-    ["@float"] = {
+    ["@number.float"] = {
       link = "Float",
     },
-    ["@text.note"] = {
+    ["@markup.note"] = {
       fg = palette.orange,
       bg = palette.info,
       bold = true,
     },
-    ["@text.warning"] = {
+    ["@markup.warning"] = {
       -- TODO, HACK, WARNING
       fg = palette.black,
       bg = palette.warning,
       bold = true,
     },
-    ["@text.danger"] = {
+    ["@markup.danger"] = {
       -- FIXME, XXX, BUG
       fg = palette.black,
       bg = palette.error,
@@ -1299,13 +1359,32 @@ local plugin_syntax = function(palette) -- Plugins {{{
     LspDiagnosticsInfo = {
       fg = palette.info,
     },
+    LspDiagnosticsInformation = {
+      fg = palette.info,
+    },
     LspDiagnosticsWarning = {
       link = "Warnings",
+    },
+    LspDiagnosticsError = {
+      link = "Error",
     },
     LspHint = {
       fg = palette.hint,
       italic = true,
     },
+
+    -- LSP Semantic Token Groups
+    ["@lsp.type.enum"] = { link = "@type" },
+    ["@lsp.type.keyword"] = { link = "@keyword" },
+    ["@lsp.type.interface"] = { link = "@identifier" },
+    ["@lsp.type.namespace"] = { link = "@module" },
+    ["@lsp.type.parameter"] = { link = "@variable.parameter" },
+    ["@lsp.type.property"] = { link = "@property" },
+    ["@lsp.type.variable"] = { link = "@variable" },
+    ["@lsp.typemod.function.defaultLibrary"] = { link = "@function.builtin" },
+    ["@lsp.typemod.variable.defaultLibrary"] = { link = "@variable.builtin" },
+    ["@lsp.typemod.variable.definition"] = { link = "@variable.builtin" },
+    ["@lsp.mod.readonly"] = { link = "Constant" },
     -- }}}
     -- Diagnostics {{{
     DiagnosticError = {
@@ -1607,6 +1686,9 @@ local plugin_syntax = function(palette) -- Plugins {{{
     SubstituteExchange = {
       bg = palette.blue_light,
       bold = true,
+    },
+    MiniOperatorsExchangeFrom = {
+      link = "SubstituteExchange",
     },
     -- }}}
     -- Noice {{{
