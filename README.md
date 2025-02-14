@@ -39,6 +39,7 @@ as dependencies in your package manager:
 - [arshlib.nvim](https://github.com/arsham/arshlib.nvim)
 - [feline.nvim](https://github.com/famiu/feline.nvim)
 - [heirline.nvim](https://github.com/rebelot/heirline.nvim)
+- [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
 - [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
 - [sqls.nvim](https://github.com/nanotee/sqls.nvim)
 
@@ -55,6 +56,7 @@ Use your favourite package manager to install this library.
 		"arsham/arshlib.nvim",
 		"famiu/feline.nvim",
 		"rebelot/heirline.nvim",
+		"nvim-lualine/lualine.nvim",
 		"kyazdani42/nvim-web-devicons",
 		"lewis6991/gitsigns.nvim",
 	},
@@ -64,6 +66,8 @@ Use your favourite package manager to install this library.
 		require("arshamiser.feliniser")
 		-- or:
 		-- require("arshamiser.heirliniser")
+		-- or:
+		-- require("arshamiser.lualiner")
 
 		_G.custom_foldtext = require("arshamiser.folding").foldtext
 		vim.opt.foldtext = "v:lua.custom_foldtext()"
@@ -82,6 +86,7 @@ use({
     "arsham/arshlib.nvim",
     "famiu/feline.nvim",
     "rebelot/heirline.nvim",
+    "nvim-lualine/lualine.nvim",
     "kyazdani42/nvim-web-devicons",
     "lewis6991/gitsigns.nvim",
   },
@@ -91,6 +96,8 @@ use({
     require("arshamiser.feliniser")
     -- or:
     -- require("arshamiser.heirliniser")
+    -- or:
+    -- require("arshamiser.lualiner")
 
     _G.custom_foldtext = require("arshamiser.folding").foldtext
     vim.opt.foldtext = "v:lua.custom_foldtext()"
@@ -122,6 +129,7 @@ use({
     "arsham/arshlib.nvim",
     "famiu/feline.nvim",
     "rebelot/heirline.nvim",
+    "nvim-lualine/lualine.nvim",
     "kyazdani42/nvim-web-devicons",
     "nanotee/sqls.nvim",
     "lewis6991/gitsigns.nvim",
@@ -135,6 +143,8 @@ use({
         require("arshamiser.feliniser")
         -- or:
         -- require("arshamiser.heirliniser")
+        -- or:
+        -- require("arshamiser.lualiner")
 
         _G.custom_foldtext = require("arshamiser.folding").foldtext
         vim.opt.foldtext = "v:lua.custom_foldtext()"
