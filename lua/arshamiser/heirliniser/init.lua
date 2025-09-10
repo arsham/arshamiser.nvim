@@ -331,7 +331,7 @@ local active_right_segment = { --{{{
   }, --}}}
 
   { -- Spell check {{{
-    provider = " 暈",
+    provider = " 󰓆",
     condition = function()
       return vim.wo.spell
     end,
