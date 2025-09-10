@@ -12,14 +12,14 @@ local libs = {
 }
 
 M.check = function()
-  vim.health.report_start("Arshamiser Health Check")
+  vim.health.start("Arshamiser Health Check")
   for name, package in pairs(libs) do
     if not pcall(require, name) then
-      vim.health.report_error(package .. " was not found", {
+      vim.health.error(package .. " was not found", {
         'Please install "' .. package .. '"',
       })
     else
-      vim.health.report_ok(package .. " is installed")
+      vim.health.ok(package .. " is installed")
     end
   end
 end
