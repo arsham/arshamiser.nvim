@@ -12,7 +12,6 @@
     "/home/arsham/.cache/nvim/lazy/neodev.nvim/types/nightly",
     "/usr/share/nvim/runtime",
     "/home/arsham/.cache/nvim/lazy/plenary.nvim/lua",
-    "/home/arsham/.cache/nvim/lazy/arshlib.nvim/lua",
     "${3rd}/luassert/library"
   ]
 }

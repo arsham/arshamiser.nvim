@@ -1,11 +1,8 @@
 local M = {}
 
 local libs = {
-  arshlib = "arsham/arshlib.nvim",
-  listish = "arsham/listish.nvim",
-  plenary = "nvim-lua/plenary.nvim",
-  feline = "famiu/feline.lua",
   heirline = "rebelot/heirline.nvim",
+  lualine = "nvim-lualine/lualine.nvim",
   ["nvim-web-devicons"] = "kyazdani42/nvim-web-devicons",
   sqls = "nanotee/sqls.nvim",
   gitsigns = "lewis6991/gitsigns.nvim",

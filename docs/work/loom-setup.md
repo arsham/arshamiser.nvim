@@ -15,8 +15,8 @@ Arshamiser statusline's visual language and user-visible information.
 
 ## Current behaviour and evidence
 
-- `lua/arshamiser/feliniser/init.lua` is the reference implementation: it
-  defines the active and inactive statuslines, including coloured mode and
+- The former Feline implementation, preserved in pre-migration Git history,
+  defined the active and inactive statuslines, including coloured mode and
   position capsules, angled separators, three visual regions, and adaptive
   truncation.
 - It shows mode, scrollbind and fold state, macro recording, Git branch and
@@ -29,13 +29,11 @@ Arshamiser statusline's visual language and user-visible information.
   repository-relative file data, optional integrations, diagnostics, search,
   quickfix/location-list, selection, and cursor state are conditionally shown
   with former colour roles and separators.
-- `lua/arshamiser/statusline.lua` now owns Feline-independent statusline
-  helpers. `lua/arshamiser/heirliniser/` uses that module rather than
-  `arshamiser.feliniser.util`, so removing Feline later will not break the
-  supported alternative.
-- `README.md`, `doc/arshamiser.txt`, and `lua/arshamiser/health.lua` still
-  advertise or check Feline. The README currently presents Feline as the
-  enabled setup and Lualine as an alternative.
+- `lua/arshamiser/statusline.lua` owns the neutral statusline helpers, and
+  `lua/arshamiser/heirliniser/` uses that module without any Feline import.
+- `README.md`, `doc/arshamiser.txt`, and `lua/arshamiser/health.lua` now
+  present and check Lualine. Feline-specific runtime files and the unused
+  Arshamiser `arshlib.nvim` dependency have been removed.
 - No automated tests or local Lualine checkout are present. Repository
   instructions prohibit agents from running Neovim; final runtime and visual
   verification must be performed by the user.
@@ -91,9 +89,9 @@ Arshamiser statusline's visual language and user-visible information.
 
 ## Authoritative paths
 
-- `lua/arshamiser/feliniser/init.lua` and `lua/arshamiser/feliniser/util.lua`:
-  former statusline behaviour and appearance.
-- `lua/arshamiser/lualiner/init.lua`: Lualine integration to replace.
+- Pre-migration Git history for the former Feline implementation: the
+  statusline behaviour and appearance baseline.
+- `lua/arshamiser/lualiner/init.lua`: current Lualine integration.
 - `lua/arshamiser/heirliniser/`: compatibility boundary for shared helpers.
 - `lua/arshamiser/palette.lua` and `lua/arshamiser/colouriser.lua`: palette and
   highlight sources.
@@ -103,12 +101,12 @@ Arshamiser statusline's visual language and user-visible information.
 
 ## Decisions and rationale
 
-- Treat the current Feline implementation, rather than the sparse existing
-  Lualine file, as the visual and behavioural baseline: it is the only local
-  source that defines the established statusline.
-- Extract or replace Feline-specific provider helpers behind a neutral project
-  module before deleting Feline-specific code. This preserves the documented
-  Heirline alternative and gives Lualine reusable custom components.
+- Treat the former Feline implementation in pre-migration Git history as the
+  visual and behavioural baseline; the current Lualine file now implements
+  that established statusline.
+- Keep reusable statusline provider helpers in a neutral project module. This
+  preserves the documented Heirline alternative and gives Lualine reusable
+  custom components without a Feline runtime dependency.
 - Prefer Lualine built-ins for its standard Git, diagnostic, filename, and
   location components only where their output and styling meet the baseline;
   use project components for the remaining behaviour and shaped separators.
@@ -140,31 +138,32 @@ not promise pixel-identical column positions.
 3. Complete: implement the Lualine active/inactive visual shell, palette
    roles, and three-group information hierarchy.
 4. Complete: restore the remaining conditional components, optional
-   integrations, and responsive behaviour. Stop for user live testing before
-   retiring Feline or changing public documentation.
+   integrations, and responsive behaviour.
+5. Complete: retire Feline from Arshamiser and align health checks,
+   dependencies, and public documentation.
+6. Run the final optional-component/runtime checks and close the migration
+   pointer once no verification gap remains.
 
 ## Unresolved context
 
-- Current Lualine API documentation and compatibility details have not been
-  inspected: this session has no authorised web-capable tool and no local
-  Lualine checkout. Validate the exact component, colour, separator, and
-  refresh APIs from the upstream source before implementation.
+- Upstream Lualine README and source were inspected for component functions,
+  conditions, dynamic colours, padding, separators, themes, `%=` handling,
+  refresh settings, and Neovim compatibility. No local Lualine checkout is
+  present.
 - “Look and feel” needs visual comparison rather than pixel-perfect automated
   proof. The Feline source defines the target components, but no local baseline
   screenshots or test matrix exist.
 - The minimum supported Neovim version is documented as 0.8.0. Confirm that the
   current Lualine release and chosen APIs support it, or explicitly update the
   compatibility contract with user approval.
-- Decide during the component map whether optional Copilot, Overseer, and SQLS
-  indicators remain supported; the default is to preserve them with guarded
-  optional loading.
+- Copilot, Overseer, and SQLS indicators remain supported through guarded
+  optional loading. Their runtime behaviour still needs user spot-checking.
 
 ## Owner and next action
 
-The primary agent owns the migration. Next, the user runs the visual/runtime
-matrix against Shark's Lualine configuration and reports any differences.
-Only then may the migration retire Feline from Arshamiser and align public
-documentation.
+The primary agent owns the migration. Next, the user spot-checks optional
+statusline integrations and the final dependency contract. Then the migration
+pointer can be closed if no verification gap remains.
 
 ## Verification
 

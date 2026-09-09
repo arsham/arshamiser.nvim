@@ -36,8 +36,6 @@ v0.8.0](https://github.com/neovim/neovim/releases/tag/v0.8.0) and newer.
 This plugin depends are the following libraries. Please make sure to add them
 as dependencies in your package manager:
 
-- [arshlib.nvim](https://github.com/arsham/arshlib.nvim)
-- [feline.nvim](https://github.com/famiu/feline.nvim)
 - [heirline.nvim](https://github.com/rebelot/heirline.nvim)
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
 - [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
@@ -53,8 +51,6 @@ Use your favourite package manager to install this library.
 {
 	"arsham/arshamiser.nvim",
 	dependencies = {
-		"arsham/arshlib.nvim",
-		"famiu/feline.nvim",
 		"rebelot/heirline.nvim",
 		"nvim-lualine/lualine.nvim",
 		"kyazdani42/nvim-web-devicons",
@@ -63,11 +59,9 @@ Use your favourite package manager to install this library.
 	config = function()
 		-- ignore any parts you don't want to use
 		vim.cmd.colorscheme("arshamiser_light")
-		require("arshamiser.feliniser")
+		require("arshamiser.lualiner")
 		-- or:
 		-- require("arshamiser.heirliniser")
-		-- or:
-		-- require("arshamiser.lualiner")
 
 		_G.custom_foldtext = require("arshamiser.folding").foldtext
 		vim.opt.foldtext = "v:lua.custom_foldtext()"
@@ -83,8 +77,6 @@ Use your favourite package manager to install this library.
 use({
   "arsham/arshamiser.nvim",
   requires = {
-    "arsham/arshlib.nvim",
-    "famiu/feline.nvim",
     "rebelot/heirline.nvim",
     "nvim-lualine/lualine.nvim",
     "kyazdani42/nvim-web-devicons",
@@ -93,11 +85,9 @@ use({
   config = function()
     -- ignore any parts you don't want to use
     vim.cmd.colorscheme("arshamiser_light")
-    require("arshamiser.feliniser")
+    require("arshamiser.lualiner")
     -- or:
     -- require("arshamiser.heirliniser")
-    -- or:
-    -- require("arshamiser.lualiner")
 
     _G.custom_foldtext = require("arshamiser.folding").foldtext
     vim.opt.foldtext = "v:lua.custom_foldtext()"
@@ -126,8 +116,6 @@ You can defer setting the colorscheme until the UI loads. Packer example:
 use({
   "arsham/arshamiser.nvim",
   requires = {
-    "arsham/arshlib.nvim",
-    "famiu/feline.nvim",
     "rebelot/heirline.nvim",
     "nvim-lualine/lualine.nvim",
     "kyazdani42/nvim-web-devicons",
@@ -140,11 +128,9 @@ use({
       pattern = "*",
       callback = function()
         vim.cmd.colorscheme("arshamiser_light")
-        require("arshamiser.feliniser")
+        require("arshamiser.lualiner")
         -- or:
         -- require("arshamiser.heirliniser")
-        -- or:
-        -- require("arshamiser.lualiner")
 
         _G.custom_foldtext = require("arshamiser.folding").foldtext
         vim.opt.foldtext = "v:lua.custom_foldtext()"
