@@ -207,8 +207,7 @@ function M.mode_colour(mode)
 end
 
 function M.lsp_client_names()
-  local names, _ = require("arshamiser.feliniser.util").lsp_client_names()
-  return names
+  return require("arshamiser.statusline").lsp_client_names()
 end
 
 return M

@@ -1,6 +1,6 @@
 local conditions = require("heirline.conditions")
 local heirline = require("heirline.utils")
-local feliniser = require("arshamiser.feliniser.util")
+local statusline = require("arshamiser.statusline")
 local util = require("arshamiser.heirliniser.util")
 
 local space = { provider = " " }
@@ -56,7 +56,7 @@ local fold_method = { --{{{
   {
     hl = { fg = util.colours.green_pale, bold = true },
     { provider = "  " },
-    { provider = feliniser.fold_method },
+    { provider = statusline.fold_method },
   },
 } --}}}
 
@@ -189,7 +189,7 @@ local folder_name = {
     return conditions.is_git_repo()
   end,
   { provider = util.separators.folder_icon, hl = { fg = util.colours.folder } },
-  { provider = feliniser.git_root },
+  { provider = statusline.git_root },
   space,
 }
 
@@ -237,7 +237,7 @@ local active_middle_segment = { --{{{
 } --}}}
 
 local locallist = { --{{{
-  provider = feliniser.locallist_count,
+  provider = statusline.locallist_count,
   condition = function()
     return #vim.fn.getloclist(0) > 0
   end,
@@ -267,24 +267,9 @@ local active_right_segment = { --{{{
       icon = "  ",
     },
     condition = conditions.lsp_attached,
-    {
-      flexible = 2,
-      {
-        {
-          provider = function(self)
-            return self.icon .. feliniser.lsp_client_names()
-          end,
-        },
-        { provider = feliniser.get_lsp_progress },
-      },
-      {
-        {
-          provider = function(self)
-            return self.icon .. feliniser.lsp_client_names()
-          end,
-        },
-      },
-    },
+    provider = function(self)
+      return self.icon .. statusline.lsp_client_names()
+    end,
   },
 
   { -- Diagnostics {{{
@@ -366,7 +351,7 @@ local active_right_segment = { --{{{
   }, --}}}
 
   space,
-  { provider = feliniser.search_results },
+  { provider = statusline.search_results },
 
   space,
   { -- Cursor Location {{{
@@ -389,7 +374,7 @@ local active_right_segment = { --{{{
 
     space,
     {
-      provider = feliniser.quickfix_count,
+      provider = statusline.quickfix_count,
       condition = function()
         return #vim.fn.getqflist() > 0
       end,
