@@ -20,3 +20,4 @@ the outcome.
 - **Dependencies**: Require external deps at function call time with `pcall(require, "module")`
 - **Error handling**: Always check `pcall` results before using loaded modules
 - **Tables**: Prefer explicit table construction, use trailing commas for multi-line tables
+- Project memory is enabled in `.pi/memory`. Routine upkeep is authorised: read relevant continuity at task start and review it at completed slice boundaries using `project-memory`. Update only useful changes; keep work state and canonical documentation with their owners.

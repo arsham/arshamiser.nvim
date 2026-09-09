@@ -41,3 +41,6 @@ luac.out
 
 # Misc
 tmp/
+
+# Local project memory
+.pi/memory/
